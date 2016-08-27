@@ -19,12 +19,14 @@ Data Structure is a way to organized data in such a way that it can be used effi
 ### Stack ###
 A stack is an abstract data type (ADT), commonly used in most programming languages. It is named stack as it behaves like a real-world stack, for example − deck of cards or pile of plates etc. <br>
 Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
+<div style="margin-left:150px">
 <h4>Operation</h4>
 1. push() − pushing (storing) an element on the stack
 2. pop() − removing (accessing) an element from the stack
 4. peek() − get the top data element of the stack, without removing it.
 5. isFull() − check if stack is full.
 6. isEmpty() − check if stack is empty.
+</div>
 
 ### Operations ###
 1. Traversing
