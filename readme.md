@@ -9,7 +9,11 @@ Data Structure is a way to organized data in such a way that it can be used effi
 5. Sorting
 6. Merging
 ### Sorting ###
+
+Sorting refers to arranging data in a particular format in accending or decending.Importance of sorting lies in the fact that data searching can be optimized to a very high level if data is stored in a sorted manner.
+
 ### Bubble Sort ###
+
 ```C
 #include <stdio.h>
 #include <conio.h>
@@ -53,13 +57,15 @@ void main(){
     printf("]");
 }
 ```
+
 ### Merge Sort ###
  [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/merge_sort_algorithm.htm).
 
 
 
- ### Quick Sort ###
+### Quick Sort ###
  [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/quick_sort_algorithm.htm).
+ 
  ```C
 #include <stdio.h>
 #include <conio.h>
