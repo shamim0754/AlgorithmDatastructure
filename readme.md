@@ -7,7 +7,7 @@ Data Structure is a way to organized data in such a way that it can be used effi
     - Boolean (true, false)
     - Floating (Decimal numbers)
     - Character and Strings
-2. Two
+2. Derived 
    - Array
    - Linked List
    - Stack
@@ -16,7 +16,17 @@ Data Structure is a way to organized data in such a way that it can be used effi
    - Graph
    - much more
 
-### Basic Operations ###
+### Stack ###
+A stack is an abstract data type (ADT), commonly used in most programming languages. It is named stack as it behaves like a real-world stack, for example − deck of cards or pile of plates etc. <br>
+Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
+<h4>Operation</h4>
+1. push() − pushing (storing) an element on the stack
+2. pop() − removing (accessing) an element from the stack
+4. peek() − get the top data element of the stack, without removing it.
+5. isFull() − check if stack is full.
+6. isEmpty() − check if stack is empty.
+
+### Operations ###
 1. Traversing
 2. Searching
 3. Insertion
