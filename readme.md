@@ -9,9 +9,9 @@ Data Structure is a way to organized data in such a way that it can be used effi
 5. Sorting
 6. Merging
 
-### Searching ###
+### Linear Searching ###
 
-Linear search is a very simple search algorithm.Every items is checked and if a match founds then that particular item
+Linear search is a very simple search algorithm.Every items is checked and if a match founds then that particular item.it is slow since every element need to check.
 
 ```C
 #include <stdio.h>
@@ -58,6 +58,73 @@ int linear_search(int arr[],int size,int searchitem){
 }
 
 ```
+### Binary Searching ###
+
+Binary search is a fast search algorithm.
+ [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/binary_search_algorithm.htm).
+ 
+ ```C
+#include <stdio.h>
+#include <conio.h>
+
+int binary_search(int arr[],int size,int searchitem);
+
+void main() {
+
+    int arr[20], n, i,item;
+    printf("Enter the size of the array\n");
+    scanf("%d", &n);
+
+    printf("Enter %d the elements\n",n);
+    for(i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+    
+    //display data
+    printf("Data : [ ");
+    for(i = 0; i < n; i++){
+      printf("%d ",arr[i]);
+    }
+    printf("]\n");
+
+    //input search item
+    printf("enter search number:\n");
+    scanf("%d", &item);
+    if(binary_search(arr,n,item) == 1)
+      printf("found");
+    else
+      printf("Not found");
+
+    getch();
+
+}
+
+int binary_search(int arr[],int size,int searchitem){
+    /*
+    low,mid,high = store array index
+    isFound = flag for search found or not
+    */
+    int low,mid,high,isFound = 0;
+    
+    //high is less then 1 than size 
+    high = size - 1;
+
+    //otherwise search done
+    while(low <= high){
+        mid = (low + high) / 2;
+        //if midlle index found
+        if(arr[mid] == searchitem){
+            isFound = 1;
+            break;
+         }else if(searchitem < arr[mid])
+            high = mid - 1;
+        else
+            low = mid + 1;
+    }
+  return isFound;  
+}
+
+ ```
+
 ### Sorting ###
 
 Sorting refers to arranging data in a particular format in accending or decending.Importance of sorting lies in the fact that data searching can be optimized to a very high level if data is stored in a sorted manner.
