@@ -1,6 +1,21 @@
 ### Data Structure ###
 Data Structure is a way to organized data in such a way that it can be used efficiently
 
+### Data Structure Type ###
+1. Built-in
+    - Integers
+    - Boolean (true, false)
+    - Floating (Decimal numbers)
+    - Character and Strings
+2. Two
+   - Array
+   - Linked List
+   - Stack
+   - Queue
+   - Tree
+   - Graph
+   - much more
+
 ### Basic Operations ###
 1. Traversing
 2. Searching
@@ -62,7 +77,7 @@ int linear_search(int arr[],int size,int searchitem){
 
 Binary search is a fast search algorithm.
  [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/binary_search_algorithm.htm).
- 
+
  ```C
 #include <stdio.h>
 #include <conio.h>
