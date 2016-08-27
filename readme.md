@@ -99,6 +99,26 @@ void main() {
    getch();
 }
 ```
+### Queue ###
+Queue is an abstract data structure, somewhat similar to Stack. In contrast to Queue, queue is opened at both end. One end is always used to insert data (enqueue) and the other is used to remove data (dequeue). Queue follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first. <br>
+In queue, we always dequeue (or access) data, pointed by front pointer and while enqueing (or storing) data in queue we take help of rear pointer.
+
+<h4>Operation</h4>
+1. enqueue() − add (store) an item to the queue.
+2. dequeue() − remove (access) an item from the queue.
+4. peek() − get the top data element of the stack, without removing it.
+5. isFull() − check if stack is full.
+6. isEmpty() − check if stack is empty.
+
+### linked-list ###
+A linked-list is a sequence of data structures which are connected together via links. Linked List is a sequence of links which contains items. Each link contains a connection to another link. Linked list the second most used data structure after array.
+<h4>Operation</h4>
+1. Insertion − add an element at the beginning of the list.
+2. Deletion − delete an element at the beginning of the list.
+3. Display − displaying complete list.
+4. Search − search an element using given key.
+5. Delete − delete an element using given key.
+
 
 ### Data Structure Operations ###
 1. Traversing
