@@ -19,16 +19,88 @@ Data Structure is a way to organized data in such a way that it can be used effi
 ### Stack ###
 A stack is an abstract data type (ADT), commonly used in most programming languages. It is named stack as it behaves like a real-world stack, for example − deck of cards or pile of plates etc. <br>
 Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
-<div style="margin-left:150px">
 <h4>Operation</h4>
 1. push() − pushing (storing) an element on the stack
 2. pop() − removing (accessing) an element from the stack
 4. peek() − get the top data element of the stack, without removing it.
 5. isFull() − check if stack is full.
 6. isEmpty() − check if stack is empty.
-</div>
 
-### Operations ###
+
+```C
+#include <stdio.h>
+#include <conio.h>
+
+int MAXSIZE = 8;       
+int stack[8];     
+int top = -1; 
+
+//push into stack
+void push(int value) {
+
+   if(!isfull()) {
+      top = top + 1;   
+      stack[top] = value;
+   }else {
+      printf("Could not insert data, Stack is full.\n");
+   }
+}
+
+//check stack full
+int isfull() {
+
+   if(top == MAXSIZE)
+      return 1;
+   else
+      return 0;
+}
+
+//pick top element
+int peek() {
+   return stack[top];
+}
+//check stack empty 
+int isempty() {
+
+   if(top == -1)
+      return 1;
+   else
+      return 0;
+}
+int pop() {
+   int value;
+    
+   if(!isempty()) {
+      value = stack[top];
+      top = top - 1;   
+      return value;
+   }else {
+      printf("Could not retrieve data, Stack is empty.\n");
+   }
+}
+
+void main() {
+   // push items on to the stack 
+   push(3);
+   push(5);
+   push(9);
+   push(1);
+   push(12);
+   push(15);
+
+   printf("Element at top of the stack: %d\n" ,peek());
+   printf("Elements: \n");
+
+   // print stack data 
+   while(!isempty()) {
+      int data = pop();
+      printf("%d\n",data);
+   }
+   getch();
+}
+```
+
+### Data Structure Operations ###
 1. Traversing
 2. Searching
 3. Insertion
