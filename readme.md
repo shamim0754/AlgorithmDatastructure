@@ -110,6 +110,68 @@ In queue, we always dequeue (or access) data, pointed by front pointer and while
 5. isFull() − check if stack is full.
 6. isEmpty() − check if stack is empty.
 
+```C
+#include <stdio.h>
+#include <conio.h>
+
+#define MAX 6
+
+int intArray[MAX];
+int front = 0;
+int rear = -1;
+int itemCount = 0;
+
+void enqueue(int value){
+
+   if(!isFull()){
+   
+      if(rear == MAX-1){
+         rear = -1;            
+      }       
+
+      intArray[++rear] = value;
+      itemCount++;
+   }
+}
+bool isFull(){
+   return itemCount == MAX;
+}
+int dequeue(){
+   int value = intArray[front++];
+   
+   if(front == MAX){
+      front = 0;
+   }
+   
+   itemCount--;
+   return value;  
+}
+
+int peek(){
+   return intArray[front];
+}
+
+bool isEmpty(){
+   return itemCount == 0;
+}
+
+void main() {
+   /* enqueue 5 items */
+   enqueue(3);
+   enqueue(5);
+   enqueue(9);
+   enqueue(1);
+   enqueue(12);
+   
+   // dequeue one item 
+   int num = dequeue();
+   printf("Element dequeue: %d\n",num);
+
+   // pick one item
+   printf("Element at front: %d\n",peek());
+   getch();
+}
+```
 ### linked-list ###
 A linked-list is a sequence of data structures which are connected together via links. Linked List is a sequence of links which contains items. Each link contains a connection to another link. Linked list the second most used data structure after array.
 <h4>Operation</h4>
