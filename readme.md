@@ -1,5 +1,5 @@
 ### Data Structure ###
-Data Structure is a way to organized data in such a way that it can be used efficiently
+Data Structure is a way to organized data in such a way that it can be used efficiently.Almost every enterprise application uses various types of data structures e.g array,linked list
 
 ### Data Structure Type ###
 1. Built-in
