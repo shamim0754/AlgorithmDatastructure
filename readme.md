@@ -16,7 +16,27 @@ Data Structure is a way to organized data in such a way that it can be used effi
    - Graph
    - much more
 
+### Algorithm ###
+An algorithm is a procedure having well defined steps for solving a particular problem
+
+The major categories of algorithms are given below:
+1. Sort Algorithm: Sorting the items inside a data structure either acending or decending.
+2. Search Algorithm : Searching the items inside a data structure.
+3. Delete Algorithm : Delere the items from a data structure.
+4. Insert Algorithm :  Inserting an item inside a data structure.
+4. Update Algorithm :  Updating an item inside a data structure.
+
+### Characteristics of an Algorithm ###
+
+1. Input: An algorithm must have 0 or well defined inputs.
+2. Output: An algorithm must have 1 or well defined outputs, and should match with the desired output.
+3. Feasibility: An algorithm must be terminated after the finite number of steps.
+4. Independent: An algorithm must have step-by-step directions which is independent of any programming code.
+5. Unambiguous: An algorithm must be unambiguous and clear. Each of their steps and input/outputs must be clear and lead to only one meaning.
+
+
 ### Stack ###
+
 A stack is an abstract data type (ADT), commonly used in most programming languages. It is named stack as it behaves like a real-world stack, for example − deck of cards or pile of plates etc. <br>
 Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
 <h4>Operation</h4>
