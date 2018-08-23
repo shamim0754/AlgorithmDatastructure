@@ -212,7 +212,9 @@ Next job D we start looking empty backward from unit 1. 0-1 is not empty slot so
 
 Next job B we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
 
-Next job E we start looking empty backward from unit 3. 0-2 is not empty slot so E is there
+Next job E we start looking empty backward from unit 3. 2-3 is  empty slot so E is there
+
+![alt text](images/job_schduling4.png)
 
 ### Stack ###
 
