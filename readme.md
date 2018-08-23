@@ -34,6 +34,33 @@ The major categories of algorithms are given below:
 4. Independent: An algorithm must have step-by-step directions which is independent of any programming code.
 5. Unambiguous: An algorithm must be unambiguous and clear. Each of their steps and input/outputs must be clear and lead to only one meaning.
 
+### Algorithm Complexity ###
+The complexity of an algorithm f(n) gives the running time and/or the storage space required by the algorithm in terms of n as the size of input data.
+
+Asymptotic analysis of an algorithm refers to defining the mathematical boundation/framing of its run-time performance.The time required by an algorithm falls under three types −
+
+1. Best Case − Minimum time required for program execution. 
+
+2. Average Case − Average time required for program execution.
+
+3. Worst Case − Maximum time required for program execution.
+
+The commonly used asymptotic notations to calculate the running time complexity of an algorithm.
+
+1. Ο(Big O) Notation : it express the upper(worse case) bound of an algorithm's running time.
+2. Ω Notation : it express the lower(best case) bound of an algorithm's running time
+3. θ Notation : it express the upper(worse case) & lower bound of an algorithm's running time.
+
+Consider flowing function
+
+```C
+int myAlgorithm1(int n)
+{
+   int x=n+10;
+   x=x/2;
+   return x;
+}
+```
 
 ### Stack ###
 
