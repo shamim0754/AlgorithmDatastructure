@@ -94,12 +94,43 @@ sum+=(i+j);
 return sum;
 }
 ```
-Since first loop is running n times, 2nd loop is running n-1 times,3rd loop running n-2 times
+Since first loop is running n times, 2nd loop is running n-1 times,3rd loop running n-2 times <br />
 so algorithm complexitity = n + n-2 + n-3+.....+1
                            = n * (n + 1)/2
                            = (n<sup>2</sup> + n)/2 
                            = n<sup>2</sup> (n<sup>2</sup> + n and n<sup>2</sup> is very little)
                            = O(n<sup>2</sup>)
+
+```
+
+int binary_search(int arr[],int size,int searchitem){
+   int low,mid,high,isFound = 0;
+   high = size - 1;
+   while(low <= high){
+       mid = (low + high) / 2;
+       //if midlle index found
+       if(arr[mid] == searchitem){
+           isFound = 1;
+           break;
+        }else if(searchitem < arr[mid])
+           high = mid - 1;
+       else
+           low = mid + 1;
+   }
+  return isFound;  
+}
+```
+
+Since here every time n is divided 2 times. <br />
+How many times a number can divided by two? <br />
+Ans : log<sub>2</sub>n (n = a number)<br />
+it is expressed by O(log<sub>2</sub>n)
+
+if an algorithm have (n<sup>4</sup>) , (n<sup>2</sup>) and log<sub>2</sub>n<br />
+then = (n<sup>4</sup>) + (n<sup>2</sup>) + log<sub>2</sub>n<br />
+= (n<sup>4</sup>) (Since (n<sup>2</sup>) + log<sub>2</sub>n is very small)
+
+
 ### Stack ###
 
 A stack is an abstract data type (ADT), commonly used in most programming languages. It is named stack as it behaves like a real-world stack, for example − deck of cards or pile of plates etc. <br>
