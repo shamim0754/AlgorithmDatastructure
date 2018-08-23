@@ -191,10 +191,13 @@ In greedy approach,
           without missing the deadline, add current job to the result.
           Else ignore the current job.
 
-For Example : 
-Reference-style: 
-![alt text](images/job_schduling.png)          
+For Example : <br />
+![alt text](images/job_schduling.png)
 
+1) Sort all jobs in decreasing order of profit.
+
+<br />
+![alt text](images/job_schduling1.png)
 
 ### Stack ###
 
