@@ -37,19 +37,18 @@ The major categories of algorithms are given below:
 ### Algorithm Complexity ###
 The complexity of an algorithm f(n) gives the running time and/or the storage space required by the algorithm in terms of n as the size of input data.
 
-Asymptotic analysis of an algorithm refers to defining the mathematical boundation/framing of its run-time performance.The time required by an algorithm falls under three types −
+Asymptotic analysis(Time complexity) of an algorithm refers to defining the mathematical boundation/framing of its run-time performance.The time required by an algorithm falls under three types −
 
-1. Best Case − Minimum time required for program execution. 
-
+1. Best Case − Minimum time required for program execution. it express by nota
+tion called Ω Notation
 2. Average Case − Average time required for program execution.
 
 3. Worst Case − Maximum time required for program execution.
+it express by nota
+tion called Ο(Big O) Notation
 
-The commonly used asymptotic notations to express the running time complexity of an algorithm.
-
-1. Ο(Big O) Notation : it express the upper(worse case) bound of an algorithm's running time.
-2. Ω Notation : it express the lower(best case) bound of an algorithm's running time
-3. θ Notation : it express the upper(worse case) & lower bound of an algorithm's running time.
+The other one asymptotic notations  is <br/>
+θ Notation : it express both best case and worst case.
 
 Consider flowing function
 
