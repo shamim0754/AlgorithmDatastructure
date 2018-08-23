@@ -45,7 +45,7 @@ Asymptotic analysis of an algorithm refers to defining the mathematical boundati
 
 3. Worst Case − Maximum time required for program execution.
 
-The commonly used asymptotic notations to calculate the running time complexity of an algorithm.
+The commonly used asymptotic notations to express the running time complexity of an algorithm.
 
 1. Ο(Big O) Notation : it express the upper(worse case) bound of an algorithm's running time.
 2. Ω Notation : it express the lower(best case) bound of an algorithm's running time
@@ -54,7 +54,7 @@ The commonly used asymptotic notations to calculate the running time complexity 
 Consider flowing function
 
 ```C
-int myAlgorithm1(int n)
+int myFunction(int n)
 {
    int x=n+10;
    x=x/2;
@@ -62,6 +62,44 @@ int myAlgorithm1(int n)
 }
 ```
 
+Since any value of n it execute constant number of instruction . as a result it will always need same time. it express by O(1);
+
+Consider floowing function
+```C
+int myFunction2(int n)
+{
+  int sum=0;
+  for(int i=1;i<=n;i++)
+  {
+    sum+=i;
+    if(sum>=1000) break;
+  }
+  return sum;
+}
+```
+
+Since based on value of n number of instruction increased . although it can break but we always concider worse case . it is expressed by O(n);
+
+```C
+int myFunction3(int n)
+{
+int sum=0;
+for(int i=1;i<=n;i++)
+{
+for(int j=i;j<=n;j++)
+{
+sum+=(i+j);
+}
+}
+return sum;
+}
+```
+Since first loop is running n times, 2nd loop is running n-1 times,3rd loop running n-2 times
+so algorithm complexitity = n + n-2 + n-3+.....+1
+                           = n * (n + 1)/2
+                           = (n<sup>2</sup> + n)/2 
+                           = n<sup>2</sup> (n<sup>2</sup> + n and n<sup>2</sup> is very little)
+                           = O(n<sup>2</sup>)
 ### Stack ###
 
 A stack is an abstract data type (ADT), commonly used in most programming languages. It is named stack as it behaves like a real-world stack, for example − deck of cards or pile of plates etc. <br>
