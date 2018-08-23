@@ -195,17 +195,17 @@ For Example : <br />
 ![alt text](images/job_schduling.png)
 
 1) Sort all jobs in decreasing order of profit.
-![alt text](images/job_schduling1.PNG)
+![alt text](images/job_schduling1.png)
 
 2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
 
 Since job A has deadline 2 unit so it could be place at 0-1 or 1-2 seconds. we choose always latest dealine  so we choose 1-2
 
-![alt text](images/job_schduling2.PNG)
+![alt text](images/job_schduling2.png)
 
 Next job C we start looking empty backward from unit 2. 0-1 is empty slot so c is there
 
-![alt text](images/job_schduling3.PNG)
+![alt text](images/job_schduling3.png)
 
 
 ### Stack ###
