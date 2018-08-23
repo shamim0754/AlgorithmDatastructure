@@ -35,9 +35,20 @@ The major categories of algorithms are given below:
 5. Unambiguous: An algorithm must be unambiguous and clear. Each of their steps and input/outputs must be clear and lead to only one meaning.
 
 ### Algorithm Complexity ###
-The complexity of an algorithm f(n) gives the running time and/or the storage space required by the algorithm in terms of n as the size of input data.
+The complexity of an algorithm gives the running time and/or the storage space required by the algorithm in terms of the size of input data.
 
-Asymptotic analysis(Time complexity) of an algorithm refers to defining the mathematical boundation/framing of its run-time performance.The time required by an algorithm falls under three types −
+1. Space Complexity
+Space complexity of an algorithm represents the amount of memory space required by the algorithm in its life cycle. The space required by an algorithm is equal to the sum of the following two components −
+
+1. Fixed part:  it is a space required to store certain data and variables, that are independent of the size of the problem. For example, simple variables and constants used, program size, etc.
+
+2. variable part : it is a space required by variables, whose size depends on the size of the problem. For example, dynamic memory allocation, recursion stack space, etc.
+
+2. Time Complexity
+Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion
+For example, addition of two n-bit integers takes n instuction. Consequently, the total computational time is T(n) = c ∗ n, where c is the time taken for the addition of two bits.
+
+<b>Asymptotic analysis</b> of an algorithm refers to defining the mathematical boundation/framing of its run-time performance.The time required by an algorithm falls under three types −
 
 1. Best Case − Minimum time required for program execution. it express by nota
 tion called Ω Notation
