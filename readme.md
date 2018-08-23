@@ -195,6 +195,7 @@ For Example : <br />
 ![alt text](images/job_schduling.png)
 
 1) Sort all jobs in decreasing order of profit.
+
 ![alt text](images/job_schduling1.png)
 
 2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
@@ -207,6 +208,11 @@ Next job C we start looking empty backward from unit 2. 0-1 is empty slot so c i
 
 ![alt text](images/job_schduling3.png)
 
+Next job D we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
+
+Next job B we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
+
+Next job E we start looking empty backward from unit 3. 0-2 is not empty slot so E is there
 
 ### Stack ###
 
