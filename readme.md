@@ -131,6 +131,47 @@ then = (n<sup>4</sup>) + (n<sup>2</sup>) + log<sub>2</sub>n<br />
 = (n<sup>4</sup>) (Since (n<sup>2</sup>) + log<sub>2</sub>n is very small)
 
 
+### Algorithm Technique ###
+
+1. Greedy approach : In greedy algorithm approach, decisions are made from the given solution domain. As being greedy, the closest solution that seems to provide an optimum solution is chosen  at that moment. But it may fail where global optimization
+
+Example : Counting Coins, we have coins of 1, 7, 10 value, How many coins are required to get 18 ?
+
+Ans : 3 coins.Greedy approach forces the algorithm to pick the largest to lowest possible coin.
+1. 10, the remaining count is 7
+2. 7, the remaining count is 1
+3. 1
+
+
+if we slightly change the problem(Count 15) then the same approach may not be able to produce the same optimum result, then greedy approach may use more coins than necessary<br/>
+10 + 1 + 1+1+1+1+1+1(6 coins)
+<br />
+Whereas the same problem could be solved by using only 3 coins (7 + 7 + 1) . (it may fail where global optimization)
+
+```
+int coin[3] = { 10, 5, 2,1 } ;
+ int totalChange = 16, coinRequired = 0;
+ // for i = 1 to total coin decensing  order
+ for(int i = 0; i <= 3; i++){
+    if(totalChange >= coin[i]){
+        coinRequired ++;
+        totalChange -= coin[i];
+    }
+ }
+ printf("The required coins %d", coinRequired);
+```
+
+Most networking algorithms use the greedy approach. Here is a list of few of them −
+
+1. Travelling Salesman Problem
+2. Prim's Minimal Spanning Tree Algorithm
+3. Kruskal's Minimal Spanning Tree Algorithm
+4. Dijkstra's Minimal Spanning Tree Algorithm
+5. Graph - Map Coloring
+6. Graph - Vertex Cover
+7. Knapsack Problem
+8. Job Scheduling Problem
+
 ### Stack ###
 
 A stack is an abstract data type (ADT), commonly used in most programming languages. It is named stack as it behaves like a real-world stack, for example − deck of cards or pile of plates etc. <br>
