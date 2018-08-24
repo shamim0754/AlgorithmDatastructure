@@ -145,31 +145,31 @@ then = (n<sup>4</sup>) + (n<sup>2</sup>) + log<sub>2</sub>n<br />
 
 1. Greedy approach : In greedy algorithm approach, decisions are made from the given solution domain. As being greedy, the closest solution that seems to provide an optimum solution is chosen  at that moment. But it may fail where global optimization
 
-Example : Counting Coins, we have coins of 1, 7, 10 value, How many coins are required to get 18 ?
+  Example : Counting Coins, we have coins of 1, 7, 10 value, How many coins are required to get 18 ?
 
-Ans : 3 coins.Greedy approach forces the algorithm to pick the largest to lowest possible coin.
-1. 10, the remaining count is 7
-2. 7, the remaining count is 1
-3. 1
+  Ans : 3 coins.Greedy approach forces the algorithm to pick the largest to lowest possible coin.
+  1. 10, the remaining count is 7
+  2. 7, the remaining count is 1
+  3. 1
 
 
-if we slightly change the problem(Count 15) then the same approach may not be able to produce the same optimum result, then greedy approach may use more coins than necessary<br/>
-10 + 1 + 1+1+1+1+1+1(6 coins)
-<br />
-Whereas the same problem could be solved by using only 3 coins (7 + 7 + 1) . (it may fail where global optimization)
+  if we slightly change the problem(Count 15) then the same approach may not be able to produce the same optimum result, then greedy approach may use more coins than necessary<br/>
+  10 + 1 + 1+1+1+1+1+1(6 coins)
+  <br />
+  Whereas the same problem could be solved by using only 3 coins (7 + 7 + 1) . (it may fail where global optimization)
 
-```
-int coin[3] = { 10, 5, 2,1 } ;
- int totalChange = 16, coinRequired = 0;
- // for i = 1 to total coin decensing  order
- for(int i = 0; i <= 3; i++){
-    if(totalChange >= coin[i]){
-        coinRequired ++;
-        totalChange -= coin[i];
-    }
- }
- printf("The required coins %d", coinRequired);
-```
+  ```
+  int coin[3] = { 10, 5, 2,1 } ;
+   int totalChange = 16, coinRequired = 0;
+   // for i = 1 to total coin decensing  order
+   for(int i = 0; i <= 3; i++){
+      if(totalChange >= coin[i]){
+          coinRequired ++;
+          totalChange -= coin[i];
+      }
+   }
+   printf("The required coins %d", coinRequired);
+  ```
 
 Most networking algorithms use the greedy approach. Here is a list of few of them −
 
@@ -181,40 +181,40 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 6. Graph - Vertex Cover
 7. Knapsack Problem
 8. Job Scheduling Problem :
-Given an array of jobs where every job has a deadline and associated profit if the job is finished before the deadline. It is also given that every job takes single unit of time, so the minimum possible deadline for any job is 1. How to maximize total profit if only one job can be scheduled at a time.
+  Given an array of jobs where every job has a deadline and associated profit if the job is finished before the deadline. It is also given that every job takes single unit of time, so the minimum possible deadline for any job is 1. How to maximize total profit if only one job can be scheduled at a time.
 
-In greedy approach,
-1) Sort all jobs in decreasing order of profit.
-2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
-3) Do following for remaining n-1 jobs
-.......a) If the current job can fit in the current result sequence 
-          without missing the deadline, add current job to the result.
-          Else ignore the current job.
+  In greedy approach,
+  1) Sort all jobs in decreasing order of profit.
+  2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
+  3) Do following for remaining n-1 jobs
+  .......a) If the current job can fit in the current result sequence 
+            without missing the deadline, add current job to the result.
+            Else ignore the current job.
 
-For Example : <br />
-![alt text](images/job_schduling.png)
+  For Example : <br />
+  ![alt text](images/job_schduling.png)
 
-1) Sort all jobs in decreasing order of profit.
+  1) Sort all jobs in decreasing order of profit.
 
-![alt text](images/job_schduling1.png)
+  ![alt text](images/job_schduling1.png)
 
-2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
+  2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
 
-Since job A has deadline 2 unit so it could be place at 0-1 or 1-2 seconds. we choose always latest dealine  so we choose 1-2
+  Since job A has deadline 2 unit so it could be place at 0-1 or 1-2 seconds. we choose always latest dealine  so we choose 1-2
 
-![alt text](images/job_schduling2.png)
+  ![alt text](images/job_schduling2.png)
 
-Next job C we start looking empty backward from unit 2. 0-1 is empty slot so c is there
+  Next job C we start looking empty backward from unit 2. 0-1 is empty slot so c is there
 
-![alt text](images/job_schduling3.png)
+  ![alt text](images/job_schduling3.png)
 
-Next job D we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
+  Next job D we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
 
-Next job B we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
+  Next job B we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
 
-Next job E we start looking empty backward from unit 3. 2-3 is  empty slot so E is there
+  Next job E we start looking empty backward from unit 3. 2-3 is  empty slot so E is there
 
-![alt text](images/job_schduling4.png)
+  ![alt text](images/job_schduling4.png)
 
 ### Stack ###
 
