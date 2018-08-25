@@ -279,7 +279,7 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 
   ```
 
-2. Divide and Conquer :
+2. `Divide and Conquer` :
 
   In divide and conquer approach, the problem in hand, is divided into smaller sub-problems and then each problem is solved independently. When we keep on dividing the subproblems into even smaller sub-problems, we may eventually reach a stage where no more division is possible. Those "atomic" smallest possible sub-problem (fractions) are solved. The solution of all sub-problems is finally merged in order to obtain the solution of an original problem.
 
@@ -295,7 +295,7 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
   4. Strassen's Matrix Multiplication
   5. Closest pair (points)
 
-2. Dynamic programming :
+3. `Dynamic programming` :
 
   Dynamic Programming is an algorithmic paradigm that solves a given complex problem by breaking it into subproblems and stores the results of subproblems to avoid computing the same results again.
 
@@ -330,6 +330,8 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
   There are following two different ways to store the values so that these values can be reused:
   a) Memoization (Top Down)
 
+  We initialize a lookup array with all initial values as NIL. Whenever we need the solution to a subproblem, we first look into the lookup table. If the precomputed value is there then we return that value, otherwise, we calculate the value and put the result in the lookup table so that it can be reused later.
+
   ```C
   #include <stdio.h>
   #include <conio.h>
@@ -361,6 +363,31 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 
   b) Tabulation (Bottom Up)
 
+  The tabulated program for a given problem builds a table in bottom up fashion and returns the last entry from table
+
+  ```
+  #include <stdio.h>
+  #include <conio.h>
+
+  void main(){
+      int n;
+      printf("Enter number of elements :\n");
+      scanf("%d", &n);
+      for(int i=0; i< n; i++)
+          printf("%d ", fibonacci(i));
+
+  }
+  int fibonacci( int n ) {
+      int fibonacci[n+1];
+      int i;
+      fibonacci[0] = 0;   fibonacci[1] = 1;
+      for (i = 2; i <= n; i++)
+        fibonacci[i] = fibonacci[i-1] + fibonacci[i-2];
+
+    return fibonacci[n];
+  }
+
+  ```
 
   2. Knapsack problem
   3. Tower of Hanoi
