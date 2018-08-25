@@ -37,12 +37,12 @@ The major categories of algorithms are given below:
 ### Algorithm Complexity ###
 The complexity of an algorithm gives the running time and/or the storage space required by the algorithm in terms of the size of input data.
 
-1. Space Complexity
+1. Space Complexity :
 Space complexity of an algorithm represents the amount of memory space required by the algorithm in its life cycle. The space required by an algorithm is equal to the sum of the following two components −
 
-  1. Fixed part:  it is a space required to store certain data and variables, that are independent of the size of the problem. For example, simple variables and constants used, program size, etc.
+  - Fixed part:  it is a space required to store certain data and variables, that are independent of the size of the problem. For example, simple variables and constants used, program size, etc.
 
-  2. variable part : it is a space required by variables, whose size depends on the size of the problem. For example, dynamic memory allocation, recursion stack space, etc.
+  - variable part : it is a space required by variables, whose size depends on the size of the problem. For example, dynamic memory allocation, recursion stack space, etc.
 
 2. Time Complexity
 Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion
