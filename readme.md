@@ -438,54 +438,6 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 A stack is an abstract data type (ADT), commonly used in most programming languages. It is named stack as it behaves like a real-world stack, for example − deck of cards or pile of plates etc. <br>
 Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
 
-### Stack Use ###
-1. Expression evaluation( infix/postfix):
-
-   An arithmetic expression can be written in three different but equivalent notations <br />
-   - Infix Notation : operators are used in-between operands . It is easy for us humans to read, write, and speak in infix notation but the same does not go well with computing devices e.g 40 - 3 * 5 + 1 
-
-   it is not a very efficient way to design an algorithm or program to evaluation infix notations. Instead, these infix notations are first converted into either postfix or prefix notations and then computed.
-
-   To parse any arithmetic expression, we need to take care of operator precedence and associativity also.
-
-     - Precedence :
-        When an operand is in between two different operators, which operator will take the operand first, is decided by the precedence of an operator over otherwise
-     - Associativity : 
-        Associativity describes the rule where operators with the same precedence appear in an expression. For example, in expression a + b − c, both + and – have the same precedence, then which part of the expression will be evaluated first, is determined by associativity of those operators 
-
-     <table style="text-align:center;" class="table table-bordered">
-      <tbody><tr>
-      <th style="text-align:center;">Operator</th>
-      <th style="text-align:center;">Precedence</th>
-      <th style="text-align:center;">Associativity</th>
-      </tr>
-      <tr>
-      <td>Exponentiation ^</td>
-      <td>Highest</td>
-      <td>Right Associative</td>
-      </tr>
-      <tr>
-      <td>Multiplication ( ∗ ) &amp; Division ( / )</td>
-      <td>Second Highest</td>
-      <td>Left Associative</td>
-      </tr>
-      <tr>
-      <td>Addition ( + ) &amp; Subtraction ( − )</td>
-      <td>Lowest</td>
-      <td>Left Associative</td>
-      </tr>
-      </tbody></table>     
-
-   - Prefix (Polish) Notation : operator is prefixed to operands e.g  +  -  40  *  3  5  1
-   - Postfix (Reverse-Polish) Notation :  operator is postfixed to the operands e.g   40  3  5  *  -  1  +
-
-
-
-2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
-3. Reverse a word
-4. Check braket sequence balance: “((” , “({)}”, ()(}” return false
-5. Converting a decimal number into a binary numbers
-
 <h4>Operation</h4>
 1. push() − pushing (storing) an element on the stack
 2. pop() − removing (accessing) an element from the stack
@@ -566,6 +518,94 @@ void main() {
    getch();
 }
 ```
+
+### Stack Use ###
+1. Expression evaluation( infix/postfix):
+
+   An arithmetic expression can be written in three different but equivalent notations <br />
+   - Infix Notation : operators are used in-between operands . It is easy for us humans to read, write, and speak in infix notation but the same does not go well with computing devices e.g 40 - 3 * 5 + 1 
+
+   it is not a very efficient way to design an algorithm or program to evaluation infix notations. Instead, these infix notations are first converted into either postfix or prefix notations and then computed.
+
+   To parse any arithmetic expression, we need to take care of operator precedence and associativity also.
+
+     - Precedence :
+        When an operand is in between two different operators, which operator will take the operand first, is decided by the precedence of an operator over otherwise
+     - Associativity : 
+        Associativity describes the rule where operators with the same precedence appear in an expression. For example, in expression a + b − c, both + and – have the same precedence, then which part of the expression will be evaluated first, is determined by associativity of those operators 
+
+     <table style="text-align:center;" class="table table-bordered">
+      <tbody><tr>
+      <th style="text-align:center;">Operator</th>
+      <th style="text-align:center;">Precedence</th>
+      <th style="text-align:center;">Associativity</th>
+      </tr>
+      <tr>
+      <td>Exponentiation ^</td>
+      <td>Highest</td>
+      <td>Right Associative</td>
+      </tr>
+      <tr>
+      <td>Multiplication ( ∗ ) &amp; Division ( / )</td>
+      <td>Second Highest</td>
+      <td>Left Associative</td>
+      </tr>
+      <tr>
+      <td>Addition ( + ) &amp; Subtraction ( − )</td>
+      <td>Lowest</td>
+      <td>Left Associative</td>
+      </tr>
+      </tbody></table>    
+
+      both + and − are left associative, so the expression will be evaluated as (a + b) − c.
+
+      At any point of time in expression evaluation, the order can be altered by using parenthesis <br/>
+      e.g a + (b − c)  here b-c will be evaluated first
+
+   - Prefix (Polish) Notation : operator is prefixed to operands e.g  +  -  40  *  3  5  1
+   - Postfix (Reverse-Polish) Notation :  operator is postfixed to the operands e.g   40  3  5  *  -  1  +
+
+   <table border="1" width="100%">
+  <tbody><tr>
+    <th width="33%">Infix</th>
+    <th width="33%">Prefix</th>
+    <th width="34%">Postfix</th>
+  </tr>
+  <tr>
+    <td width="33%">a + b</td>
+    <td width="33%">+ a b</td>
+    <td width="34%">a b +</td>
+  </tr>
+  <tr>
+    <td width="33%">a + b * c</td>
+    <td width="33%">+ a * b c</td>
+    <td width="34%">a b c * +</td>
+  </tr>
+  <tr>
+    <td width="33%">(a + b) * (c - d)</td>
+    <td width="33%">* + a b - c d</td>
+    <td width="34%">a b + c d - *</td>
+  </tr>
+  <tr>
+    <td width="33%">b * b - 4 * a * c</td>
+    
+    <td width="33%"><strong><em>- * b b &nbsp;* * 4 a c</em></strong></td><td width="34%"><strong><em>b b * 4 a * c * -  </em></strong></td>
+  </tr>
+  <tr>
+    <td width="33%">40 - 3 * 5 + 1 &nbsp; &nbsp; &nbsp; = &nbsp; &nbsp; &nbsp; <strong><em>26</em></strong></td>
+    
+    <td width="33%"><strong><em>+ &nbsp;- &nbsp;40 &nbsp;* &nbsp;3 &nbsp;5 &nbsp;1 </em></strong></td><td width="34%"><strong><em>40 &nbsp;3 &nbsp;5 &nbsp;* &nbsp;- &nbsp;1 &nbsp;+ </em></strong></td>
+  </tr>
+</tbody></table>
+
+
+
+2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
+3. Reverse a word
+4. Check braket sequence balance: “((” , “({)}”, ()(}” return false
+5. Converting a decimal number into a binary numbers
+
+
 ### Queue ###
 Queue is an abstract data structure, somewhat similar to Stack. In contrast to Queue, queue is opened at both end. One end is always used to insert data (enqueue) and the other is used to remove data (dequeue). Queue follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first. <br>
 In queue, we always dequeue (or access) data, pointed by front pointer and while enqueing (or storing) data in queue we take help of rear pointer.
