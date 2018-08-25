@@ -3,7 +3,51 @@ Data Structure is a way to organized data in such a way that it can be used effi
 
 ### Data Structure Type ###
 ![alt text](images/introduction-to-data-structures.gif)
+
 We will discuss important data  structure array, linked list, tree, graph
+
+### Array ###
+Array is a collection of elements of similar data type.
+Following are the important terms to understand the concept of Array.
+
+1. Element − Each item stored in an array is called an element.
+
+2. Index − Each location of an element in an array has a numerical index, which is used to identify the element.
+
+![alt text](images/array_representation.jpg)
+
+### Need of using Array ###
+n computer programming, the most of the cases requires to store the large number of data of similar type. To store such amount of data, we need to define a large number of variables. It would be very difficult to remember names of all the variables while writing the programs. Instead of naming all the variables with a different name, it is better to define an array and store all the elements into it.
+
+we have marks of a student in six different subjects. The problem intends to calculate the average of all the marks of the student.
+
+```
+#include <stdio.h>
+void main ()
+{
+    int marks_1 = 56, marks_2 = 78, marks_3 = 88, marks_4 = 76, marks_5 = 56, marks_6 = 89;
+    float avg = (marks_1 + marks_2 + marks_3 + marks_4 + marks_5 +marks_6) / 6 ;
+    printf("%f",avg);
+}
+
+```
+here 6 variable define and add those  variable. but when weh have 1000 students then it will be difficult to program above way.
+
+In array, Only single name(array variable) for the group of variables of the same type
+
+```C
+#include <stdio.h>
+void main ()
+{
+    int marks[6] = {56,78,88,76,56,89);  
+    int i,float sum;  
+    for (i=0; i<6; i++ )   
+        sum += marks[i];   
+    
+    printf("%f",sum/6);
+}
+
+```
 
 ### Algorithm ###
 An algorithm is a procedure having well defined steps for solving a particular problem
