@@ -814,26 +814,26 @@ void main(){
 }
 ```
 
-    ![alt text](images/output1.png)
+![alt text](images/output1.png)
 
 
-    Algorithm for evaluation postfix expressions.
+Algorithm for evaluation postfix expressions.
 
-    1. Create a stack to store operands (or values).
-    2. Scan the given expression and do following for every scanned element.
-      - If the element is a number, push it into the stack
-      - If the element is a operator, pop operands for the operator from stack. Evaluate the operator and push the result back to the stack
-    3. When the expression is ended, the number in the stack is the final answer
+1. Create a stack to store operands (or values).
+2. Scan the given expression and do following for every scanned element.
+  - If the element is a number, push it into the stack
+  - If the element is a operator, pop operands for the operator from stack. Evaluate the operator and push the result back to the stack
+3. When the expression is ended, the number in the stack is the final answer
 
 
-    Example:
-    Let the given expression be “123+*“. We scan all elements one by one.
-    1) Scan ‘1’, it’s a number, so push it to stack. Stack contains ‘1’
-    2) Scan ‘2’, again a number, push it to stack, stack now contains ‘1 2’ (from bottom to top)
-    3) Scan ‘3’, again a number, push it to stack, stack now contains ‘1 2 3’
-    4) Scan ‘+’, it’s an operator, pop two operands from stack, apply the + operator on operands, we get 2+3 which results in 5. We push the result ‘5’ to stack. Stack now becomes ‘1 5’.
-    5) Scan ‘*’, it’s an operator, pop two operands from stack, apply the * operator on operands, we get 1 * 5 which results in 5. We push the result ‘5’ to stack. Stack now becomes ‘5’.
-    6) There are no more elements to scan, we return the top element from stack (which is the only element left in stack).
+Example:
+Let the given expression be “123+*“. We scan all elements one by one.
+1) Scan ‘1’, it’s a number, so push it to stack. Stack contains ‘1’
+2) Scan ‘2’, again a number, push it to stack, stack now contains ‘1 2’ (from bottom to top)
+3) Scan ‘3’, again a number, push it to stack, stack now contains ‘1 2 3’
+4) Scan ‘+’, it’s an operator, pop two operands from stack, apply the + operator on operands, we get 2+3 which results in 5. We push the result ‘5’ to stack. Stack now becomes ‘1 5’.
+5) Scan ‘*’, it’s an operator, pop two operands from stack, apply the * operator on operands, we get 1 * 5 which results in 5. We push the result ‘5’ to stack. Stack now becomes ‘5’.
+6) There are no more elements to scan, we return the top element from stack (which is the only element left in stack).
 
 2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
 3. Reverse a word
