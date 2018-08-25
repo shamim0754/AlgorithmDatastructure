@@ -44,7 +44,15 @@ Space complexity of an algorithm represents the amount of memory space required 
 
   - variable part : it is a space required by variables, whose size depends on the size of the problem. For example, dynamic memory allocation, recursion stack space, etc.
 
-2. Time Complexity
+  <table class="table table-bordered">
+  <tbody><tr><th>Type</th><th>Size</th></tr>
+  <tr><td>bool, char, unsigned char, signed char, __int8</td><td>1 byte</td></tr>
+  <tr><td>__int16, short, unsigned short, wchar_t, __wchar_t</td><td>2 bytes</td></tr>
+  <tr><td>float, __int32, int, unsigned int, long, unsigned long</td><td>4 bytes</td></tr>
+  <tr><td>double, __int64, long double, long long</td><td>8 bytes</td></tr>
+  </tbody></table>
+
+2. Time Complexity :
 Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion
 For example, addition of two n-bit integers takes n instuction. Consequently, the total computational time is T(n) = c ∗ n, where c is the time taken for the addition of two bits.
 
