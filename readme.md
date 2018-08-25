@@ -705,7 +705,7 @@ void main() {
     </tbody>
     </table>
 
-    <br/>
+
     
     ```C
     #include <stdio.h>
