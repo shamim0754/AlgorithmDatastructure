@@ -30,10 +30,10 @@ int isOperand(char symbol) {
       case '^':
       case '(':
       case ')':
-         return 0;
+         return 1;
          break;
       default:
-         return 1;
+         return 0;
    }
 }
 // A utility function to return precedence of a given operator

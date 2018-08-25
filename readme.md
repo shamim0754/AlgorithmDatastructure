@@ -85,7 +85,7 @@ Space complexity of an algorithm represents the amount of memory space required 
 Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion
 For example, addition of two n-bit integers takes n instuction. Consequently, the total computational time is T(n) = c ∗ n, where c is the time taken for the addition of two bits.
 
-<b>Asymptotic(Asymptotic means approaching a value or curve arbitrarily closely) analysis</b> of an algorithm refers to defining the mathematical boundation/framing of its run-time performance.The time required by an algorithm falls under three types −
+<b>Asymptotic(Asymptotic means approaching a value or curve arbitrarily closely) analysis</b> of an algorithm refers to defining the mathematical boundation/framing of its run-time performance in terms of input size.The time required by an algorithm falls under three types −
 
 1. Best Case − Minimum time required for program execution. it express by nota
 tion called Ω Notation
@@ -185,9 +185,9 @@ then = (n<sup>4</sup>) + (n<sup>2</sup>) + log<sub>2</sub>n<br />
   Example : Counting Coins, we have coins of 1, 7, 10 value, How many coins are required to get 18 ?
 
   Ans : 3 coins.Greedy approach forces the algorithm to pick the largest to lowest possible coin.
-  1. 10, the remaining count is 7
-  2. 7, the remaining count is 1
-  3. 1
+  - 10, the remaining count is 7
+  - 7, the remaining count is 1
+  - 1
 
 
   if we slightly change the problem(Count 15) then the same approach may not be able to produce the same optimum result, then greedy approach may use more coins than necessary<br/>
@@ -219,7 +219,8 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 7. Knapsack Problem
 8. Job Scheduling Problem :
 9. Job Sequencing Problem :
-  Given an array of jobs where every job has a deadline and associated profit if the job is finished before the deadline. It is also given that every job takes single unit of time, so the minimum possible deadline for any job is 1. How to maximize total profit if only one job can be scheduled at a time.
+  Given an array of jobs where every job has a deadline and associated profit if the job is finished before the deadline. It is also given that every job takes single unit of time, so the minimum possible deadline for any job is 1. <br />
+  How to maximize total profit if only one job can be scheduled at a time ?
 
   In greedy approach,
   1) Sort all jobs in decreasing order of profit.
@@ -703,6 +704,137 @@ void main() {
     </tr>
     </tbody>
     </table>
+
+
+    ```C
+    #include <stdio.h>
+    #include <conio.h>
+    #include<string.h>
+
+
+    int MAXSIZE = 80;
+    int stack[80];
+    int top = -1;
+
+    //push into stack
+    void push(int value) {
+       stack[++top] = value;
+    }
+
+    //check stack empty
+    int isEmpty() {
+        return top == -1 ? 1 : 0;
+    }
+    int pop() {
+       return stack[top--];
+    }
+    //check whether the symbol is operator?
+    int isOperand(char symbol) {
+
+       switch(symbol) {
+          case '+':
+          case '-':
+          case '*':
+          case '/':
+          case '^':
+          case '(':
+          case ')':
+             return 1;
+             break;
+          default:
+             return 0;
+       }
+    }
+    // A utility function to return precedence of a given operator
+    // Higher returned value means higher precedence
+    int precedence(char ch)
+    {
+        switch (ch){
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+            case '^':
+                return 3;
+        }
+        return -1;
+    }
+
+    //converts infix expression to postfix
+    void convert(char infix[],char postfix[]) {
+       int i,symbol,j = 0;
+
+       for(i = 0;i<strlen(infix);i++) {
+          symbol = infix[i];
+          if(isOperand(symbol) == 0) {
+             postfix[j] = symbol;
+             j++;
+          } else if(symbol == '(') {
+            push(symbol);
+          } else if(symbol == ')') {
+            while(stack[top] != '(') {
+                postfix[j] = pop();
+                j++;
+            }
+            pop();
+          } else {
+            if(precedence(symbol) > precedence(stack[top])) {
+                push(symbol);
+            } else {
+                while(precedence(symbol) <= precedence(stack[top])) {
+                    postfix[j] = pop();
+                     j++;
+                }
+                push(symbol);
+            }
+          }
+       }
+
+       while(!isEmpty()) {
+          postfix[j] = pop();
+          j++;
+       }
+
+       postfix[j]='\0';  //null terminate string.
+    }
+
+    void main(){
+        //= "1*(2+3)" // output = 123+*
+        char infix[80] ,postfix[80];
+        printf("Enter a infix to convert postfix ? \n");
+        scanf("%s",&infix);
+        convert(infix,postfix);
+
+        printf("Infix expression is: %s\n" , infix);
+        printf("Postfix expression is: %s\n" , postfix);
+
+
+    }
+
+    ```
+
+    ![alt text](images/output1.png)
+
+
+    Algorithm for evaluation postfix expressions.
+
+    1. Create a stack to store operands (or values).
+    2. Scan the given expression and do following for every scanned element.
+      - If the element is a number, push it into the stack
+      - If the element is a operator, pop operands for the operator from stack. Evaluate the operator and push the result back to the stack
+    3. When the expression is ended, the number in the stack is the final answer
+
+
+    Example:
+    Let the given expression be “123+*“. We scan all elements one by one.
+    1) Scan ‘1’, it’s a number, so push it to stack. Stack contains ‘1’
+    2) Scan ‘2’, again a number, push it to stack, stack now contains ‘1 2’ (from bottom to top)
+    3) Scan ‘3’, again a number, push it to stack, stack now contains ‘1 2 3’
+    4) Scan ‘+’, it’s an operator, pop two operands from stack, apply the + operator on operands, we get 2+3 which results in 5. We push the result ‘5’ to stack. Stack now becomes ‘1 5’.
+    5) Scan ‘*’, it’s an operator, pop two operands from stack, apply the * operator on operands, we get 1 * 5 which results in 5. We push the result ‘5’ to stack. Stack now becomes ‘5’.
+    6) There are no more elements to scan, we return the top element from stack (which is the only element left in stack).
 
 2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
 3. Reverse a word
