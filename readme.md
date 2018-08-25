@@ -4,7 +4,21 @@ Data Structure is a way to organized data in such a way that it can be used effi
 ### Data Structure Type ###
 ![alt text](images/introduction-to-data-structures.gif)
 
+- Linear: A data structure is said to be linear if its elements form a sequential memory locations. The other way is to have the linear relationship between the elements represented by means of pointers or links. Ex- Array and Link List.
+
+Non-linear: A data structure is said to be non-linear if its elements a hierarchical relationship between elements such as trees and graphs.
+
 We will discuss important data  structure array, linked list, tree, graph
+
+### Data Structure Operations ###
+1. Traversing : print all the array elements one by one.
+2. Searching : Searches an element using the given index or by the value.
+3. Insertion : Adds an element at the given index.
+4. Update : Updates an element at the given index.
+5. Deletion : Deletes an element at the given index.
+6. Sorting : Managing the data or record in some logical order(Ascending or descending order).
+7. Merging : Combining the record in two different sorted data structure into a single sorted data structure.
+
 
 ### Array ###
 Array is a collection of elements of similar data type.
@@ -15,6 +29,12 @@ Following are the important terms to understand the concept of Array.
 2. Index − Each location of an element in an array has a numerical index, which is used to identify the element.
 
 ![alt text](images/array_representation.jpg)
+
+C array declaration.
+
+![alt text](images/array_declaration.jpg)
+
+here size declaration optional
 
 ### Need of using Array ###
 n computer programming, the most of the cases requires to store the large number of data of similar type. To store such amount of data, we need to define a large number of variables. It would be very difficult to remember names of all the variables while writing the programs. Instead of naming all the variables with a different name, it is better to define an array and store all the elements into it.
@@ -49,6 +69,56 @@ void main ()
 
 ```
 
+Array data structure operation
+
+```C
+#include <stdio.h>
+int array[] = {1,3,5,7,8};
+int  n = 4;
+void travers(int array[]){
+    for(int i = 0; i < n; i++)
+        printf("array[%d] = %d \n", i, array[i]);
+}
+void insert(int value){
+    array[n++] = value;
+}
+void update(int value, int updateIndex){
+    array[updateIndex] = value;
+}
+void delete(int indexDelete){
+   int j = indexDelete;
+   while( j < n) {
+      array[j-1] = array[j];
+      j++;
+   }
+   n--;
+}
+void search(int searchValue){
+    for(int i = 0; i < n; i++){
+        if(array[i] == searchValue)
+            printf("Found element %d at position %d\n", searchValue, i);
+    }
+}
+main() {
+   printf("The original array elements are :\n");
+
+   travers(array);
+   insert(10);
+   printf("The array elements after insertion :\n");
+   travers(array);
+
+   update(12, 0);
+   printf("The array elements after update :\n");
+   travers(array);
+
+   delete(3); // delete 3th position(value 5)
+   printf("The array elements after deletion :\n");
+   travers(array);
+
+   search(3);
+}
+
+```
 ### Algorithm ###
 An algorithm is a procedure having well defined steps for solving a particular problem
 
@@ -1003,12 +1073,6 @@ void main() {
 ```
 ### linked-list ###
 A linked-list is a sequence of data structures which are connected together via links. Linked List is a sequence of links which contains items. Each link contains a connection to another link. Linked list the second most used data structure after array.
-<h4>Operation</h4>
-1. Insertion − add an element at the beginning of the list.
-2. Deletion − delete an element at the beginning of the list.
-3. Display − displaying complete list.
-4. Search − search an element using given key.
-5. Delete − delete an element using given key.
 
 ```C
 #include <stdio.h>
@@ -1147,13 +1211,7 @@ void main() {
 }
 ```
 
-### Data Structure Operations ###
-1. Traversing
-2. Searching
-3. Insertion
-4. Deletion
-5. Sorting
-6. Merging
+
 
 ### Linear Searching ###
 
