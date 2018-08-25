@@ -441,6 +441,7 @@ Stack can only access the top element of a stack hence it is called LIFO(Last-in
 <h4>Operation</h4>
 1. push() − pushing (storing) an element on the stack
 2. pop() − removing (accessing) an element from the stack
+Helper/Utility operation
 4. peek() − get the top data element of the stack, without removing it.
 5. isFull() − check if stack is full.
 6. isEmpty() − check if stack is empty.
@@ -524,8 +525,12 @@ void main() {
 
    An arithmetic expression can be written in three different but equivalent notations <br />
    - Infix Notation : operators are used in-between operands . It is easy for us humans to read, write, and speak in infix notation but the same does not go well with computing devices e.g 40 - 3 * 5 + 1 
+   Consider the below expression: a + b * c + d
 
-   it is not a very efficient way to design an algorithm or program to evaluation infix notations. Instead, these infix notations are first converted into either postfix or prefix notations and then computed.
+   The compiler first scans the expression to evaluate the expression 3 * 5, then again scan the expression to subtract it from 40. The result is then added to 1 after another scan.
+    The repeated scanning makes it very in-efficient(time consuming).
+
+   Instead, these infix notations are first converted into either postfix or prefix notations and then computed using stack.
 
    To parse any arithmetic expression, we need to take care of operator precedence and associativity also.
 
@@ -563,7 +568,8 @@ void main() {
       e.g a + (b − c)  here b-c will be evaluated first
 
    - Prefix (Polish) Notation : operator is prefixed to operands e.g  +  -  40  *  3  5  1
-   - Postfix (Reverse-Polish) Notation :  operator is postfixed to the operands e.g   40  3  5  *  -  1  +
+   - Postfix (Reverse-Polish) Notation :  operator is postfixed to the operands e.g   40  3  5  *  -  1  + 
+   <br />
 
    <table border="1" width="100%">
   <tbody><tr>
@@ -592,13 +598,109 @@ void main() {
     <td width="33%"><strong><em>- * b b &nbsp;* * 4 a c</em></strong></td><td width="34%"><strong><em>b b * 4 a * c * -  </em></strong></td>
   </tr>
   <tr>
-    <td width="33%">40 - 3 * 5 + 1 &nbsp; &nbsp; &nbsp; = &nbsp; &nbsp; &nbsp; <strong><em>26</em></strong></td>
+    <td width="33%">40 - 3 * 5 + 1></td>
     
     <td width="33%"><strong><em>+ &nbsp;- &nbsp;40 &nbsp;* &nbsp;3 &nbsp;5 &nbsp;1 </em></strong></td><td width="34%"><strong><em>40 &nbsp;3 &nbsp;5 &nbsp;* &nbsp;- &nbsp;1 &nbsp;+ </em></strong></td>
   </tr>
 </tbody></table>
 
+  Algorithm to converts infix expression to postfix
+  1. Create a stack & an empty postfix output string
+  2. Scan the infix expression from left to right.
+  3. If the scanned character is an operand, output it.
+  4. If the scanned character is an ‘(‘, push it to the stack.
+  5. If the scanned character is an ‘)’, pop and output from the stack until an ‘(‘ is encountered.
+  6. Else,
+      - If the precedence of the scanned operator is greater than the precedence of the operator in the stack(or the stack is empty), push it.
+      - Else, Pop the operator from the stack until the precedence of the scanned operator is less-equal to the precedence of the operator residing on the top of the stack. Push the scanned operator to the stack.
+  
+  7. Repeat steps 2-6 until infix expression is scanned.
+  8. Pop and output from the stack until it is not empty.
 
+  For better understanding, let us trace out an example A * B – (C + D) + E
+
+  <table>
+    <tbody>
+    <tr>
+    <td><b>INPUT CHARACTER</b></td>
+    <td><b>OPERATION ON STACK</b></td>
+    <td><b>STACK</b></td>
+    <td><b>POSTFIX EXPRESSION</b></td>
+    </tr>
+    <tr>
+    <td>A</td>
+    <td></td>
+    <td>Empty</td>
+    <td>A</td>
+    </tr>
+    <tr>
+    <td>*</td>
+    <td>Push</td>
+    <td>*</td>
+    <td>A</td>
+    </tr>
+    <tr>
+    <td>B</td>
+    <td></td>
+    <td>*</td>
+    <td>A B</td>
+    </tr>
+    <tr>
+    <td>–</td>
+    <td>Check and Push</td>
+    <td>–</td>
+    <td>A B *</td>
+    </tr>
+    <tr>
+    <td>(</td>
+    <td>Push</td>
+    <td>– (</td>
+    <td>A B *</td>
+    </tr>
+    <tr>
+    <td>C</td>
+    <td></td>
+    <td>– (</td>
+    <td>A B * C</td>
+    </tr>
+    <tr>
+    <td>+</td>
+    <td>Check and Push</td>
+    <td>– ( +</td>
+    <td>A B * C</td>
+    </tr>
+    <tr>
+    <td>D</td>
+    <td></td>
+    <td>– ( +</td>
+    <td>A B * C D</td>
+    </tr>
+    <tr>
+    <td>)</td>
+    <td>Pop and append to postfix till ‘(‘</td>
+    <td>–</td>
+    <td>A B * C D +</td>
+    </tr>
+    <tr>
+    <td>+</td>
+    <td>Check and push</td>
+    <td>+</td>
+    <td>A B * C D + –</td>
+    </tr>
+    <tr>
+    <td>E</td>
+    <td></td>
+    <td>+</td>
+    <td>A B * C D + – E</td>
+    </tr>
+    <tr>
+    <td>End of Input</td>
+    <td>Pop till Empty</td>
+    <td>Empty</td>
+    <td>A B * C D + – E +</td>
+    </tr>
+    </tbody>
+    </table>
 
 2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
 3. Reverse a word
