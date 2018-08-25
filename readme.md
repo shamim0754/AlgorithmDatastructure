@@ -297,7 +297,7 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 
 2. Dynamic programming :
 
-  Dynamic programming approach is similar to divide and conquer in breaking down the problem into smaller and yet smaller possible sub-problems. But unlike, divide and conquer, these sub-problems are not solved independently. Rather, results of these smaller sub-problems are remembered and used for similar or overlapping sub-problems.
+  Dynamic Programming is an algorithmic paradigm that solves a given complex problem by breaking it into subproblems and stores the results of subproblems to avoid computing the same results again.
 
   Mostly, these algorithms are used for optimization.
 
@@ -319,6 +319,49 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
       return fibonacci( n-1 ) + fibonacci( n-2 );
   }
   ```
+  Execution time : 3.266s <br />
+
+  Recursion tree for execution of fib(5)
+
+  ![alt text](images/fibbo.png)
+
+  We can see that the function fib(3) is being called 2 times. If we would have stored the value of fib(3), then instead of computing it again, we could have reused the old stored value.
+
+  There are following two different ways to store the values so that these values can be reused:
+  a) Memoization (Top Down)
+
+  ```C
+  #include <stdio.h>
+  #include <conio.h>
+  int dp[20];
+
+  void main(){
+      int n;
+      printf("Enter number of elements :\n");
+      scanf("%d", &n);
+      for(int i=0;i<20;i++)
+          dp[i] = -1;
+      for(int i=0; i< n; i++)
+          printf("%d ", fibonacci(i));
+
+  }
+  int fibonacci( int n ) {
+      if( n == 0 ) return 0;
+      if( n == 1 ) return 1;
+      if( dp[n] != -1 ) return dp[n];
+      else{
+          dp[n] = fibonacci( n-1 ) + fibonacci( n-2 );
+          return dp[n];
+      }
+  }
+
+  ```
+
+  Execution time : 2.265s <br />
+
+  b) Tabulation (Bottom Up)
+
+
   2. Knapsack problem
   3. Tower of Hanoi
   4. All pair shortest path by Floyd-Warshall
