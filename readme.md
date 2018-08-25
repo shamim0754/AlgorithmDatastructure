@@ -181,6 +181,7 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 6. Graph - Vertex Cover
 7. Knapsack Problem
 8. Job Scheduling Problem :
+9. Job Sequencing Problem :
   Given an array of jobs where every job has a deadline and associated profit if the job is finished before the deadline. It is also given that every job takes single unit of time, so the minimum possible deadline for any job is 1. How to maximize total profit if only one job can be scheduled at a time.
 
   In greedy approach,
@@ -399,6 +400,13 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 
 A stack is an abstract data type (ADT), commonly used in most programming languages. It is named stack as it behaves like a real-world stack, for example − deck of cards or pile of plates etc. <br>
 Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
+
+### Stack Use ###
+1. Expression evaluation( infix/postfix)
+2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
+3. Reverse a word
+4. Check braket sequence balance: “((” , “({)}”, ()(}” return false
+
 <h4>Operation</h4>
 1. push() − pushing (storing) an element on the stack
 2. pop() − removing (accessing) an element from the stack
