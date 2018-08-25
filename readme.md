@@ -2,7 +2,7 @@
 Data Structure is a way to organized data in such a way that it can be used efficiently.Almost every enterprise application uses various types of data structures e.g array,linked list
 
 ### Data Structure Type ###
-![alt text](introduction-to-data-structures.gif)
+![alt text](images/introduction-to-data-structures.gif)
 We will discuss important data  structure array, linked list, tree, graph
 
 ### Algorithm ###
