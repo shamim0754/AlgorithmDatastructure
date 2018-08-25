@@ -439,7 +439,18 @@ A stack is an abstract data type (ADT), commonly used in most programming langua
 Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
 
 ### Stack Use ###
-1. Expression evaluation( infix/postfix)
+1. Expression evaluation( infix/postfix):
+
+   An arithmetic expression can be written in three different but equivalent notations <br />
+   - Infix Notation : operators are used in-between operands . It is easy for us humans to read, write, and speak in infix notation but the same does not go well with computing devices e.g 40 - 3 * 5 + 1 
+
+   An algorithm to process infix notation could be difficult and costly in terms of time and space consumption. For this reason prefix or postfix notation is used for computing devices
+
+   - Prefix (Polish) Notation : operator is prefixed to operands e.g  +  -  40  *  3  5  1
+   - Postfix (Reverse-Polish) Notation :  operator is postfixed to the operands e.g   40  3  5  *  -  1  +
+
+   
+
 2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
 3. Reverse a word
 4. Check braket sequence balance: “((” , “({)}”, ()(}” return false
