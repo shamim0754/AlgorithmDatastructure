@@ -280,34 +280,50 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
   ```
 
 2. Divide and Conquer :
-In divide and conquer approach, the problem in hand, is divided into smaller sub-problems and then each problem is solved independently. When we keep on dividing the subproblems into even smaller sub-problems, we may eventually reach a stage where no more division is possible. Those "atomic" smallest possible sub-problem (fractions) are solved. The solution of all sub-problems is finally merged in order to obtain the solution of an original problem.
 
-Example : Convert following small alphabet to capital alphabet
+  In divide and conquer approach, the problem in hand, is divided into smaller sub-problems and then each problem is solved independently. When we keep on dividing the subproblems into even smaller sub-problems, we may eventually reach a stage where no more division is possible. Those "atomic" smallest possible sub-problem (fractions) are solved. The solution of all sub-problems is finally merged in order to obtain the solution of an original problem.
 
-![alt text](images/divide_and_conquer.jpg)
+  Example : Convert following small alphabet to capital alphabet
 
-The following computer algorithms are based on divide-and-conquer programming approach −
+  ![alt text](images/divide_and_conquer.jpg)
 
-1. Merge Sort
-2. Quick Sort
-3. Binary Search
-4. Strassen's Matrix Multiplication
-5. Closest pair (points)
+  The following computer algorithms are based on divide-and-conquer programming approach −
+
+  1. Merge Sort
+  2. Quick Sort
+  3. Binary Search
+  4. Strassen's Matrix Multiplication
+  5. Closest pair (points)
 
 2. Dynamic programming :
 
-Dynamic programming approach is similar to divide and conquer in breaking down the problem into smaller and yet smaller possible sub-problems. But unlike, divide and conquer, these sub-problems are not solved independently. Rather, results of these smaller sub-problems are remembered and used for similar or overlapping sub-problems.
+  Dynamic programming approach is similar to divide and conquer in breaking down the problem into smaller and yet smaller possible sub-problems. But unlike, divide and conquer, these sub-problems are not solved independently. Rather, results of these smaller sub-problems are remembered and used for similar or overlapping sub-problems.
 
-Mostly, these algorithms are used for optimization.
+  Mostly, these algorithms are used for optimization.
 
-The following computer problems can be solved using dynamic programming approach −
+  The following computer problems can be solved using dynamic programming approach −
 
-1. Fibonacci number series
-2. Knapsack problem
-3. Tower of Hanoi
-4. All pair shortest path by Floyd-Warshall
-5. Shortest path by Dijkstra
-6. Project scheduling
+  1. Fibonacci number series
+  ```C
+  void main(){
+      int n;
+      printf("Enter number of elements :\n");
+      scanf("%d", &n);
+      for(int i=0; i< n; i++)
+          printf("%d ", fibonacci(i));
+
+  }
+  int fibonacci( int n ) {
+      if( n == 0 ) return 0;
+      if( n == 1 ) return 1;
+      return fibonacci( n-1 ) + fibonacci( n-2 );
+  }
+  ```
+  2. Knapsack problem
+  3. Tower of Hanoi
+  4. All pair shortest path by Floyd-Warshall
+  5. Shortest path by Dijkstra
+  6. Project scheduling
 
 ### Stack ###
 
