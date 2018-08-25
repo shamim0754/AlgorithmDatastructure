@@ -52,6 +52,35 @@ Space complexity of an algorithm represents the amount of memory space required 
   <tr><td>double, __int64, long double, long long</td><td>8 bytes</td></tr>
   </tbody></table>
 
+  Concider following programm
+  ```C
+  {
+    int z = a + b + c;
+    return(z);
+  }
+  ```
+
+  variables a, b, c and z are all integer types, hence they will take up 2 bytes each, so total memory requirement will be (8 + 2) = 10 bytes
+  this additional 2 bytes is for return value. And because this space requirement is fixed
+  hence it is called Constant Space Complexity.
+
+  ```C
+  // n is the length of array a[]
+  int sum(int a[], int n)
+  {
+    int x = 0;    // 2 bytes for x
+    for(int i = 0; i < n; i++)  // 2 bytes for i
+    { 
+        x  = x + a[i];    
+    }
+    return(x);
+  }
+  ```
+
+  In the above code, 2*n bytes of space is required for the array a[] elements.
+  2 bytes each for x, n, i and the return value.
+  Hence the total memory requirement will be (2n + 8), which is increasing linearly with the increase in the input value n, hence it is called as Linear Space Complexity
+
 2. Time Complexity :
 Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion
 For example, addition of two n-bit integers takes n instuction. Consequently, the total computational time is T(n) = c ∗ n, where c is the time taken for the addition of two bits.
