@@ -40,15 +40,15 @@ The complexity of an algorithm gives the running time and/or the storage space r
 1. Space Complexity
 Space complexity of an algorithm represents the amount of memory space required by the algorithm in its life cycle. The space required by an algorithm is equal to the sum of the following two components −
 
-1. Fixed part:  it is a space required to store certain data and variables, that are independent of the size of the problem. For example, simple variables and constants used, program size, etc.
+  1. Fixed part:  it is a space required to store certain data and variables, that are independent of the size of the problem. For example, simple variables and constants used, program size, etc.
 
-2. variable part : it is a space required by variables, whose size depends on the size of the problem. For example, dynamic memory allocation, recursion stack space, etc.
+  2. variable part : it is a space required by variables, whose size depends on the size of the problem. For example, dynamic memory allocation, recursion stack space, etc.
 
 2. Time Complexity
 Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion
 For example, addition of two n-bit integers takes n instuction. Consequently, the total computational time is T(n) = c ∗ n, where c is the time taken for the addition of two bits.
 
-<b>Asymptotic analysis</b> of an algorithm refers to defining the mathematical boundation/framing of its run-time performance.The time required by an algorithm falls under three types −
+<b>Asymptotic(Asymptotic means approaching a value or curve arbitrarily closely) analysis</b> of an algorithm refers to defining the mathematical boundation/framing of its run-time performance.The time required by an algorithm falls under three types −
 
 1. Best Case − Minimum time required for program execution. it express by nota
 tion called Ω Notation
@@ -406,6 +406,7 @@ Stack can only access the top element of a stack hence it is called LIFO(Last-in
 2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
 3. Reverse a word
 4. Check braket sequence balance: “((” , “({)}”, ()(}” return false
+5. Converting a decimal number into a binary numbers
 
 <h4>Operation</h4>
 1. push() − pushing (storing) an element on the stack
