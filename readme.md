@@ -6,7 +6,7 @@ Data Structure is a way to organized data in such a way that it can be used effi
 
 - Linear: A data structure is said to be linear if its elements form a sequential memory locations. The other way is to have the linear relationship between the elements represented by means of pointers or links. Ex- Array and Link List.
 
-Non-linear: A data structure is said to be non-linear if its elements a hierarchical relationship between elements such as trees and graphs.
+- Non-linear: A data structure is said to be non-linear if its elements a hierarchical relationship between elements such as trees and graphs.
 
 We will discuss important data  structure array, linked list, tree, graph
 
@@ -119,6 +119,167 @@ main() {
 }
 
 ```
+
+### linked-list ###
+Array contains following limitations:
+
+1. The size of array must be known in advance before using it in the program.it is almost impossible to expand the size of the array at run time.
+2. All the elements in the array need to be contiguously stored in the memory. Inserting any element in the array needs shifting of all its predecessors.
+
+Linked list is the data structure which can overcome all the limitations of an array becuase
+1. It allocates the memory dynamically(run time)
+
+![alt text](images/linked-list.png)
+
+A linked-list is collection of objects called nodes. A node contains two field
+- element :  Each item stored in an linked-list is called an element.
+- Link : it contains the address of the next node in the memory.
+
+Note :
+- Head : the first node is called head
+- Trail : the last node is called trail.  it link contains null.
+
+
+linked-list data structure operation
+
+```C
+#include <stdio.h>
+#include <conio.h>
+struct node  
+{
+   int value;
+   struct node *next;
+};
+
+struct node *head = NULL;
+struct node *current = NULL;
+
+//display the list
+void printList()
+{
+   struct node *ptr = head;
+   printf("\n[ ");
+   
+   //start from the beginning
+   while(ptr != NULL)
+   {        
+      printf("%d ",ptr->value);
+      ptr = ptr->next;
+   }
+   
+   printf(" ]");
+}
+
+//insert link at the first location
+void insert(int value)
+{
+   //create a link
+   struct node *link = (struct node*) malloc(sizeof(struct node));
+   
+   link->value = value;
+   
+   //point it to old first node
+   link->next = head;
+   
+   //point first to new first node
+   head = link;
+}
+int length(){
+   int length = 0;
+   struct node *current;
+   
+   for(current = head; current != NULL; current = current->next)
+      length++;
+   
+   return length;
+}
+//find a link with given value
+struct node* search(int searchItem){
+   //start from the first link
+   struct node* current = head;
+
+   //if list is empty
+   if(head == NULL)
+      return NULL;
+
+   while(current->value != searchItem){
+      
+      if(current->next == NULL) //if it is last node
+         return NULL;
+      else
+         current = current->next; //go to next link
+   }
+   //if data found, return the current Link
+   return current;
+}
+//delete a link with given value
+struct node* delete(int value){
+   //start from the first link
+   struct node* current = head;
+   struct node* previous = NULL;
+   //if list is empty
+   if(head == NULL)
+      return NULL;
+
+   while(current->value != value){
+
+      if(current->next == NULL) //if it is last node
+         return NULL;
+      else{
+         //store reference to current link
+         previous = current;
+         //move to next link
+         current = current->next;
+      }    
+   }
+   //found a match, update the link
+   if(current == head) 
+      //change first to point to next link
+      head = head->next;
+   else 
+      //bypass the current link
+      previous->next = current->next;
+      
+   
+   return current;
+}
+void main() {
+   struct node *ptr = head;
+   int n,arr[50],i,item,ditem;
+   printf("How many data you want to store ? \n");
+   scanf("%d", &n);
+
+   printf("Enter %d elements\n",n);
+   for(i = 0; i < n; i++)
+      scanf("%d", &arr[i]);
+   
+   for(i = 0; i < n; i++)
+      insert(arr[i]);
+   
+   printf("Original List: "); 
+   //print list
+   printList();
+   
+   printf("\nEnter a searchItem \n");
+   scanf("%d", &item);
+   struct node *foundLink = search(item);
+   if(foundLink == NULL)
+      printf("Not found");
+   else
+      printf("found");
+
+   printf("\nEnter a delete item \n");
+   scanf("%d", &ditem);
+   delete(ditem);
+
+   //print list
+   printList();
+
+   getch();
+}
+```
+
+
 ### Algorithm ###
 An algorithm is a procedure having well defined steps for solving a particular problem
 
@@ -1071,145 +1232,7 @@ void main() {
    getch();
 }
 ```
-### linked-list ###
-A linked-list is a sequence of data structures which are connected together via links. Linked List is a sequence of links which contains items. Each link contains a connection to another link. Linked list the second most used data structure after array.
 
-```C
-#include <stdio.h>
-#include <conio.h>
-struct node  
-{
-   int value;
-   struct node *next;
-};
-
-struct node *head = NULL;
-struct node *current = NULL;
-
-//display the list
-void printList()
-{
-   struct node *ptr = head;
-   printf("\n[ ");
-   
-   //start from the beginning
-   while(ptr != NULL)
-   {        
-      printf("%d ",ptr->value);
-      ptr = ptr->next;
-   }
-   
-   printf(" ]");
-}
-
-//insert link at the first location
-void insert(int value)
-{
-   //create a link
-   struct node *link = (struct node*) malloc(sizeof(struct node));
-   
-   link->value = value;
-   
-   //point it to old first node
-   link->next = head;
-   
-   //point first to new first node
-   head = link;
-}
-int length(){
-   int length = 0;
-   struct node *current;
-   
-   for(current = head; current != NULL; current = current->next)
-      length++;
-   
-   return length;
-}
-//find a link with given value
-struct node* search(int searchItem){
-   //start from the first link
-   struct node* current = head;
-
-   //if list is empty
-   if(head == NULL)
-      return NULL;
-
-   while(current->value != searchItem){
-      
-      if(current->next == NULL) //if it is last node
-         return NULL;
-      else
-         current = current->next; //go to next link
-   }
-   //if data found, return the current Link
-   return current;
-}
-//delete a link with given value
-struct node* delete(int value){
-   //start from the first link
-   struct node* current = head;
-   struct node* previous = NULL;
-   //if list is empty
-   if(head == NULL)
-      return NULL;
-
-   while(current->value != value){
-
-      if(current->next == NULL) //if it is last node
-         return NULL;
-      else{
-         //store reference to current link
-         previous = current;
-         //move to next link
-         current = current->next;
-      }    
-   }
-   //found a match, update the link
-   if(current == head) 
-      //change first to point to next link
-      head = head->next;
-   else 
-      //bypass the current link
-      previous->next = current->next;
-      
-   
-   return current;
-}
-void main() {
-   struct node *ptr = head;
-   int n,arr[50],i,item,ditem;
-   printf("How many data you want to store ? \n");
-   scanf("%d", &n);
-
-   printf("Enter %d elements\n",n);
-   for(i = 0; i < n; i++)
-      scanf("%d", &arr[i]);
-   
-   for(i = 0; i < n; i++)
-      insert(arr[i]);
-   
-   printf("Original List: "); 
-   //print list
-   printList();
-   
-   printf("\nEnter a searchItem \n");
-   scanf("%d", &item);
-   struct node *foundLink = search(item);
-   if(foundLink == NULL)
-      printf("Not found");
-   else
-      printf("found");
-
-   printf("\nEnter a delete item \n");
-   scanf("%d", &ditem);
-   delete(ditem);
-
-   //print list
-   printList();
-
-   getch();
-}
-```
 
 
 
