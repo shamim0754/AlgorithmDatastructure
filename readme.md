@@ -705,7 +705,8 @@ void main() {
     </tbody>
     </table>
 
-
+    <br/>
+    
     ```C
     #include <stdio.h>
     #include <conio.h>
@@ -812,7 +813,6 @@ void main() {
 
 
     }
-
     ```
 
     ![alt text](images/output1.png)
