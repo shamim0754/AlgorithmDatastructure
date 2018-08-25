@@ -443,7 +443,7 @@ Stack can only access the top element of a stack hence it is called LIFO(Last-in
 - push() − pushing (storing) an element on the stack
 -  pop() − removing (accessing) an element from the stack
 
-Helper/Utility operation
+Helper/Utility operation need for implementing push and pop operation
 - peek() − get the top data element of the stack, without removing it.
 - isFull() − check if stack is full.
 - isEmpty() − check if stack is empty.
@@ -596,13 +596,13 @@ void main() {
   </tr>
   <tr>
     <td width="33%">b * b - 4 * a * c</td>
-    
     <td width="33%"><strong><em>- * b b &nbsp;* * 4 a c</em></strong></td><td width="34%"><strong><em>b b * 4 a * c * -  </em></strong></td>
   </tr>
   <tr>
     <td width="33%">40 - 3 * 5 + 1></td>
-    
-    <td width="33%"><strong><em>+ &nbsp;- &nbsp;40 &nbsp;* &nbsp;3 &nbsp;5 &nbsp;1 </em></strong></td><td width="34%"><strong><em>40 &nbsp;3 &nbsp;5 &nbsp;* &nbsp;- &nbsp;1 &nbsp;+ </em></strong></td>
+    <td width="33%">+ &nbsp;- &nbsp;40 &nbsp;* &nbsp;3 &nbsp;5 &nbsp;1 
+    </td>
+    <td width="34%">40 &nbsp;3 &nbsp;5 &nbsp;* &nbsp;- &nbsp;1 &nbsp;+ </td>
   </tr>
 </tbody></table>
 
