@@ -439,12 +439,14 @@ A stack is an abstract data type (ADT), commonly used in most programming langua
 Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
 
 <h4>Operation</h4>
-1. push() − pushing (storing) an element on the stack
-2. pop() − removing (accessing) an element from the stack
+
+- push() − pushing (storing) an element on the stack
+-  pop() − removing (accessing) an element from the stack
+
 Helper/Utility operation
-4. peek() − get the top data element of the stack, without removing it.
-5. isFull() − check if stack is full.
-6. isEmpty() − check if stack is empty.
+- peek() − get the top data element of the stack, without removing it.
+- isFull() − check if stack is full.
+- isEmpty() − check if stack is empty.
 
 
 ```C
