@@ -835,6 +835,60 @@ Let the given expression be “123+*“. We scan all elements one by one.
 5) Scan ‘*’, it’s an operator, pop two operands from stack, apply the * operator on operands, we get 1 * 5 which results in 5. We push the result ‘5’ to stack. Stack now becomes ‘5’.
 6) There are no more elements to scan, we return the top element from stack (which is the only element left in stack).
 
+add following evaluation implementation in above program
+
+```
+//int stack
+int stack_int[25];
+int top_int = -1;
+
+void push_int(int item) {
+   stack_int[++top_int] = item;
+}
+
+char pop_int() {
+   return stack_int[top_int--];
+}
+
+//evaluates postfix expression
+int evaluate(char *postfix){
+    char ch;
+    int i = 0,value1,value2;
+
+    while( (ch = postfix[i++]) != '\0') {
+        if(isdigit(ch)) {
+       push_int(ch - '0');  // Push the operand
+      } else {
+         //Operator,pop two  operands
+         value1 = pop_int();
+         value2 = pop_int();
+
+         switch(ch) {
+            case '+':
+               push_int(value1+value2);
+               break;
+            case '-':
+               push_int(value1-value2);
+               break;
+            case '*':
+               push_int(value1*value2);
+               break;
+            case '/':
+               push_int(value1/value2);
+               break;
+         }
+      }
+    }
+    return stack_int[top_int];
+}
+```
+
+Add following line into main method
+
+```
+printf("Evaluated expression is: %d\n" , evaluate(postfix));
+```
+
 2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
 3. Reverse a word
 4. Check braket sequence balance: “((” , “({)}”, ()(}” return false

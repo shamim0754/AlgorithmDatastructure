@@ -90,7 +90,49 @@ void convert(char infix[],char postfix[]) {
 
    postfix[j]='\0';  //null terminate string.
 }
+//int stack
+int stack_int[25];
+int top_int = -1;
 
+void push_int(int item) {
+   stack_int[++top_int] = item;
+}
+
+char pop_int() {
+   return stack_int[top_int--];
+}
+
+//evaluates postfix expression
+int evaluate(char *postfix){
+    char ch;
+    int i = 0,value1,value2;
+
+    while( (ch = postfix[i++]) != '\0') {
+        if(isdigit(ch)) {
+       push_int(ch - '0');  // Push the operand
+      } else {
+         //Operator,pop two  operands
+         value1 = pop_int();
+         value2 = pop_int();
+
+         switch(ch) {
+            case '+':
+               push_int(value1+value2);
+               break;
+            case '-':
+               push_int(value1-value2);
+               break;
+            case '*':
+               push_int(value1*value2);
+               break;
+            case '/':
+               push_int(value1/value2);
+               break;
+         }
+      }
+    }
+    return stack_int[top_int];
+}
 void main(){
     //= "1*(2+3)"
     char infix[80] ,postfix[80];
@@ -100,6 +142,5 @@ void main(){
 
     printf("Infix expression is: %s\n" , infix);
     printf("Postfix expression is: %s\n" , postfix);
-
-
+    printf("Evaluated expression is: %d\n" , evaluate(postfix));
 }
