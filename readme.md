@@ -320,12 +320,63 @@ travers(head);
   - All operations require an extra pointer previous to be maintained. For example, in insertion, we need to modify previous pointers together with next pointers that will  take more time
 
   Insertion: A node can be added in four ways
-  - At the beginning of the DLL
+  - At the beginning of the DLL: Algorithm below
     - allocate node 
     - put in the data 
     - Make next of new node as head and previous as NULL 
     - change prev of head node to new node
     - move the head to point to the new node 
+    
+```C
+#include <stdio.h>
+struct node
+{
+   struct node *prev;
+   int data;
+   struct node *next;
+};
+struct node *head = NULL;
+struct node *current = NULL; //travers purpose
+void traversForword(){
+   current = head;
+   while(current != NULL){
+      printf("%d ",current->data);
+      current = current->next;
+   }
+}
+
+void traversBackword(){
+   current = head;
+   while(current != NULL){
+      printf("%d ",current->data);
+      current = current->prev;
+   }
+}
+
+void insertBegining(int data)
+{
+   //create a node
+   struct node *myNode = (struct node*) malloc(sizeof(struct node));
+   myNode->data = data;
+   myNode->next = head;
+   myNode->prev = NULL;
+
+   if (head != NULL)
+        head->prev = myNode;
+
+   //myNode is head now
+   head = myNode;
+}
+
+
+main() {
+   insertBegining(3);
+   insertBegining(10);
+   printf("The Double linked list elements after insertion :\n");
+   traversForword(head);
+}
+
+```
   - After a given node.
   - At the end of the DLL
   - Before a given node.
