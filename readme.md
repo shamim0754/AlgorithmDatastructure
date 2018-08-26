@@ -1,3 +1,173 @@
+### Algorithm ###
+An algorithm is a procedure having well defined steps for solving a particular problem
+
+For example : Algorithm to multiply the two numbers x and y
+1. Step 1 START
+2. Step 2 declare three integers x, y & z
+3. Step 3 define values of x & y
+4. Step 4 multiply values of x & y
+5. Step 5 store the output of step 4 in z
+6. Step 6 print z
+7. Step 7 STOP
+
+The major categories of algorithms are given below:
+1. Sort Algorithm: Sorting the items inside a data structure either acending or decending.
+2. Search Algorithm : Searching the items inside a data structure.
+3. Delete Algorithm : Delere the items from a data structure.
+4. Insert Algorithm :  Inserting an item inside a data structure.
+4. Update Algorithm :  Updating an item inside a data structure.
+
+### Characteristics of an Algorithm ###
+
+1. Input: An algorithm must have 0 or well defined inputs.
+2. Output: An algorithm must have 1 or well defined outputs, and should match with the desired output.
+3. Feasibility: An algorithm must be terminated after the finite number of steps.
+4. Independent: An algorithm must have step-by-step directions which is independent of any programming code.
+5. Unambiguous: An algorithm must be unambiguous and clear. Each of their steps and input/outputs must be clear and lead to only one meaning.
+
+### Algorithm Complexity ###
+The complexity of an algorithm gives the running time and/or the storage space required by the algorithm in terms of the size of input data.
+
+1. Space Complexity :
+Space complexity of an algorithm represents the amount of memory space required by the algorithm in its life cycle. The space required by an algorithm is equal to the sum of the following two components −
+
+  - Fixed part:  it is a space required to store certain data and variables, that are independent of the size of the problem. For example, simple variables and constants used, program size, etc.
+
+  - variable part : it is a space required by variables, whose size depends on the size of the problem. For example, dynamic memory allocation, recursion stack space, etc.
+
+  <table class="table table-bordered">
+  <tbody><tr><th>Type</th><th>Size</th></tr>
+  <tr><td>bool, char, unsigned char, signed char, __int8</td><td>1 byte</td></tr>
+  <tr><td>__int16, short, unsigned short, wchar_t, __wchar_t</td><td>2 bytes</td></tr>
+  <tr><td>float, __int32, int, unsigned int, long, unsigned long</td><td>4 bytes</td></tr>
+  <tr><td>double, __int64, long double, long long</td><td>8 bytes</td></tr>
+  </tbody></table>
+
+  Concider following programm
+  ```C
+  {
+    int z = a + b + c;
+    return(z);
+  }
+  ```
+
+  variables a, b, c and z are all integer types, hence they will take up 2 bytes each, so total memory requirement will be (8 + 2) = 10 bytes
+  this additional 2 bytes is for return value. And because this space requirement is fixed
+  hence it is called Constant Space Complexity.
+
+  ```C
+  // n is the length of array a[]
+  int sum(int a[], int n)
+  {
+    int x = 0;    // 2 bytes for x
+    for(int i = 0; i < n; i++)  // 2 bytes for i
+    { 
+        x  = x + a[i];    
+    }
+    return(x);
+  }
+  ```
+
+  In the above code, 2*n bytes of space is required for the array a[] elements.
+  2 bytes each for x, n, i and the return value.
+  Hence the total memory requirement will be (2n + 8), which is increasing linearly with the increase in the input value n, hence it is called as Linear Space Complexity
+
+2. Time Complexity :
+Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion
+For example, addition of two n-bit integers takes n instuction. Consequently, the total computational time is T(n) = c ∗ n, where c is the time taken for the addition of two bits.
+
+<b>Asymptotic(Asymptotic means approaching a value or curve arbitrarily closely) analysis</b> of an algorithm refers to defining the mathematical boundation/framing of its run-time performance in terms of input size.The time required by an algorithm falls under three types −
+
+1. Best Case − Minimum time required for program execution. it express by nota
+tion called Ω Notation
+2. Average Case − Average time required for program execution.
+
+3. Worst Case − Maximum time required for program execution.
+it express by nota
+tion called Ο(Big O) Notation
+
+The other one asymptotic notations  is <br/>
+θ Notation : it express both best case and worst case.
+
+Consider flowing function
+
+```C
+int myFunction(int n)
+{
+   int x=n+10;
+   x=x/2;
+   return x;
+}
+```
+
+Since any value of n it execute constant number of instruction . as a result it will always need same time. it express by O(1);
+
+Consider floowing function
+```C
+int myFunction2(int n)
+{
+  int sum=0;
+  for(int i=1;i<=n;i++)
+  {
+    sum+=i;
+    if(sum>=1000) break;
+  }
+  return sum;
+}
+```
+
+Since based on value of n number of instruction increased . although it can break but we always concider worse case . it is expressed by O(n);
+
+```C
+int myFunction3(int n)
+{
+int sum=0;
+for(int i=1;i<=n;i++)
+{
+for(int j=i;j<=n;j++)
+{
+sum+=(i+j);
+}
+}
+return sum;
+}
+```
+Since first loop is running n times, 2nd loop is running n-1 times,3rd loop running n-2 times <br />
+so algorithm complexitity = n + n-2 + n-3+.....+1
+                           = n * (n + 1)/2
+                           = (n<sup>2</sup> + n)/2 
+                           = n<sup>2</sup> (n<sup>2</sup> + n and n<sup>2</sup> is very little)
+                           = O(n<sup>2</sup>)
+
+```
+
+int binary_search(int arr[],int size,int searchitem){
+   int low,mid,high,isFound = 0;
+   high = size - 1;
+   while(low <= high){
+       mid = (low + high) / 2;
+       //if midlle index found
+       if(arr[mid] == searchitem){
+           isFound = 1;
+           break;
+        }else if(searchitem < arr[mid])
+           high = mid - 1;
+       else
+           low = mid + 1;
+   }
+  return isFound;  
+}
+```
+
+Since here every time n is divided 2 times. <br />
+How many times a number can divided by two? <br />
+Ans : log<sub>2</sub>n (n = a number)<br />
+it is expressed by O(log<sub>2</sub>n)
+
+if an algorithm have (n<sup>4</sup>) , (n<sup>2</sup>) and log<sub>2</sub>n<br />
+then = (n<sup>4</sup>) + (n<sup>2</sup>) + log<sub>2</sub>n<br />
+= (n<sup>4</sup>) (Since (n<sup>2</sup>) + log<sub>2</sub>n is very small)
+
 ### Data Structure ###
 Data Structure is a way to organized data in such a way that it can be used efficiently.Almost every enterprise application uses various types of data structures e.g array,linked list
 
@@ -395,166 +565,7 @@ main() {
 ### Linked List Use ###
 1. create different types of tree(e.g binary search tree) data structure
 
-### Algorithm ###
-An algorithm is a procedure having well defined steps for solving a particular problem
 
-The major categories of algorithms are given below:
-1. Sort Algorithm: Sorting the items inside a data structure either acending or decending.
-2. Search Algorithm : Searching the items inside a data structure.
-3. Delete Algorithm : Delere the items from a data structure.
-4. Insert Algorithm :  Inserting an item inside a data structure.
-4. Update Algorithm :  Updating an item inside a data structure.
-
-### Characteristics of an Algorithm ###
-
-1. Input: An algorithm must have 0 or well defined inputs.
-2. Output: An algorithm must have 1 or well defined outputs, and should match with the desired output.
-3. Feasibility: An algorithm must be terminated after the finite number of steps.
-4. Independent: An algorithm must have step-by-step directions which is independent of any programming code.
-5. Unambiguous: An algorithm must be unambiguous and clear. Each of their steps and input/outputs must be clear and lead to only one meaning.
-
-### Algorithm Complexity ###
-The complexity of an algorithm gives the running time and/or the storage space required by the algorithm in terms of the size of input data.
-
-1. Space Complexity :
-Space complexity of an algorithm represents the amount of memory space required by the algorithm in its life cycle. The space required by an algorithm is equal to the sum of the following two components −
-
-  - Fixed part:  it is a space required to store certain data and variables, that are independent of the size of the problem. For example, simple variables and constants used, program size, etc.
-
-  - variable part : it is a space required by variables, whose size depends on the size of the problem. For example, dynamic memory allocation, recursion stack space, etc.
-
-  <table class="table table-bordered">
-  <tbody><tr><th>Type</th><th>Size</th></tr>
-  <tr><td>bool, char, unsigned char, signed char, __int8</td><td>1 byte</td></tr>
-  <tr><td>__int16, short, unsigned short, wchar_t, __wchar_t</td><td>2 bytes</td></tr>
-  <tr><td>float, __int32, int, unsigned int, long, unsigned long</td><td>4 bytes</td></tr>
-  <tr><td>double, __int64, long double, long long</td><td>8 bytes</td></tr>
-  </tbody></table>
-
-  Concider following programm
-  ```C
-  {
-    int z = a + b + c;
-    return(z);
-  }
-  ```
-
-  variables a, b, c and z are all integer types, hence they will take up 2 bytes each, so total memory requirement will be (8 + 2) = 10 bytes
-  this additional 2 bytes is for return value. And because this space requirement is fixed
-  hence it is called Constant Space Complexity.
-
-  ```C
-  // n is the length of array a[]
-  int sum(int a[], int n)
-  {
-    int x = 0;    // 2 bytes for x
-    for(int i = 0; i < n; i++)  // 2 bytes for i
-    { 
-        x  = x + a[i];    
-    }
-    return(x);
-  }
-  ```
-
-  In the above code, 2*n bytes of space is required for the array a[] elements.
-  2 bytes each for x, n, i and the return value.
-  Hence the total memory requirement will be (2n + 8), which is increasing linearly with the increase in the input value n, hence it is called as Linear Space Complexity
-
-2. Time Complexity :
-Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion
-For example, addition of two n-bit integers takes n instuction. Consequently, the total computational time is T(n) = c ∗ n, where c is the time taken for the addition of two bits.
-
-<b>Asymptotic(Asymptotic means approaching a value or curve arbitrarily closely) analysis</b> of an algorithm refers to defining the mathematical boundation/framing of its run-time performance in terms of input size.The time required by an algorithm falls under three types −
-
-1. Best Case − Minimum time required for program execution. it express by nota
-tion called Ω Notation
-2. Average Case − Average time required for program execution.
-
-3. Worst Case − Maximum time required for program execution.
-it express by nota
-tion called Ο(Big O) Notation
-
-The other one asymptotic notations  is <br/>
-θ Notation : it express both best case and worst case.
-
-Consider flowing function
-
-```C
-int myFunction(int n)
-{
-   int x=n+10;
-   x=x/2;
-   return x;
-}
-```
-
-Since any value of n it execute constant number of instruction . as a result it will always need same time. it express by O(1);
-
-Consider floowing function
-```C
-int myFunction2(int n)
-{
-  int sum=0;
-  for(int i=1;i<=n;i++)
-  {
-    sum+=i;
-    if(sum>=1000) break;
-  }
-  return sum;
-}
-```
-
-Since based on value of n number of instruction increased . although it can break but we always concider worse case . it is expressed by O(n);
-
-```C
-int myFunction3(int n)
-{
-int sum=0;
-for(int i=1;i<=n;i++)
-{
-for(int j=i;j<=n;j++)
-{
-sum+=(i+j);
-}
-}
-return sum;
-}
-```
-Since first loop is running n times, 2nd loop is running n-1 times,3rd loop running n-2 times <br />
-so algorithm complexitity = n + n-2 + n-3+.....+1
-                           = n * (n + 1)/2
-                           = (n<sup>2</sup> + n)/2 
-                           = n<sup>2</sup> (n<sup>2</sup> + n and n<sup>2</sup> is very little)
-                           = O(n<sup>2</sup>)
-
-```
-
-int binary_search(int arr[],int size,int searchitem){
-   int low,mid,high,isFound = 0;
-   high = size - 1;
-   while(low <= high){
-       mid = (low + high) / 2;
-       //if midlle index found
-       if(arr[mid] == searchitem){
-           isFound = 1;
-           break;
-        }else if(searchitem < arr[mid])
-           high = mid - 1;
-       else
-           low = mid + 1;
-   }
-  return isFound;  
-}
-```
-
-Since here every time n is divided 2 times. <br />
-How many times a number can divided by two? <br />
-Ans : log<sub>2</sub>n (n = a number)<br />
-it is expressed by O(log<sub>2</sub>n)
-
-if an algorithm have (n<sup>4</sup>) , (n<sup>2</sup>) and log<sub>2</sub>n<br />
-then = (n<sup>4</sup>) + (n<sup>2</sup>) + log<sub>2</sub>n<br />
-= (n<sup>4</sup>) (Since (n<sup>2</sup>) + log<sub>2</sub>n is very small)
 
 
 ### Algorithm Technique ###
