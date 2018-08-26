@@ -557,6 +557,7 @@ Array contains following limitations:
 Linked list is the data structure which can overcome all the limitations of an array becuase
 1. It allocates the memory dynamically(run time)
 2. Ease of insertion/deletion
+As a result try to use linkedlist instead of array
 
 Drawbacks:
 1. Random access is not allowed.We have to access elements sequentially starting from the head node and then compare random value to node value and return . as a result greatly increasing the time periods required to access individual elements within the list
@@ -1467,7 +1468,7 @@ void main() {
 ```
 
 ### Queue ###
-In Queue  data structure, One end(front pointer) is always used to insert data (called  enqueue operation) and the other(rear pointer) is used to remove data ( called  dequeue operation ). 
+In Queue  data structure, One end(front pointer) is always used to insert/in data (called  enqueue operation) and the other(rear(means behind side) pointer) is used to remove/out data ( called  dequeue operation ). 
 The difference between stacks and queues is in removing. In a stack we remove the item the most recently added; in a queue, we remove the item the least recently added(.
 hence queue follows First-In-First-Out(FIFO) methodology
 )
@@ -1481,6 +1482,8 @@ Queue can be implemented using
 2. Stack 
 3. Linked List. 
 
+Algorithm for ENQUEUE & DEQUEUE operation 
+
 Initially the head(FRONT) and the tail(REAR) of the queue points at the first index of the array (starting the index of array from 0). As we add elements to the queue, the tail keeps on moving ahead, always pointing to the position where the next element will be inserted, while the head remains at the first index.
 
 ![alt text](images/implementation-of-queue.png)
@@ -1493,67 +1496,68 @@ In approach [A] there is an overhead of shifting the elements one position forwa
 
 In approach [B] there is no such overhead, but whenever we move head one position ahead, after removal of first element, the size on Queue is reduced by one space each time.
 
+
 ```C
 #include <stdio.h>
 #include <conio.h>
 
-#define MAX 6
+#define MAX 10
 
 int intArray[MAX];
 int front = 0;
-int rear = -1;
-int itemCount = 0;
+int rear = 0;
 
+int total =0;
 void enqueue(int value){
-
    if(!isFull()){
-   
-      if(rear == MAX-1){
-         rear = -1;            
-      }       
-
-      intArray[++rear] = value;
-      itemCount++;
+      intArray[rear++] = value;
+      total++;
+   }else{
+        printf("overflow ");
+        exit(0);
    }
 }
-bool isFull(){
-   return itemCount == MAX;
+void travers(int array[]){
+    for(int i = front; i < MAX; i++)
+        printf("queue[%d] = %d \n", i, array[i]);
 }
+
 int dequeue(){
    int value = intArray[front++];
-   
-   if(front == MAX){
-      front = 0;
-   }
-   
-   itemCount--;
-   return value;  
+   total--;
+   return value;
+}
+
+//utility function
+int isFull(){
+   return total == MAX ? 1 : 0;
 }
 
 int peek(){
    return intArray[front];
 }
 
-bool isEmpty(){
-   return itemCount == 0;
+int isEmpty(){
+   return total == 0 ? 1 : 0;
 }
 
 void main() {
+
    /* enqueue 5 items */
    enqueue(3);
    enqueue(5);
    enqueue(9);
    enqueue(1);
    enqueue(12);
-   
-   // dequeue one item 
+   travers(intArray) ;
+
    int num = dequeue();
    printf("Element dequeue: %d\n",num);
+   travers(intArray) ;
 
-   // pick one item
-   printf("Element at front: %d\n",peek());
    getch();
 }
+
 ```
 
 
