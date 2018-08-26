@@ -1092,8 +1092,8 @@ void main() {
 #include<string.h>
 
 
-int MAXSIZE = 80;
-int stack[80];
+#define MAXSIZE 80
+int stack[MAXSIZE];
 int top = -1;
 
 //push into stack
@@ -1268,15 +1268,16 @@ Add following line into main method
 printf("Evaluated expression is: %d\n" , evaluate(postfix));
 ```
 
-2. Syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
+2. Syntax parsing : Many compilers use a stack for parsing the syntax of expressions using infix notation, program blocks etc. before translating into low level code
+
 3. Reverse a word
 ```C
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
 
-int MAXSIZE = 80;
-char stack[80];
+#define MAXSIZE 80
+int stack[MAXSIZE];
 int top = -1;
 
 //push into stack
@@ -1340,8 +1341,8 @@ Algorithm
 #include <string.h>
 #include <stdbool.h>
 
-int MAXSIZE = 80;
-char stack[80];
+#define MAXSIZE 80
+char stack[MAXSIZE];
 int top = -1;
 
 //push into stack
@@ -1421,8 +1422,10 @@ void main() {
 #include <stdio.h>
 #include <conio.h>
 
-int MAXSIZE = 1000;
-int stack[1000];
+
+#define MAXSIZE 1000
+
+int stack[MAXSIZE];
 int top = -1;
 
 void push(int value) {
@@ -1464,13 +1467,31 @@ void main() {
 ```
 
 ### Queue ###
-Queue is an abstract data structure, somewhat similar to Stack. In Queue, One end(front pointer) is always used to insert data (called  enqueue operation) and the other(rear pointer) is used to remove data ( called  dequeue operation ). 
-
+In Queue  data structure, One end(front pointer) is always used to insert data (called  enqueue operation) and the other(rear pointer) is used to remove data ( called  dequeue operation ). 
+The difference between stacks and queues is in removing. In a stack we remove the item the most recently added; in a queue, we remove the item the least recently added(.
 hence queue follows First-In-First-Out(FIFO) methodology
+)
 
 Example : 
 1. A single-lane one-way road, where the vehicle form a queue(vehicle enters first, exits first.).
 2. People waiting in line for a rail ticket form a queue.
+
+Queue can be implemented using 
+1. Array : The easiest way of implementing a queue is by using an Array.
+2. Stack 
+3. Linked List. 
+
+Initially the head(FRONT) and the tail(REAR) of the queue points at the first index of the array (starting the index of array from 0). As we add elements to the queue, the tail keeps on moving ahead, always pointing to the position where the next element will be inserted, while the head remains at the first index.
+
+![alt text](images/implementation-of-queue.png)
+
+When we remove an element from Queue, we can follow two possible approaches (mentioned [A] and [B] in above diagram). In [A] approach, we remove the element at head position, and then one by one shift all the other elements in forward position.
+
+In approach [B] we remove the element from head position and then move head to the next position.
+
+In approach [A] there is an overhead of shifting the elements one position forward every time we remove the first element.
+
+In approach [B] there is no such overhead, but whenever we move head one position ahead, after removal of first element, the size on Queue is reduced by one space each time.
 
 ```C
 #include <stdio.h>
@@ -1857,3 +1878,7 @@ void mergeSort(int arr[],int low,int mid,int high){
 
 }
 ```
+
+Referece
+
+[git](https://introcs.cs.princeton.edu/java/43stack/)
