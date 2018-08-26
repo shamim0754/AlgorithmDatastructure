@@ -280,16 +280,15 @@ main() {
   Simple Linked List have following drawback:
   - Insert Operation : Inserting the second last node of the list or Inserting in the middle of the two node we need the list is traversed it is inefficient
   - Delete Operation : We saw that to delete a node, always remember previous node . To get this previous node, we need the list is also traversed
-
   − Item travers is forward only
 
-  To overcome such problem add  an extra link(called previous) on every node of simple linked list. It sturcutre called Doubly Linked List (DLL) 
+  To overcome such problem add  an extra link(called previous) on every node of simple linked list.Then It sturcutre called Doubly Linked List (DLL) 
 
   ![alt text](images/doubly-linked-list2.png)
 
   Disadvantages over singly linked list
-  1. Every node of DLL require extra space for an previous pointer
-  2. All operations require an extra pointer previous to be maintained. For example, in insertion, we need to modify previous pointers together with next pointers that will  take more time
+  - Every node of DLL require extra space for an previous pointer
+  - All operations require an extra pointer previous to be maintained. For example, in insertion, we need to modify previous pointers together with next pointers that will  take more time
 
 
 
