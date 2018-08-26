@@ -832,9 +832,8 @@ A stack is an abstract data type (ADT), commonly used in most programming langua
 Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
 
 <h4>Operation</h4>
-
-- push() − pushing (storing) an element on the stack
--  pop() − removing (accessing) an element from the stack
+- Insert : Adds an element an element on the stack called special name `push()`
+- Delete : Deletes an element from the stack called special name `pop()`
 
 Helper/Utility operation need for implementing push and pop operation
 - peek() − get the top data element of the stack, without removing it.
@@ -853,21 +852,16 @@ int top = -1;
 //push into stack
 void push(int value) {
 
-   if(!isfull()) {
-      top = top + 1;   
-      stack[top] = value;
+   if(!isFull()) {  
+      stack[++top] = value;
    }else {
       printf("Could not insert data, Stack is full.\n");
    }
 }
 
 //check stack full
-int isfull() {
-
-   if(top == MAXSIZE)
-      return 1;
-   else
-      return 0;
+int isFull() {
+   return top == MAXSIZE ? 1 : 0;
 }
 
 //pick top element
@@ -875,23 +869,16 @@ int peek() {
    return stack[top];
 }
 //check stack empty 
-int isempty() {
+int isEmpty() {
 
-   if(top == -1)
-      return 1;
-   else
-      return 0;
+   return top == -1 ? 1 : 0;
 }
 int pop() {
-   int value;
-    
-   if(!isempty()) {
-      value = stack[top];
-      top = top - 1;   
-      return value;
-   }else {
+   if(!isEmpty())   
+      return stack[top--];
+   else 
       printf("Could not retrieve data, Stack is empty.\n");
-   }
+   
 }
 
 void main() {
@@ -907,7 +894,7 @@ void main() {
    printf("Elements: \n");
 
    // print stack data 
-   while(!isempty()) {
+   while(!isEmpty()) {
       int data = pop();
       printf("%d\n",data);
    }
@@ -1281,9 +1268,154 @@ Add following line into main method
 printf("Evaluated expression is: %d\n" , evaluate(postfix));
 ```
 
-2. syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
+2. Syntax parsing : Many compilers use a stack for parsing the syntax of expressions, program blocks etc. before translating into low level code
 3. Reverse a word
-4. Check braket sequence balance: “((” , “({)}”, ()(}” return false
+```C
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+
+int MAXSIZE = 80;
+char stack[80];
+int top = -1;
+
+//push into stack
+void push(char value) {
+
+   if(!isFull()) {
+      stack[++top] = value;
+   }else {
+      printf("Could not insert data, Stack is full.\n");
+   }
+}
+
+int isFull() {
+   return top == MAXSIZE ? 1 :0;
+}
+
+//pick top element
+char peek() {
+   return stack[top];
+}
+//check stack empty
+int isEmpty() {
+   return top == -1 ? 1 :0;
+}
+
+char pop() {
+   if(!isEmpty()) {
+      return stack[top--];
+   }else {
+      printf("Could not retrieve data, Stack is empty.\n");
+   }
+}
+
+void main() {
+   char name[80];
+   printf("input a word (max 20 char)\n");
+   scanf("%s",&name);
+   for(int i = 0;i<strlen(name); i++)
+     push(name[i]);
+
+   printf("Reverse of above word\n");
+   while(!isEmpty()) {
+      printf("%c",pop());
+   }
+}
+
+```
+4. Check braket sequence balance: “((” , “({)}”, ()(}” return false where “[()]{}{[()()]()}” retrun true
+
+Algorithm
+1. Declare a character stack S.
+2. Now traverse the expression string exp.
+    - If the current character is a starting bracket e.g (‘(‘ or ‘{‘ or ‘[‘) then push it to stack.
+    - If the current character is a closing bracket  e.g ‘)’ or ‘}’ or ‘]’) then pop from stack and if the popped character is the matching starting bracket then fine 
+      else parenthesis are not balanced.
+3) After complete traversal, if there is some starting bracket left in stack then “not balanced”
+
+```C
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include <stdbool.h>
+
+int MAXSIZE = 80;
+char stack[80];
+int top = -1;
+
+//push into stack
+void push(char value) {
+
+   if(!isFull()) {
+      stack[++top] = value;
+   }else {
+      printf("Could not insert data, Stack is full.\n");
+   }
+}
+
+int isFull() {
+   return top == MAXSIZE ? 1 :0;
+}
+
+//pick top element
+char peek() {
+   return stack[top];
+}
+//check stack empty
+int isEmpty() {
+   return top == -1 ? 1 :0;
+}
+
+char pop() {
+   if(!isEmpty()) {
+      return stack[top--];
+   }else {
+      printf("Could not retrieve data, Stack is empty.\n");
+   }
+}
+
+int isBalanceBracket(char bracket[]){
+   char x;
+   for(int i = 0;i<strlen(bracket); i++){
+     if (bracket[i] == '(' || bracket[i] == '[' || bracket[i] == '{'){
+        push(bracket[i]);
+        continue;
+     }
+     switch (bracket[i]){
+        case ')':
+            x = pop();
+            if (x == '{' || x == '[')
+                return 0;
+            break;
+        case '}':
+            x = pop();
+            if (x=='(' || x=='[')
+                return 0;
+            break;
+
+        case ']':
+            x = pop();
+            if (x =='(' || x == '{')
+                return 0;
+            break;
+        }
+   }
+   return isEmpty();
+}
+void main() {
+   char bracket[80];
+
+   printf("input a bracket (max 20 char)\n");
+   scanf("%s",&bracket);
+
+   if(isBalanceBracket(bracket) == 1)
+    printf("is balanced of above bracket :true");
+   else
+    printf("is balanced of above bracket :false");
+}
+
+```
 5. Converting a decimal number into a binary numbers
 
 
