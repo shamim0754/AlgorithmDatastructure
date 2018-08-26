@@ -161,22 +161,23 @@ struct Node
 Insert Operation : We can add node by three ways
 1. Inserting beginning of the list (implement below code)
 2. Inserting the second last node of the list and the new node will point to NULL.
+
 ```C
 //create a node
- struct node *myNode = (struct node*) malloc(sizeof(struct node));
- myNode->data = data;
- myNode->next = NULL;
+struct node *myNode = (struct node*) malloc(sizeof(struct node));
+myNode->data = data;
+myNode->next = NULL;
 
- current = head;
- while(current != NULL){
-    current = current->next; 
- }
+current = head;
+while(current != NULL){
+  current = current->next; 
+}
 
- current->next=myNode;
-
+current->next=myNode;
 ```
 3. Inserting in the middle of the two node
 suppose inserting a node B  between A  and C 
+
 ```C
 b.next −> C;
 a.next −> b;
