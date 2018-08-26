@@ -832,8 +832,8 @@ A stack is an abstract data type (ADT), commonly used in most programming langua
 Stack can only access the top element of a stack hence it is called LIFO(Last-in-first-out) like data structure
 
 <h4>Operation</h4>
-- Insert : Adds an element an element on the stack called special name `push()`
-- Delete : Deletes an element from the stack called special name `pop()`
+  - Insert : Adds an element an element on the stack called special name `push()`
+  - Delete : Deletes an element from the stack called special name `pop()`
 
 Helper/Utility operation need for implementing push and pop operation
 - peek() − get the top data element of the stack, without removing it.
@@ -1464,15 +1464,13 @@ void main() {
 ```
 
 ### Queue ###
-Queue is an abstract data structure, somewhat similar to Stack. In contrast to Queue, queue is opened at both end. One end is always used to insert data (enqueue) and the other is used to remove data (dequeue). Queue follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first. <br>
-In queue, we always dequeue (or access) data, pointed by front pointer and while enqueing (or storing) data in queue we take help of rear pointer.
+Queue is an abstract data structure, somewhat similar to Stack. In Queue, One end(front pointer) is always used to insert data (called  enqueue operation) and the other(rear pointer) is used to remove data ( called  dequeue operation ). 
 
-<h4>Operation</h4>
-1. enqueue() − add (store) an item to the queue.
-2. dequeue() − remove (access) an item from the queue.
-4. peek() − get the top data element of the stack, without removing it.
-5. isFull() − check if stack is full.
-6. isEmpty() − check if stack is empty.
+hence queue follows First-In-First-Out(FIFO) methodology
+
+Example : 
+1. A single-lane one-way road, where the vehicle form a queue(vehicle enters first, exits first.).
+2. People waiting in line for a rail ticket form a queue.
 
 ```C
 #include <stdio.h>
