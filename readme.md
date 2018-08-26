@@ -160,6 +160,47 @@ struct Node
 
 Insert Operation : We can add node by three ways
 1. Inserting beginning of the list (implement below code)
+Algorithm:
+    - allocate node
+    - put in the data
+    - Make next of new node as head
+    - move the head to point to the new node
+
+```C
+#include <stdio.h>
+struct node
+{
+   int data;
+   struct node *next;
+};
+struct node *head = NULL;
+
+void insert(int data)
+{
+   //create a node
+   struct node *myNode = (struct node*) malloc(sizeof(struct node));
+   myNode->data = data;
+   myNode->next = head;
+
+   //myNode is head now
+   head = myNode;
+}
+
+void travers(struct node *node){
+
+   while(node != NULL){
+      printf("%d ",node->data);
+      node = node->next; // loop while last node( we know last node link is NULL)
+   }
+}
+
+void main() {
+   insert(3);
+   insert(10);
+   printf("The linked list elements after insertion :\n");
+   travers(head);
+}
+```    
 2. Inserting the second last node of the list and the new node will point to NULL.
 
 ```C
@@ -183,36 +224,9 @@ b.next −> C;
 a.next −> b;
 ```
 
-linked-list data structure operation
+Update Operation : 
 
 ```C
-#include <stdio.h>
-struct node
-{
-   int data;
-   struct node *next;
-};
-struct node *head = NULL;
-
-void travers(struct node *node){
-
-   while(node != NULL){
-      printf("%d ",node->data);
-      node = node->next; // loop while last node( we know last node link is NULL)
-   }
-}
-
-void insert(int data)
-{
-   //create a node
-   struct node *myNode = (struct node*) malloc(sizeof(struct node));
-   myNode->data = data;
-   myNode->next = head;
-
-   //head now 
-   head = myNode;
-}
-
 struct node *current = NULL;
 void update(int oldData, int newData) {
    current = head; //make a copy of head node
@@ -225,7 +239,41 @@ void update(int oldData, int newData) {
    }
    printf("%d does not exist in the list\n", oldData);
 }
+```
 
+main()
+
+```C
+update(10, 12);
+printf("\nThe linked list elements after update :\n");
+travers(head);
+```
+
+
+Search Operation : 
+
+```C
+void search(int searchValue){
+   current = head;
+   while(current != NULL) {
+      if(current->data == searchValue) {
+         printf("found %d", searchValue);
+         break;
+      }
+     current = current->next;
+   }
+}
+```
+
+main()
+
+```C
+search(3);
+```
+
+Delete Operation : 
+
+```C
 void delete(int deleteData){
    struct node* previous = NULL;
 
@@ -241,36 +289,16 @@ void delete(int deleteData){
       current = current->next;
    }
 }
-
-void search(int searchValue){
-   current = head;
-   while(current != NULL) {
-      if(current->data == searchValue) {
-         printf("found %d", searchValue);
-         break;
-      }
-     current = current->next;
-   }
-}
-
-main() {
-   insert(3);
-   insert(10);
-   printf("The linked list elements after insertion :\n");
-   travers(head);
-
-   update(10, 12);
-   printf("\nThe linked list elements after update :\n");
-   travers(head);
-
-   search(3);
-
-   delete(3);
-   printf("\nThe linked list elements after deletion :\n");
-   travers(head);
-}
-
 ```
+
+main()
+
+```C
+delete(3);
+printf("\nThe linked list elements after deletion :\n");
+travers(head);
+```
+
 
 ### Types of Linked List ###
 
@@ -290,7 +318,11 @@ main() {
   - Every node of DLL require extra space for an previous pointer
   - All operations require an extra pointer previous to be maintained. For example, in insertion, we need to modify previous pointers together with next pointers that will  take more time
 
-
+  Insertion: A node can be added in four ways
+  - At the beginning of the DLL
+  - After a given node.
+  - At the end of the DLL
+  - Before a given node.
 
 3. Circular Linked List − Last item contains link of the first element as next and the first element has a link to the last element as previous.
 
