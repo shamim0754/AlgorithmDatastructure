@@ -326,7 +326,7 @@ travers(head);
     - Make next of new node as head and previous as NULL 
     - change prev of head node to new node
     - move the head to point to the new node 
-    
+
 ```C
 #include <stdio.h>
 struct node
@@ -378,10 +378,19 @@ main() {
 
 ```
   - After a given node.
+    - check if the given prev_node is NULL 
+    - allocate new node 
+    - put in the data  
+    - Make next of new node as next of prev_node 
+    - Make the next of prev_node as new_node 
+    - Make prev_node as previous of new_node 
+    - Change previous of new_node's next node
+    [GitHub](https://www.geeksforgeeks.org/doubly-linked-list/)
   - At the end of the DLL
   - Before a given node.
 
 3. Circular Linked List − Last item contains link of the first element as next and the first element has a link to the last element as previous.
+[GitHub](https://www.geeksforgeeks.org/circular-linked-list)
 
 ### Linked List Use ###
 1. create different types of tree(e.g binary search tree) data structure
