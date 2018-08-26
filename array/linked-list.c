@@ -21,7 +21,7 @@ void insert(int data)
    myNode->data = data;
    myNode->next = head;
 
-   //save created node for further create node next
+   //head now 
    head = myNode;
 }
 

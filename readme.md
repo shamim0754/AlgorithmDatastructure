@@ -133,15 +133,16 @@ Linked list is the data structure which can overcome all the limitations of an a
 2. Ease of insertion/deletion
 
 Drawbacks:
-1. Random access is not allowed.We have to access elements sequentially starting from the head node and then compare random value to node value and return . So we cannot do binary search with linked lists.
+1. Random access is not allowed.We have to access elements sequentially starting from the head node and then compare random value to node value and return . as a result greatly increasing the time periods required to access individual elements within the list
+For this behaviour, we cannot do binary search with linked lists.
 2. Extra memory space for a pointer is required with each element of the list.
-3. Not cache friendly. Since array elements are contiguous locations, there is locality of reference which is not there in case of linked lists.
+
 
 ![alt text](images/linked-list.png)
 
-A linked-list is collection of objects called nodes. A node contains two field
-- element/data :  Each item stored in an linked-list is called an element.
-- Link : it contains the address of the next node in the memory.
+A linked-list is collection of objects called node/element. A node contains two field
+- data :  Each item stored in an linked-list is called an data.
+- Link/Next : it contains the address of the next node in the memory.
 
 Note :
 - Head : the first node is called head
@@ -157,7 +158,30 @@ struct Node
 };
 
 
+Insert Operation : We can add node by three ways
+1. Inserting beginning of the list (implement below code)
+2. Inserting the second last node of the list and the new node will point to NULL.
+```C
+//create a node
+ struct node *myNode = (struct node*) malloc(sizeof(struct node));
+ myNode->data = data;
+ myNode->next = NULL;
+
+ current = head;
+ while(current != NULL){
+    current = current->next; 
+ }
+
+ current->next=myNode;
+
 ```
+3. Inserting in the middle of the two node
+suppose inserting a node B  between A  and C 
+```C
+b.next −> C;
+a.next −> b;
+```
+
 linked-list data structure operation
 
 ```C
@@ -184,13 +208,13 @@ void insert(int data)
    myNode->data = data;
    myNode->next = head;
 
-   //save created node for further create node next
+   //head now 
    head = myNode;
 }
 
 struct node *current = NULL;
 void update(int oldData, int newData) {
-   current = head;
+   current = head; //make a copy of head node
    while(current->next != NULL) {
       if(current->data == oldData) {
          current->data = newData;
@@ -204,10 +228,12 @@ void update(int oldData, int newData) {
 void delete(int deleteData){
    struct node* previous = NULL;
 
-   current = head;
+   current = head; //make a copy of head node
    while(current != NULL) {
       if(current->data == deleteData) {
          previous->next = current->next;
+         //we just point next node. but actual delete not happen .below lines actual delete that node
+         delete(current);
          break;
       }
       previous = current;
@@ -247,11 +273,29 @@ main() {
 
 ### Types of Linked List ###
 
-1. Simple Linked List − Item navigation is forward only that is discuss above
+1. Simple Linked List  :  that is discuss above
 
-2. Doubly Linked List − Items can be navigated forward and backward.
+2. Doubly Linked List : 
+  Simple Linked List have following drawback:
+  - Insert Operation : Inserting the second last node of the list or Inserting in the middle of the two node we need the list is traversed it is inefficient
+  - Delete Operation : We saw that to delete a node, always remember previous node . To get this previous node, we need the list is also traversed
+
+  − Item travers is forward only
+
+  To overcome such problem add  an extra link(called previous) on every node of simple linked list. It sturcutre called Doubly Linked List (DLL) 
+
+  ![alt text](images/doubly-linked-list2.png)
+
+  Disadvantages over singly linked list
+  1. Every node of DLL require extra space for an previous pointer
+  2. All operations require an extra pointer previous to be maintained. For example, in insertion, we need to modify previous pointers together with next pointers that will  take more time
+
+
 
 3. Circular Linked List − Last item contains link of the first element as next and the first element has a link to the last element as previous.
+
+### Linked List Use ###
+1. creat different types of tree(e.g binary search tree) data structure
 
 ### Algorithm ###
 An algorithm is a procedure having well defined steps for solving a particular problem
