@@ -307,8 +307,9 @@ travers(head);
 2. Doubly Linked List : 
   Simple Linked List have following drawback:
   - Insert Operation : Inserting the second last node of the list or Inserting in the middle of the two node we need the list is traversed it is inefficient
-  - Delete Operation : We saw that to delete a node, always remember previous node . To get this previous node, we need the list is also traversed
-  − Item travers is forward only
+  - Delete Operation : We saw that to delete a node, always remember previous node . 
+    To get this previous node, we need the list is also traversed
+  - Item travers is forward only
 
   To overcome such problem add  an extra link(called previous) on every node of simple linked list.Then It sturcutre called Doubly Linked List (DLL) 
 
