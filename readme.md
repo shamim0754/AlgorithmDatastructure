@@ -158,7 +158,7 @@ struct Node
 };
 ```
 
-Insert Operation : We can add node by three ways
+`Insert Operation :` We can add node by three ways
 1. Inserting beginning of the list (implement below code)
 Algorithm:
     - allocate node
@@ -224,7 +224,7 @@ b.next −> C;
 a.next −> b;
 ```
 
-Update Operation : 
+`Update Operation :` 
 
 ```C
 struct node *current = NULL;
@@ -250,7 +250,7 @@ travers(head);
 ```
 
 
-Search Operation : 
+`Search Operation :` 
 
 ```C
 void search(int searchValue){
@@ -271,7 +271,7 @@ main()
 search(3);
 ```
 
-Delete Operation : 
+`Delete Operation` : 
 
 ```C
 void delete(int deleteData){
@@ -321,6 +321,11 @@ travers(head);
 
   Insertion: A node can be added in four ways
   - At the beginning of the DLL
+    - allocate node 
+    - put in the data 
+    - Make next of new node as head and previous as NULL 
+    - change prev of head node to new node
+    - move the head to point to the new node 
   - After a given node.
   - At the end of the DLL
   - Before a given node.
@@ -328,7 +333,7 @@ travers(head);
 3. Circular Linked List − Last item contains link of the first element as next and the first element has a link to the last element as previous.
 
 ### Linked List Use ###
-1. creat different types of tree(e.g binary search tree) data structure
+1. create different types of tree(e.g binary search tree) data structure
 
 ### Algorithm ###
 An algorithm is a procedure having well defined steps for solving a particular problem
