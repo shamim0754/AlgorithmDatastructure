@@ -168,6 +168,262 @@ if an algorithm have (n<sup>4</sup>) , (n<sup>2</sup>) and log<sub>2</sub>n<br /
 then = (n<sup>4</sup>) + (n<sup>2</sup>) + log<sub>2</sub>n<br />
 = (n<sup>4</sup>) (Since (n<sup>2</sup>) + log<sub>2</sub>n is very small)
 
+### Algorithm Technique ###
+
+1. Greedy approach : In greedy algorithm approach, decisions are made from the given solution domain. As being greedy, the closest solution that seems to provide an optimum solution is chosen  at that moment. But it may fail where global optimization
+
+  Example : Counting Coins, we have coins of 1, 7, 10 value, How many coins are required to get 18 ?
+
+  Ans : 3 coins.Greedy approach forces the algorithm to pick the largest to lowest possible coin.
+  - 10, the remaining count is 7
+  - 7, the remaining count is 1
+  - 1
+
+
+  if we slightly change the problem(Count 15) then the same approach may not be able to produce the same optimum result, then greedy approach may use more coins than necessary<br/>
+  10 + 1 + 1+1+1+1+1+1(6 coins)
+  <br />
+  Whereas the same problem could be solved by using only 3 coins (7 + 7 + 1) . (it may fail where global optimization)
+
+  ```
+  int coin[3] = { 10, 5, 2,1 } ;
+   int totalChange = 16, coinRequired = 0;
+   // for i = 1 to total coin decensing  order
+   for(int i = 0; i <= 3; i++){
+      if(totalChange >= coin[i]){
+          coinRequired ++;
+          totalChange -= coin[i];
+      }
+   }
+   printf("The required coins %d", coinRequired);
+  ```
+
+Most networking algorithms use the greedy approach. Here is a list of few of them −
+
+1. Travelling Salesman Problem
+2. Prim's Minimal Spanning Tree Algorithm
+3. Kruskal's Minimal Spanning Tree Algorithm
+4. Dijkstra's Minimal Spanning Tree Algorithm
+5. Graph - Map Coloring
+6. Graph - Vertex Cover
+7. Knapsack Problem
+8. Job Scheduling Problem :
+9. Job Sequencing Problem :
+  Given an array of jobs where every job has a deadline and associated profit if the job is finished before the deadline. It is also given that every job takes single unit of time, so the minimum possible deadline for any job is 1. <br />
+  How to maximize total profit if only one job can be scheduled at a time ?
+
+  In greedy approach,
+  1) Sort all jobs in decreasing order of profit.
+  2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
+  3) Do following for remaining n-1 jobs
+  .......a) If the current job can fit in the current result sequence 
+            without missing the deadline, add current job to the result.
+            Else ignore the current job.
+
+  For Example : <br />
+  ![alt text](images/job_schduling.png)
+
+  1) Sort all jobs in decreasing order of profit.
+
+  ![alt text](images/job_schduling1.png)
+
+  2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
+
+  Since job A has deadline 2 unit so it could be place at 0-1 or 1-2 seconds. we choose always latest dealine  so we choose 1-2
+
+  ![alt text](images/job_schduling2.png)
+
+  Next job C we start looking empty backward from unit 2. 0-1 is empty slot so c is there
+
+  ![alt text](images/job_schduling3.png)
+
+  Next job D we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
+
+  Next job B we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
+
+  Next job E we start looking empty backward from unit 3. 2-3 is  empty slot so E is there
+
+  ![alt text](images/job_schduling4.png)
+
+  ```
+  //implement using C++
+  #include<iostream>
+  #include<algorithm>
+  using namespace std;
+
+  struct Job{
+      char id;
+      int deadline;
+      int profit;
+  };
+
+  bool comparison(Job a, Job b)
+  {
+       return a.profit > b.profit;
+  }
+
+  void printJobScheduling(Job arr[], int n){
+      sort(arr, arr+n, comparison);
+
+       int result[n]; // To store result (Sequence of jobs)
+       bool slot[n];
+
+       // Initialize all slots to be free
+      for (int i=0; i<n; i++)
+          slot[i] = false;
+      // Iterate through all given jobs
+      for (int i=0; i<n; i++){
+              //min(n, arr[i].deadline)-1; slot before or after based on deadline
+          for (int j=min(n, arr[i].deadline)-1; j>=0; j--){
+            // Free slot found
+            if (slot[j]==false)
+            {
+               result[j] = i;  // Add this job to result
+               slot[j] = true; // Make this slot occupied
+               break;
+            }
+          }
+      }
+
+      // Print the result
+      for (int i=0; i<n; i++)
+         if (slot[i])
+           cout << arr[result[i]].id << " ";
+  }
+  // Driver program to test methods
+  int main()
+  {
+      Job arr[] = {
+                      {'a', 2, 100},
+                      {'b', 1, 19},
+                      {'c', 2, 27},
+                      {'d', 1, 25},
+                      {'e', 3, 15}
+                 };
+      int n = sizeof(arr)/sizeof(arr[0]);
+      cout << "Following is maximum profit sequence of job :" ;
+      printJobScheduling(arr, n);
+      return 0;
+  }
+
+  ```
+
+2. `Divide and Conquer` :
+
+  In divide and conquer approach, the problem in hand, is divided into smaller sub-problems and then each problem is solved independently. When we keep on dividing the subproblems into even smaller sub-problems, we may eventually reach a stage where no more division is possible. Those "atomic" smallest possible sub-problem (fractions) are solved. The solution of all sub-problems is finally merged in order to obtain the solution of an original problem.
+
+  Example : Convert following small alphabet to capital alphabet
+
+  ![alt text](images/divide_and_conquer.jpg)
+
+  The following computer algorithms are based on divide-and-conquer programming approach −
+
+  1. Merge Sort
+  2. Quick Sort
+  3. Binary Search
+  4. Strassen's Matrix Multiplication
+  5. Closest pair (points)
+
+3. `Dynamic programming` :
+
+  Dynamic Programming is an algorithmic paradigm that solves a given complex problem by breaking it into subproblems and stores the results of subproblems to avoid computing the same results again.
+
+  Mostly, these algorithms are used for optimization.
+
+  The following computer problems can be solved using dynamic programming approach −
+
+  1. Fibonacci number series
+  ```C
+  void main(){
+      int n;
+      printf("Enter number of elements :\n");
+      scanf("%d", &n);
+      for(int i=0; i< n; i++)
+          printf("%d ", fibonacci(i));
+
+  }
+  int fibonacci( int n ) {
+      if( n == 0 ) return 0;
+      if( n == 1 ) return 1;
+      return fibonacci( n-1 ) + fibonacci( n-2 );
+  }
+  ```
+  Execution time : 3.266s <br />
+
+  Recursion tree for execution of fib(5)
+
+  ![alt text](images/fibbo.png)
+
+  We can see that the function fib(3) is being called 2 times. If we would have stored the value of fib(3), then instead of computing it again, we could have reused the old stored value.
+
+  There are following two different ways to store the values so that these values can be reused:
+  a) Memoization (Top Down)
+
+  We initialize a lookup array with all initial values as NIL. Whenever we need the solution to a subproblem, we first look into the lookup table. If the precomputed value is there then we return that value, otherwise, we calculate the value and put the result in the lookup table so that it can be reused later.
+
+  ```C
+  #include <stdio.h>
+  #include <conio.h>
+  int dp[20];
+
+  void main(){
+      int n;
+      printf("Enter number of elements :\n");
+      scanf("%d", &n);
+      for(int i=0;i<20;i++)
+          dp[i] = -1;
+      for(int i=0; i< n; i++)
+          printf("%d ", fibonacci(i));
+
+  }
+  int fibonacci( int n ) {
+      if( n == 0 ) return 0;
+      if( n == 1 ) return 1;
+      if( dp[n] != -1 ) return dp[n];
+      else{
+          dp[n] = fibonacci( n-1 ) + fibonacci( n-2 );
+          return dp[n];
+      }
+  }
+
+  ```
+
+  Execution time : 2.265s <br />
+
+  b) Tabulation (Bottom Up)
+
+  The tabulated program for a given problem builds a table in bottom up fashion and returns the last entry from table
+
+  ```
+  #include <stdio.h>
+  #include <conio.h>
+
+  void main(){
+      int n;
+      printf("Enter number of elements :\n");
+      scanf("%d", &n);
+      for(int i=0; i< n; i++)
+          printf("%d ", fibonacci(i));
+
+  }
+  int fibonacci( int n ) {
+      int fibonacci[n+1];
+      int i;
+      fibonacci[0] = 0;   fibonacci[1] = 1;
+      for (i = 2; i <= n; i++)
+        fibonacci[i] = fibonacci[i-1] + fibonacci[i-2];
+
+    return fibonacci[n];
+  }
+
+  ```
+
+  2. Knapsack problem
+  3. Tower of Hanoi
+  4. All pair shortest path by Floyd-Warshall
+  5. Shortest path by Dijkstra
+  6. Project scheduling
+
 ### Data Structure ###
 Data Structure is a way to organized data in such a way that it can be used efficiently.Almost every enterprise application uses various types of data structures e.g array,linked list
 
@@ -568,261 +824,7 @@ main() {
 
 
 
-### Algorithm Technique ###
 
-1. Greedy approach : In greedy algorithm approach, decisions are made from the given solution domain. As being greedy, the closest solution that seems to provide an optimum solution is chosen  at that moment. But it may fail where global optimization
-
-  Example : Counting Coins, we have coins of 1, 7, 10 value, How many coins are required to get 18 ?
-
-  Ans : 3 coins.Greedy approach forces the algorithm to pick the largest to lowest possible coin.
-  - 10, the remaining count is 7
-  - 7, the remaining count is 1
-  - 1
-
-
-  if we slightly change the problem(Count 15) then the same approach may not be able to produce the same optimum result, then greedy approach may use more coins than necessary<br/>
-  10 + 1 + 1+1+1+1+1+1(6 coins)
-  <br />
-  Whereas the same problem could be solved by using only 3 coins (7 + 7 + 1) . (it may fail where global optimization)
-
-  ```
-  int coin[3] = { 10, 5, 2,1 } ;
-   int totalChange = 16, coinRequired = 0;
-   // for i = 1 to total coin decensing  order
-   for(int i = 0; i <= 3; i++){
-      if(totalChange >= coin[i]){
-          coinRequired ++;
-          totalChange -= coin[i];
-      }
-   }
-   printf("The required coins %d", coinRequired);
-  ```
-
-Most networking algorithms use the greedy approach. Here is a list of few of them −
-
-1. Travelling Salesman Problem
-2. Prim's Minimal Spanning Tree Algorithm
-3. Kruskal's Minimal Spanning Tree Algorithm
-4. Dijkstra's Minimal Spanning Tree Algorithm
-5. Graph - Map Coloring
-6. Graph - Vertex Cover
-7. Knapsack Problem
-8. Job Scheduling Problem :
-9. Job Sequencing Problem :
-  Given an array of jobs where every job has a deadline and associated profit if the job is finished before the deadline. It is also given that every job takes single unit of time, so the minimum possible deadline for any job is 1. <br />
-  How to maximize total profit if only one job can be scheduled at a time ?
-
-  In greedy approach,
-  1) Sort all jobs in decreasing order of profit.
-  2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
-  3) Do following for remaining n-1 jobs
-  .......a) If the current job can fit in the current result sequence 
-            without missing the deadline, add current job to the result.
-            Else ignore the current job.
-
-  For Example : <br />
-  ![alt text](images/job_schduling.png)
-
-  1) Sort all jobs in decreasing order of profit.
-
-  ![alt text](images/job_schduling1.png)
-
-  2) Initialize the result sequence as first job in sorted jobs( place at Scheduling List).
-
-  Since job A has deadline 2 unit so it could be place at 0-1 or 1-2 seconds. we choose always latest dealine  so we choose 1-2
-
-  ![alt text](images/job_schduling2.png)
-
-  Next job C we start looking empty backward from unit 2. 0-1 is empty slot so c is there
-
-  ![alt text](images/job_schduling3.png)
-
-  Next job D we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
-
-  Next job B we start looking empty backward from unit 1. 0-1 is not empty slot so skip it
-
-  Next job E we start looking empty backward from unit 3. 2-3 is  empty slot so E is there
-
-  ![alt text](images/job_schduling4.png)
-
-  ```
-  //implement using C++
-  #include<iostream>
-  #include<algorithm>
-  using namespace std;
-
-  struct Job{
-      char id;
-      int deadline;
-      int profit;
-  };
-
-  bool comparison(Job a, Job b)
-  {
-       return a.profit > b.profit;
-  }
-
-  void printJobScheduling(Job arr[], int n){
-      sort(arr, arr+n, comparison);
-
-       int result[n]; // To store result (Sequence of jobs)
-       bool slot[n];
-
-       // Initialize all slots to be free
-      for (int i=0; i<n; i++)
-          slot[i] = false;
-      // Iterate through all given jobs
-      for (int i=0; i<n; i++){
-              //min(n, arr[i].deadline)-1; slot before or after based on deadline
-          for (int j=min(n, arr[i].deadline)-1; j>=0; j--){
-            // Free slot found
-            if (slot[j]==false)
-            {
-               result[j] = i;  // Add this job to result
-               slot[j] = true; // Make this slot occupied
-               break;
-            }
-          }
-      }
-
-      // Print the result
-      for (int i=0; i<n; i++)
-         if (slot[i])
-           cout << arr[result[i]].id << " ";
-  }
-  // Driver program to test methods
-  int main()
-  {
-      Job arr[] = {
-                      {'a', 2, 100},
-                      {'b', 1, 19},
-                      {'c', 2, 27},
-                      {'d', 1, 25},
-                      {'e', 3, 15}
-                 };
-      int n = sizeof(arr)/sizeof(arr[0]);
-      cout << "Following is maximum profit sequence of job :" ;
-      printJobScheduling(arr, n);
-      return 0;
-  }
-
-  ```
-
-2. `Divide and Conquer` :
-
-  In divide and conquer approach, the problem in hand, is divided into smaller sub-problems and then each problem is solved independently. When we keep on dividing the subproblems into even smaller sub-problems, we may eventually reach a stage where no more division is possible. Those "atomic" smallest possible sub-problem (fractions) are solved. The solution of all sub-problems is finally merged in order to obtain the solution of an original problem.
-
-  Example : Convert following small alphabet to capital alphabet
-
-  ![alt text](images/divide_and_conquer.jpg)
-
-  The following computer algorithms are based on divide-and-conquer programming approach −
-
-  1. Merge Sort
-  2. Quick Sort
-  3. Binary Search
-  4. Strassen's Matrix Multiplication
-  5. Closest pair (points)
-
-3. `Dynamic programming` :
-
-  Dynamic Programming is an algorithmic paradigm that solves a given complex problem by breaking it into subproblems and stores the results of subproblems to avoid computing the same results again.
-
-  Mostly, these algorithms are used for optimization.
-
-  The following computer problems can be solved using dynamic programming approach −
-
-  1. Fibonacci number series
-  ```C
-  void main(){
-      int n;
-      printf("Enter number of elements :\n");
-      scanf("%d", &n);
-      for(int i=0; i< n; i++)
-          printf("%d ", fibonacci(i));
-
-  }
-  int fibonacci( int n ) {
-      if( n == 0 ) return 0;
-      if( n == 1 ) return 1;
-      return fibonacci( n-1 ) + fibonacci( n-2 );
-  }
-  ```
-  Execution time : 3.266s <br />
-
-  Recursion tree for execution of fib(5)
-
-  ![alt text](images/fibbo.png)
-
-  We can see that the function fib(3) is being called 2 times. If we would have stored the value of fib(3), then instead of computing it again, we could have reused the old stored value.
-
-  There are following two different ways to store the values so that these values can be reused:
-  a) Memoization (Top Down)
-
-  We initialize a lookup array with all initial values as NIL. Whenever we need the solution to a subproblem, we first look into the lookup table. If the precomputed value is there then we return that value, otherwise, we calculate the value and put the result in the lookup table so that it can be reused later.
-
-  ```C
-  #include <stdio.h>
-  #include <conio.h>
-  int dp[20];
-
-  void main(){
-      int n;
-      printf("Enter number of elements :\n");
-      scanf("%d", &n);
-      for(int i=0;i<20;i++)
-          dp[i] = -1;
-      for(int i=0; i< n; i++)
-          printf("%d ", fibonacci(i));
-
-  }
-  int fibonacci( int n ) {
-      if( n == 0 ) return 0;
-      if( n == 1 ) return 1;
-      if( dp[n] != -1 ) return dp[n];
-      else{
-          dp[n] = fibonacci( n-1 ) + fibonacci( n-2 );
-          return dp[n];
-      }
-  }
-
-  ```
-
-  Execution time : 2.265s <br />
-
-  b) Tabulation (Bottom Up)
-
-  The tabulated program for a given problem builds a table in bottom up fashion and returns the last entry from table
-
-  ```
-  #include <stdio.h>
-  #include <conio.h>
-
-  void main(){
-      int n;
-      printf("Enter number of elements :\n");
-      scanf("%d", &n);
-      for(int i=0; i< n; i++)
-          printf("%d ", fibonacci(i));
-
-  }
-  int fibonacci( int n ) {
-      int fibonacci[n+1];
-      int i;
-      fibonacci[0] = 0;   fibonacci[1] = 1;
-      for (i = 2; i <= n; i++)
-        fibonacci[i] = fibonacci[i-1] + fibonacci[i-2];
-
-    return fibonacci[n];
-  }
-
-  ```
-
-  2. Knapsack problem
-  3. Tower of Hanoi
-  4. All pair shortest path by Floyd-Warshall
-  5. Shortest path by Dijkstra
-  6. Project scheduling
 
 ### Stack ###
 
