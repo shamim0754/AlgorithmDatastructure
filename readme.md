@@ -156,7 +156,7 @@ struct Node
   int data;
   struct Node *link;
 };
-
+```
 
 Insert Operation : We can add node by three ways
 1. Inserting beginning of the list (implement below code)
