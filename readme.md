@@ -1841,16 +1841,293 @@ Terminology used in trees
 4. Recursive Data Structure: tree recursively contain another tree that contais data
 5. Number of Edges is N-1 : if a tree have n th node then edge must be n-1
 
+Linear data structures like arrays, stacks, queues and linked list have only one way to read the data. But a hierarchical data structure like a tree can be traversed in three different ways.
+![alt text](images/tree-traversal.jpg)
+
+
+1.Inorder traversal : 
+Until all nodes are traversed −
+  1.First, visit all the nodes in the left subtree
+  2.Then the root node
+  3.Visit all the nodes in the right subtree
+
+  Let's put all this in a stack so that we remember.
+
+![alt text](images/inorder-stack.jpg)
+
+  Now we traverse to the subtree pointed on the TOP of the stack.Again, we follow the same rule of inorder
+
+Left subtree -> root -> right subtree
+
+![alt text](images/inorder-stack-subtree.jpg)
+
+Since the node "5" doesn't have any subtrees, pop from stack
+
+5 -> 12 -> 6 -> 1 -> 9
+
+2.Preorder traversal
+Until all nodes are traversed 
+Visit root node
+Visit all the nodes in the left subtree
+Visit all the nodes in the right subtree
+
+1 ->12 ->5 ->6 ->9 ->    
+
+3.Postorder traversal
+Until all nodes are traversed 
+visit all the nodes in the left subtree
+visit the root node
+visit all the nodes in the right subtree
+
+5 ->6 ->12 ->9 ->1 ->
+
+Example 2 :
+
+![alt text](images/inorder_traversal.jpg)
+
+in-order : D → B → E → A → F → C → G
+Pre-order :A → B → D → E → C → F → G
+
+Post-order : D → E → B → F → G → C → A
+
 ![alt text](images/types-of-tree.png)
 
-General Tree
+see implemnetation on binary search tree
+
+1.General Tree:
+
 General Tree stores the elements in a hierarchical order in which the top level element is always present at level 0 as the root element. All the nodes except the root node are present at number of levels. The nodes which are present on the same level are called siblings while the nodes which are present on the different levels exhibit the parent-child relationship among them. A node may contain any number of sub-trees. The tree in which each node contain 3 sub-tree, is called ternary tree.
 
-Forests
+2. Forests:
+
 Forest can be defined as the set of disjoint trees which can be obtained by deleting the root node and the edges which connects root node to the first level node.
 
 ![alt text](images/forest-tree.png)
 
+3. Binary Tree :
+Binary Tree is a special type of generic tree in which, each node can have at most two children. Binary tree is generally partitioned into three disjoint subsets.
+
+  1. Root of the node
+  2. left sub-tree which is also a binary tree.
+  3. Right sub-tree which is also a binary tree.
+
+![alt text](images/binary_tree.jpg)
+
+Types of Binary Tree:
+
+  1. Strictly Binary Tree:
+  Every non-leaf node contain non-empty left and right sub-trees
+
+  ![alt text](images/strictly-binary-tree.png)
+
+  2. Complete Binary Tree: 
+
+  A Binary Tree is complete Binary Tree if all levels are completely filled except possibly the last level and the last level has all keys as left as possible
+
+  ![alt text](images/complete-binary-tree.png)
+
+4. Binary Search Tree :
+ binary search tree is a special binary tree is that following The properties
+
+  1. All nodes of left subtree are less than root node
+  2. All nodes of right subtree are more than root node
+  3. Both subtrees of each node are also BSTs i.e. they have the above two properties
+
+It is called a search tree because it can be used to search for the presence of a number in O(log(n)) time.  
+![alt text](images/bst-vs-not-bst.jpg)
+
+The binary tree on the right isn't a binary search tree because the right subtree of the node "3" contains a value smaller that it.
+
+  Advantages of using binary search tree :
+
+  Searching become very efficient in a binary search tree since, we get a hint at each step, about which sub-tree contains the desired element.
+  The binary search tree is considered as efficient data structure in compare to arrays and linked lists. In searching process, it removes half sub-tree at every step. Searching for an element in a binary search tree takes o(log2n) time. In worst case, the time it takes to search an element is 0(n).
+  It also speed up the insertion and deletion operations as compare to that in array and linked list.
+
+Insert  Operations
+1. Start searching from the root node,it is null then place it as root
+2. Start searching from the root node, then if the data is less than the key value, search for the empty location in the left subtree and insert the data. 
+3. Otherwise, search for the empty location in the right subtree and insert the 
+
+For example : 43, 10, 79, 90, 12, 54, 11, 9, 50
+
+![alt text](images/binary-search-tree-creation.png)
+
+```C
+#include<stdio.h>
+#include<stdlib.h>
+  
+struct node
+{
+    int data;
+    struct node* left;
+    struct node* right;
+};
+
+struct node* createNode(value){
+    struct node* newNode = malloc(sizeof(struct node));
+    newNode->data = value;
+    newNode->left = NULL;
+    newNode->right = NULL;
+
+    return newNode;
+}
+  
+  
+struct node* insert(struct node* root, int data)
+{
+    if (root == NULL) return createNode(data);
+
+    if (data < root->data)
+        root->left  = insert(root->left, data);
+    else if (data > root->data)
+        root->right = insert(root->right, data);   
+ 
+    return root;
+}
+
+
+int main(){
+    struct node *root = NULL;
+    root = insert(root, 8);
+    insert(root, 43);
+    insert(root, 10);
+    insert(root, 79);
+    insert(root, 90);
+    insert(root, 12);
+    insert(root, 54);
+    insert(root, 4);
+    insert(root, 9);
+    insert(root, 50);
+}
+```
+Search Operation : similar way to insert operation
+
+```C
+struct node* search(struct node* root,int data){
+   struct node *current = root;
+   printf("Visiting elements: ");
+
+   while(current->data != data){
+
+      if(current != NULL) {
+         printf("%d ",current->data);
+
+         //go to left tree
+         if(current->data > data){
+            current = current->left;
+         }  //else go to right tree
+         else {
+            current = current->right;
+         }
+
+         //not found
+         if(current == NULL){
+            return NULL;
+         }
+      }
+   }
+
+   return current;
+}
+```
+
+1.start searching from the root node. Then if the data is less than the key value, search for the element in the left subtree. 
+2. Otherwise, search for the element in the right subtree. 
+3. Follow the same algorithm for each node.
+
+![alt text](images/bst-search-downward-recursion-step.jpg)
+
+
+Traversing operation
+
+```C
+void inorder(struct node* root){
+    if(root == NULL) return;
+    inorder(root->left);
+    printf("%d ->", root->data);
+    inorder(root->right);
+}
+
+void preorder(struct node* root){
+    if(root == NULL) return;
+    printf("%d ->", root->data);
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void postorder(struct node* root) {
+    if(root == NULL) return;
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d ->", root->data);
+}
+```
+
+![alt text](images/tree-travers.png)
+
+we noticed that(red symbol) The inorder traversal of a Binary Search Tree(BST) is a sorted list of numbers! !!
+
+5. Expression Tree:
+Expression trees are used to evaluate the simple arithmetic expressions. Expression tree is basically a binary tree where internal nodes are represented by operators while the leaf nodes are represented by operands. Expression trees are widely used to solve algebraic expressions like (a+b)*(a-b). Consider the following example.
+
+Q. Construct an expression tree by using the following algebraic expression.
+
+(a + b) / (a*b - c) + d
+
+
+![alt text](images/expression-tree.png)
+
+6. Tournament Tree
+Tournament tree are used to record the winner of the match in each round being played between two players. Tournament tree can also be called as selection tree or winner tree. External nodes represent the players among which a match is being played while the internal nodes represent the winner of the match played. At the top most level, the winner of the tournament is present as the root node of the tree.
+
+For example, tree .of a chess tournament being played among 4 players is shown as follows. However, the winner in the left sub-tree will play against the winner of right sub-tree.
+
+![alt text](images/tournament-tree.png)
+
+
+A special pointer called ROOT points to the node that is the parent of all the other nodes.
+
+Also, the nodes that don't have any children have their left and right pointers point to NULL.
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node* left;
+    struct node* right;
+};
+
+struct node* createNode(value){
+    struct node* newNode = malloc(sizeof(struct node));
+    newNode->data = value;
+    newNode->left = NULL;
+    newNode->right = NULL;
+
+    return newNode;
+}
+
+struct node* insertLeft(struct node *root, int value) {
+    root->left = createNode(value);
+    return root->left;
+} 
+
+
+struct node* insertRight(struct node *root, int value){
+    root->right = createNode(value);
+    return root->right;
+}
+
+int main(){
+    struct node *root = createNode(1);
+    insertLeft(root, 2);
+    insertRight(root, 3);
+    
+    printf("The elements of tree are %d %d %d", root->data, root->left->data, root->right->data);
+}
+```
 
 Applications of Trees
 Trees and their variants are an extremely useful data structure with lots of practical applications.
