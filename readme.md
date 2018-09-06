@@ -2107,7 +2107,7 @@ A node balance factor = 0-0 = 0
 
 Named after their inventor Adelson, Velski & Landis(AVL tree) is a bst that the balance factore of any node is either 1 or 0 or -1 then it is considered balanced
 
-![alt text](unbalanced_avl_trees(1).jpg)
+![alt text](unbalanced_avl_trees_v2.jpg)
 
 A node with any other balance factor is considered unbalanced(Not avl tree) and requires rebalancing the tree/ convert to avl tree.
 
@@ -2164,7 +2164,7 @@ For Right rotation we need two RR but here one so we consider b have right child
 ![alt text](left_unbalanced_tree.jpg)
 1. Do Left rotation
 
-![alt text](right_rotation.jpg
+![alt text](right_rotation.jpg)
 
 ![alt text](balanced_avl_tree.jpg)
 
