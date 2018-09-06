@@ -2185,9 +2185,9 @@ For Left rotation we need two LL but here one so we consider b have left child(i
 ![alt text](right_unbalanced_tree.jpg)
 1. Do Right rotation
 
-![alt text](left_rotation.jpg
+![alt text](left_rotation.jpg)
 
-![alt text](balanced_avl_tree.jpg)
+![alt text](balanced_avl_tree(1).jpg
 
 
 5. Expression Tree:
