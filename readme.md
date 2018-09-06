@@ -1817,12 +1817,41 @@ One example where a deque can be used is the A-Steal job scheduling algorithm.[5
 ### Tree Data structure ###
  tree Data structure is a widely used abstract data type (ADT) that simulates a hierarchical tree structure, with a root value and subtrees of children with a parent node
 
+Terminology used in trees
+1.Root : The top node in a tree.
+2. Child: A node directly connected to another node when moving away from the root.
+3.Parent:The converse notion of a child.
+4.Siblings:A group of nodes with the same parent.
+5.Descendant:A node reachable by repeated proceeding from parent to child. Also known as subchild.
+6.Ancestor:A node reachable by repeated proceeding from child to parent.
+7.Leaf:A node with no children.
+
+8.Degree:For a given node, its number of children. A leaf is necessarily degree zero.
+9.Edge:The connection between one node and another.
+10.Path:A sequence of nodes and edges connecting a node with a descendant.
+11.Level:The level of a node is defined as: 1 + the number of edges between the node and the root.
+12.Height of node:The height of a node is the number of edges on the longest path between that node and a leaf.
+13.Height of tree:The height of a tree is the height of its root node.
+14.Depth:The depth of a node is the number of edges from the tree's root node to the node.
+
 ### Some properties of Tree ###
 1. One way direction : Tree travers should be root to leaf . 
 2. No cycle : Node can't connected such a way that can't create cycle or loop.
 3. Every child must have only one parent:
 4. Recursive Data Structure: tree recursively contain another tree that contais data
 5. Number of Edges is N-1 : if a tree have n th node then edge must be n-1
+
+![alt text](images/types-of-tree.png)
+
+General Tree
+General Tree stores the elements in a hierarchical order in which the top level element is always present at level 0 as the root element. All the nodes except the root node are present at number of levels. The nodes which are present on the same level are called siblings while the nodes which are present on the different levels exhibit the parent-child relationship among them. A node may contain any number of sub-trees. The tree in which each node contain 3 sub-tree, is called ternary tree.
+
+Forests
+Forest can be defined as the set of disjoint trees which can be obtained by deleting the root node and the edges which connects root node to the first level node.
+
+![alt text](images/forest-tree.png)
+
+
 Applications of Trees
 Trees and their variants are an extremely useful data structure with lots of practical applications.
 
