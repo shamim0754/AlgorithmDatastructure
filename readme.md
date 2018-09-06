@@ -1890,20 +1890,11 @@ Pre-order :A → B → D → E → C → F → G
 
 Post-order : D → E → B → F → G → C → A
 
-![alt text](images/types-of-tree.png)
 
 see implemnetation on binary search tree
 
-1.General Tree:
 
-General Tree stores the elements in a hierarchical order in which the top level element is always present at level 0 as the root element. All the nodes except the root node are present at number of levels. The nodes which are present on the same level are called siblings while the nodes which are present on the different levels exhibit the parent-child relationship among them. A node may contain any number of sub-trees. The tree in which each node contain 3 sub-tree, is called ternary tree.
-
-2. Forests:
-
-Forest can be defined as the set of disjoint trees which can be obtained by deleting the root node and the edges which connects root node to the first level node.
-
-![alt text](images/forest-tree.png)
-
+### types-of-tree ###
 3. Binary Tree :
 Binary Tree is a special type of generic tree in which, each node can have at most two children. Binary tree is generally partitioned into three disjoint subsets.
 
@@ -2003,6 +1994,12 @@ int main(){
 ```
 Search Operation : similar way to insert operation
 
+
+1.start searching from the root node. Then if the data is less than the key value, search for the element in the left subtree. 
+2. Otherwise, search for the element in the right subtree. 
+3. Follow the same algorithm for each node.
+
+
 ```C
 struct node* search(struct node* root,int data){
    struct node *current = root;
@@ -2031,10 +2028,6 @@ struct node* search(struct node* root,int data){
    return current;
 }
 ```
-
-1.start searching from the root node. Then if the data is less than the key value, search for the element in the left subtree. 
-2. Otherwise, search for the element in the right subtree. 
-3. Follow the same algorithm for each node.
 
 ![alt text](images/bst-search-downward-recursion-step.jpg)
 
