@@ -820,12 +820,12 @@ main() {
 [GitHub](https://www.geeksforgeeks.org/circular-linked-list)
 
 ### Linked List Use ###
-1. create different types of tree(e.g binary search tree) data structure
+1. Create different types of tree(e.g binary search tree) data structure
+2. Allmost every application use linked list for dynamic memory allocation nature
 
-
-
-
-
+Langauge support
+1. C++'s Standard Template Library provides the class templates std::list, for the linked list implementations
+2. LinkedList, providing the dynamic array and linked list implementations, respectively. However, the ArrayDeque, contrary to its name, does not support random access.
 
 ### Stack ###
 
@@ -836,10 +836,115 @@ Stack can only access the top element of a stack hence it is called LIFO(Last-in
   - Insert : Adds an element an element on the stack called special name `push()`
   - Delete : Deletes an element from the stack called special name `pop()`
 
+since above operations were performed at the same end, so we had to take only one variable top
+
 Helper/Utility operation need for implementing push and pop operation
 - peek() − get the top data element of the stack, without removing it.
 - isFull() − check if stack is full.
 - isEmpty() − check if stack is empty.
+
+Using Linked List(recommend way)
+
+```C
+#include <stdio.h>  
+#include <stdlib.h>  
+void push();  
+void pop();  
+void display();  
+struct node{  
+    int val;  
+    struct node *next;  
+};  
+struct node *head;  
+  
+void main ()  
+{  
+    int choice=0;     
+    printf("\n*********Stack operations using linked list*********\n");  
+    printf("\n----------------------------------------------\n");  
+    while(choice != 4){  
+        printf("\n\nChose one from the below options...\n");  
+        printf("\n1.Push\n2.Pop\n3.Show\n4.Exit");  
+        printf("\n Enter your choice \n");        
+        scanf("%d",&choice);  
+        switch(choice) {  
+            case 1: {   
+                push();  
+                break;  
+            }  
+            case 2:{  
+                pop();  
+                break;  
+            }  
+            case 3:{  
+                display();  
+                break;  
+            }  
+            case 4: {  
+                printf("Exiting....");  
+                break;   
+            }  
+            default:{  
+                printf("Please Enter valid choice ");  
+            }   
+        };  
+    }  
+}  
+void push ()  
+{  
+    int val;  
+    struct node *ptr = (struct node*)malloc(sizeof(struct node));   
+    if(ptr == NULL)
+        printf("not able to push the element");   
+    else {  
+        printf("Enter the value");  
+        scanf("%d",&val);  
+        if(head==NULL){         
+            ptr->val = val;  
+            ptr -> next = NULL;  
+            head=ptr;  
+        }else{  
+            ptr->val = val;  
+            ptr->next = head;  
+            head=ptr;  
+        }  
+        printf("Item pushed");  
+    }  
+}  
+  
+void pop()  
+{  
+    int item;  
+    struct node *ptr;  
+    if (head == NULL)   
+        printf("Underflow");  
+    else{  
+        item = head->val;  
+        ptr = head;  
+        head = head->next;  
+        free(ptr);  
+        printf("Item popped");  
+          
+    }  
+}  
+void display()  
+{  
+    int i;  
+    struct node *ptr;  
+    ptr=head;  
+    if(ptr == NULL) 
+        printf("Stack is empty\n");  
+    else {  
+        printf("Printing Stack elements \n");  
+        while(ptr!=NULL){  
+            printf("%d\n",ptr->val);  
+            ptr = ptr->next;  
+        }  
+    }  
+}  
+```
+
+Using Array
 
 
 ```C
@@ -1271,62 +1376,7 @@ printf("Evaluated expression is: %d\n" , evaluate(postfix));
 
 2. Syntax parsing : Many compilers use a stack for parsing the syntax of expressions using infix notation, program blocks etc. before translating into low level code
 
-3. Reverse a word
-```C
-#include <stdio.h>
-#include <conio.h>
-#include <string.h>
-
-#define MAXSIZE 80
-int stack[MAXSIZE];
-int top = -1;
-
-//push into stack
-void push(char value) {
-
-   if(!isFull()) {
-      stack[++top] = value;
-   }else {
-      printf("Could not insert data, Stack is full.\n");
-   }
-}
-
-int isFull() {
-   return top == MAXSIZE ? 1 :0;
-}
-
-//pick top element
-char peek() {
-   return stack[top];
-}
-//check stack empty
-int isEmpty() {
-   return top == -1 ? 1 :0;
-}
-
-char pop() {
-   if(!isEmpty()) {
-      return stack[top--];
-   }else {
-      printf("Could not retrieve data, Stack is empty.\n");
-   }
-}
-
-void main() {
-   char name[80];
-   printf("input a word (max 20 char)\n");
-   scanf("%s",&name);
-   for(int i = 0;i<strlen(name); i++)
-     push(name[i]);
-
-   printf("Reverse of above word\n");
-   while(!isEmpty()) {
-      printf("%c",pop());
-   }
-}
-
-```
-4. Check braket sequence balance: “((” , “({)}”, ()(}” return false where “[()]{}{[()()]()}” retrun true
+- Check braket sequence balance: “((” , “({)}”, ()(}” return false where “[()]{}{[()()]()}” retrun true
 
 Algorithm
 1. Declare a character stack S.
@@ -1418,6 +1468,63 @@ void main() {
 }
 
 ```
+
+3. Reverse a word
+```C
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+
+#define MAXSIZE 80
+int stack[MAXSIZE];
+int top = -1;
+
+//push into stack
+void push(char value) {
+
+   if(!isFull()) {
+      stack[++top] = value;
+   }else {
+      printf("Could not insert data, Stack is full.\n");
+   }
+}
+
+int isFull() {
+   return top == MAXSIZE ? 1 :0;
+}
+
+//pick top element
+char peek() {
+   return stack[top];
+}
+//check stack empty
+int isEmpty() {
+   return top == -1 ? 1 :0;
+}
+
+char pop() {
+   if(!isEmpty()) {
+      return stack[top--];
+   }else {
+      printf("Could not retrieve data, Stack is empty.\n");
+   }
+}
+
+void main() {
+   char name[80];
+   printf("input a word (max 20 char)\n");
+   scanf("%s",&name);
+   for(int i = 0;i<strlen(name); i++)
+     push(name[i]);
+
+   printf("Reverse of above word\n");
+   while(!isEmpty()) {
+      printf("%c",pop());
+   }
+}
+
+```
+
 5. Converting a decimal number into a binary numbers
 ```C
 #include <stdio.h>
@@ -1468,7 +1575,8 @@ void main() {
 ```
 
 ### Queue ###
-In Queue  data structure, One end(front pointer) is always used to insert/in data (called  enqueue operation) and the other(rear(means behind side) pointer) is used to remove/out data ( called  dequeue operation ). 
+ queue is a  abstract data type or collection in which the entities in the collection are kept in order and the principal (or only) operations on the collection are the addition of entities to the `rear` terminal position, known as `enqueue`, and removal of entities from the `front` terminal position, known as `dequeue`
+
 The difference between stacks and queues is in removing. In a stack we remove the item the most recently added; in a queue, we remove the item the least recently added(.
 hence queue follows First-In-First-Out(FIFO) methodology
 )
@@ -1560,8 +1668,168 @@ void main() {
 
 ```
 
+Queue implement using link list (recommended way)
+
+```C
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *front;
+struct node *rear;
+void enqueue();
+void dequeue();
+void travers();
+void main() {
+    int choice;
+    while(choice != 4)
+    {
+        printf("\n*************************Main Menu*****************************\n");
+        printf("\n=================================================================\n");
+        printf("\n1.insert an element\n2.Delete an element\n3.Display the queue\n4.Exit\n");
+        printf("\nEnter your choice ?");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+            enqueue();
+            break;
+            case 2:
+            dequeue();
+            break;
+            case 3:
+            travers();
+            break;
+            case 4:
+            exit(0);
+            break;
+            default:
+            printf("\nEnter valid choice??\n");
+        }
+    }
+   getch();
+}
+void enqueue(){
+    struct node *ptr;
+    int item;
+
+    ptr = (struct node *) malloc (sizeof(struct node));
+    if(ptr == NULL) {
+        printf("\nOVERFLOW\n");
+        return;
+    }else {
+        printf("\nEnter value?\n");
+        scanf("%d",&item);
+
+        ptr -> data = item;
+        if(front == NULL){
+            front = ptr;
+            rear = ptr;
+            front -> next = NULL;
+            rear -> next = NULL;
+        }else{
+            rear -> next = ptr;
+            rear = ptr;
+            rear->next = NULL;
+        }
+    }
+}
+
+void dequeue(){
+    struct node *ptr;
+    if(front == NULL) {
+        printf("\nUNDERFLOW\n");
+        return;
+    }else {
+        ptr = front;
+        front = front -> next;
+        free(ptr);
+    }
+}
+void travers()
+{
+    struct node *ptr;
+    ptr = front;
+    if(front == NULL)
+        printf("\nEmpty queue\n");
+    else{
+        printf("\nprinting values .....\n");
+        while(ptr != NULL)  {
+            printf("\n%d\n",ptr -> data);
+            ptr = ptr -> next;
+        }
+    }
+}
+
+```
+
+### Applications of Queue ###
+
+1. Queues are widely used as waiting lists for a single shared resource like printer, disk, CPU.
+2. Queues are used in asynchronous transfer of data (where data is not being transferred at the same rate between two processes) for eg. pipes, file IO, sockets.
+3. Queues are used as buffers in most of the applications like MP3 media player, CD player, etc.
+4. Queue are used to maintain the play list in media players in order to add and remove the songs from the play-list.
+
+### Standard problem of Queue ###
+
+1. Breadth first searches for graph use queues
+2. Level Order Tree Traversal
+3. Reverse path of Binary tree
+4. Construct Complete Binary Tree
+5. Check whether a given Binary Tree is Complete or not 
+6. Program for Page Replacement Algorithms | Set 2 (FIFO)
+7. Number of siblings of a given Node in n-ary Tree
+8. ZigZag Tree Traversal
+9. Find the largest multiple of 3
+10. Find maximum level sum in Binary Tree
+Input :               4
+                    /   \
+                   2    -5
+                  / \    /\
+                -1   3 -2  6
+Output: 6
+Explanation :
+Sum of all nodes of 0'th level is 4
+Sum of all nodes of 1'th level is -3
+Sum of all nodes of 0'th level is 6
+Hence maximum sum is 6
 
 
+
+### Deque ###
+Deque is a generalized version of Queue data structure that allows insert and delete at both ends
+Because of this property it is known as double ended queue(Deque)
+
+Langauge support
+
+1. C++'s Standard Template Library provides the class templates std::deque  for the multiple array
+2. Java's Collections Framework provides a new `Deque` interface that provides the functionality of insertion and removal at both ends. It is implemented by classes such as ArrayDeque
+
+###  Applications ###
+One example where a deque can be used is the A-Steal job scheduling algorithm.[5] This algorithm implements task scheduling for several processors. A separate deque with threads to be executed is maintained for each processor. To execute the next thread, the processor gets the first element from the deque (using the "remove first element" deque operation). If the current thread forks, it is put back to the front of the deque ("insert element at front") and a new thread is executed. When one of the processors finishes execution of its own threads (i.e. its deque is empty), it can "steal" a thread from another processor: it gets the last element from the deque of another processor ("remove last element") and executes it. The steal-job scheduling algorithm is used by Intel's Threading Building Blocks (TBB) library for parallel programming.
+
+### Priority queue ###
+[Link](https://en.wikipedia.org/wiki/Priority_queue)
+
+### Tree Data structure ###
+ tree Data structure is a widely used abstract data type (ADT) that simulates a hierarchical tree structure, with a root value and subtrees of children with a parent node
+
+### Some properties of Tree ###
+1. One way direction : Tree travers should be root to leaf . 
+2. No cycle : Node can't connected such a way that can't create cycle or loop.
+3. Every child must have only one parent:
+4. Recursive Data Structure: tree recursively contain another tree that contais data
+5. Number of Edges is N-1 : if a tree have n th node then edge must be n-1
+Applications of Trees
+Trees and their variants are an extremely useful data structure with lots of practical applications.
+
+Binary Search Trees(BSTs) are used to quickly check whether an element is present in a set or not.
+Heap is a kind of tree that is used for heifz used in modern routers to store routing information.
+Most popular databases use B-Trees and T-Trees, which are variants of the tree structure we learned above to store their data
+Compilers use a syntax tree to validate the syntax of every program you write. 
 
 ### Linear Searching ###
 
