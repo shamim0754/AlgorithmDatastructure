@@ -2087,7 +2087,7 @@ here every element need compare
 we need to limit the skewnees(balancing) of bst to speed up search operation
 
 Balance Factor of any node = height(left-sutree) − height(right-sutree)
-![alt text](unbalanced_avl_trees.jpg)
+![alt text](images/unbalanced_avl_trees.jpg)
 1st picture 
 B node balance factor = 1-1 = 0
 A node balance factor = 0-0 = 0
@@ -2107,44 +2107,44 @@ A node balance factor = 0-0 = 0
 
 Named after their inventor Adelson, Velski & Landis(AVL tree) is a bst that the balance factore of any node is either 1 or 0 or -1 then it is considered balanced
 
-![alt text](unbalanced_avl_trees_v2.jpg)
+![alt text](images/unbalanced_avl_trees_v2.jpg)
 
 A node with any other balance factor is considered unbalanced(Not avl tree) and requires rebalancing the tree/ convert to avl tree.
 
 To rebalancing , an unbalanced tree may perform the following four kinds of rotations techniques −
 
 Left rotation : if a node is inserted into the right subtree of the right subtree(LL)
-![alt text](avl1.png)
+![alt text](images/avl1.png)
 
 insert 18,19
-![alt text](rravl1.png)
+![alt text](images/rravl1.png)
 
-![alt text](avl_left_rotation.jpg)
-![alt text](rravl2.png)
+![alt text](images/avl_left_rotation.jpg)
+![alt text](images/rravl2.png)
 
 Right rotation :  if a node is inserted in the left subtree of the left subtree(RR)
-![alt text](avl1.png)
+![alt text](images/avl1.png)
 
 Insert 6
-![alt text](avl2.png)
+![alt text](images/avl2.png)
 
 Insert 4
-![alt text](avl3.png)
+![alt text](images/avl3.png)
 Now it is not balanced since it have node 7, 8 imbalance node(since have balance factore =2)
 
 we have to go from leaf node . node 4 blance, node 6 balance node 7 imbalance
 
 since if 7 node is inserted in the left subtree( 6) of the left subtree( 4) . we rotate right (Pull then becommes figure)as a result it becomes balance bst(right side grater value, left side less value)
 
-![alt text](avl_right_rotation.jpg)
-![alt text](avl4.png)
+![alt text](images/avl_right_rotation.jpg)
+![alt text](images/avl4.png)
 
 
 Left-Right rotation:
-![alt text](avl1.png)
+![alt text](images/avl1.png)
 
 insert 2,3
-![alt text](lr1.png)
+![alt text](images/lr1.png)
 
 Method 1 :
 
@@ -2152,42 +2152,42 @@ Method 1 :
 
 so 3 is root , 4 right, 2 left
 
-![alt text](lr2.png)
+![alt text](images/lr2.png)
 
 Method 2 : 
 Example:
-![alt text](right_subtree_of_left_subtree.jpg)
+![alt text](images/right_subtree_of_left_subtree.jpg)
 1. Do Right rotation
 For Right rotation we need two RR but here one so we consider b have right child(imagine) . 
-![alt text](subtree_left_rotation.jpg)
+![alt text](images/subtree_left_rotation.jpg)
 
-![alt text](left_unbalanced_tree.jpg)
+![alt text](images/left_unbalanced_tree.jpg)
 1. Do Left rotation
 
-![alt text](right_rotation.jpg)
+![alt text](images/right_rotation.jpg)
 
-![alt text](balanced_avl_tree.jpg)
+![alt text](images/balanced_avl_tree.jpg)
 
 Right-Left rotation :
 
 
-![alt text](avl1.png)
+![alt text](images/avl1.png)
 
 insert 18,17
-![alt text](rl1.png)
+![alt text](images/rl1.png)
 
 Example:
-![alt text](balanced_avl_tree.jpg)
+![alt text](images/balanced_avl_tree.jpg)
 1. Do Left rotation
 For Left rotation we need two LL but here one so we consider b have left child(imagine) . 
-![alt text](subtree_right_rotation.jpg)
+![alt text](images/subtree_right_rotation.jpg)
 
-![alt text](right_unbalanced_tree.jpg)
+![alt text](images/right_unbalanced_tree.jpg)
 1. Do Right rotation
 
-![alt text](left_rotation.jpg)
+![alt text](images/left_rotation.jpg)
 
-![alt text](balanced_avl_tree(1).jpg
+![alt text](images/balanced_avl_tree_v2.jpg)
 
 
 5. Expression Tree:
