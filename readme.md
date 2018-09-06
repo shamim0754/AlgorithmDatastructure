@@ -2000,6 +2000,8 @@ Search Operation : similar way to insert operation
 3. Follow the same algorithm for each node.
 
 
+
+
 ```C
 struct node* search(struct node* root,int data){
    struct node *current = root;
@@ -2060,6 +2062,133 @@ void postorder(struct node* root) {
 ![alt text](images/tree-travers.png)
 
 we noticed that(red symbol) The inorder traversal of a Binary Search Tree(BST) is a sorted list of numbers! !!
+
+AVL Tree : 
+![alt text](images/bst-vs-not-bst.jpg)
+
+search 7
+
+complexity: O(h)    h = log(n) where n = number of element on bst/bt
+
+here O(4)
+
+element 10, but comparisom  required 4 
+
+but  
+In real-time data, we cannot predict data pattern and their frequencies so it can be following binary search tree 
+![alt text](images/unbalanced_bst.jpg)
+
+search 10
+
+complexity: O(n)     where n = number of element 
+
+here every element need compare
+
+we need to limit the skewnees(balancing) of bst to speed up search operation
+
+Balance Factor of any node = height(left-sutree) − height(right-sutree)
+![alt text](unbalanced_avl_trees.jpg)
+1st picture 
+B node balance factor = 1-1 = 0
+A node balance factor = 0-0 = 0
+C node balance factor = 0-0 = 0
+
+2nd picture
+C node balance factor = 2-0 = 2
+B node balance factor = 1-0 = 1
+A node balance factor = 0-0 = 0
+
+
+
+3nd picture
+A node balance factor = 0-2 = -2
+B node balance factor = 0-1 = -1
+A node balance factor = 0-0 = 0
+
+Named after their inventor Adelson, Velski & Landis(AVL tree) is a bst that the balance factore of any node is either 1 or 0 or -1 then it is considered balanced
+
+![alt text](unbalanced_avl_trees(1).jpg)
+
+A node with any other balance factor is considered unbalanced(Not avl tree) and requires rebalancing the tree/ convert to avl tree.
+
+To rebalancing , an unbalanced tree may perform the following four kinds of rotations techniques −
+
+Left rotation : if a node is inserted into the right subtree of the right subtree(LL)
+![alt text](avl1.png)
+
+insert 18,19
+![alt text](rravl1.png)
+
+![alt text](avl_left_rotation.jpg)
+![alt text](rravl2.png)
+
+Right rotation :  if a node is inserted in the left subtree of the left subtree(RR)
+![alt text](avl1.png)
+
+Insert 6
+![alt text](avl2.png)
+
+Insert 4
+![alt text](avl3.png)
+Now it is not balanced since it have node 7, 8 imbalance node(since have balance factore =2)
+
+we have to go from leaf node . node 4 blance, node 6 balance node 7 imbalance
+
+since if 7 node is inserted in the left subtree( 6) of the left subtree( 4) . we rotate right (Pull then becommes figure)as a result it becomes balance bst(right side grater value, left side less value)
+
+![alt text](avl_right_rotation.jpg)
+![alt text](avl4.png)
+
+
+Left-Right rotation:
+![alt text](avl1.png)
+
+insert 2,3
+![alt text](lr1.png)
+
+Method 1 :
+
+2<3<4
+
+so 3 is root , 4 right, 2 left
+
+![alt text](lr2.png)
+
+Method 2 : 
+Example:
+![alt text](right_subtree_of_left_subtree.jpg)
+1. Do Right rotation
+For Right rotation we need two RR but here one so we consider b have right child(imagine) . 
+![alt text](subtree_left_rotation.jpg)
+
+![alt text](left_unbalanced_tree.jpg)
+1. Do Left rotation
+
+![alt text](right_rotation.jpg
+
+![alt text](balanced_avl_tree.jpg)
+
+Right-Left rotation :
+
+
+![alt text](avl1.png)
+
+insert 18,17
+![alt text](rl1.png)
+
+Example:
+![alt text](balanced_avl_tree.jpg)
+1. Do Left rotation
+For Left rotation we need two LL but here one so we consider b have left child(imagine) . 
+![alt text](subtree_right_rotation.jpg)
+
+![alt text](right_unbalanced_tree.jpg)
+1. Do Right rotation
+
+![alt text](left_rotation.jpg
+
+![alt text](balanced_avl_tree.jpg)
+
 
 5. Expression Tree:
 Expression trees are used to evaluate the simple arithmetic expressions. Expression tree is basically a binary tree where internal nodes are represented by operators while the leaf nodes are represented by operands. Expression trees are widely used to solve algebraic expressions like (a+b)*(a-b). Consider the following example.
@@ -2125,7 +2254,7 @@ int main(){
 Applications of Trees
 Trees and their variants are an extremely useful data structure with lots of practical applications.
 
-Binary Search Trees(BSTs) are used to quickly check whether an element is present in a set or not.
+
 Heap is a kind of tree that is used for heifz used in modern routers to store routing information.
 Most popular databases use B-Trees and T-Trees, which are variants of the tree structure we learned above to store their data
 Compilers use a syntax tree to validate the syntax of every program you write. 
