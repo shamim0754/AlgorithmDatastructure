@@ -1668,6 +1668,16 @@ void main() {
 
 ```
 
+Limitation of Array implementation
+
+As you can see in the image below, after a bit of enqueueing and dequeueing, the size of the queue has been reduced.
+
+![alt text](images/why-circular-queue_0.jpg)
+
+`Circular queue` avoids the wastage of space
+
+https://www.programiz.com/dsa/circular-queue
+
 Queue implement using link list (recommended way)
 
 ```C
@@ -1921,7 +1931,21 @@ Binary Tree is a special type of generic tree in which, each node can have at mo
   2. left sub-tree which is also a binary tree.
   3. Right sub-tree which is also a binary tree.
 
+
 ![alt text](images/binary_tree.jpg)
+Application of Binary Tree:
+Searching in Binary tree become faster.
+Binary tree provides six traversals.
+Two of six traversals give sorted order of elements.
+Maximum and minimum elements can be directly picked up.
+It is used for graph traversal and to convert an expression to postfix and prefix forms.
+### Properties of Binary Tree: ###
+
+1) The maximum number of nodes at level 'l' of a binary tree is 2<sup>l</sup>-1. Here level is number of nodes on path from root to the node (including root and node). Level of root is 1. 
+2) Maximum number of nodes in a binary tree of height 'h' is 2<sup>h</sup> – 1.
+3.In a Binary Tree with N nodes, minimum possible height or minimum number of levels is  ⌈ Log2(N+1) ⌉
+4. A Binary Tree with L leaves has at least   ⌈ Log2L ⌉ + 1   levels   
+ 5.In Binary tree where every node has 0 or 2 children, number of leaf nodes is always one more than nodes with two children.
 
 Types of Binary Tree:
 
@@ -1935,6 +1959,10 @@ Types of Binary Tree:
   A Binary Tree is complete Binary Tree if all levels are completely filled except possibly the last level and the last level has all keys as left as possible
 
   ![alt text](images/complete-binary-tree.png)
+
+  2. Perfect Binary Tree:  where all nodes have two children and all leaves are at same level
+
+  2. Balance binary tree : A binary tree is balance if height of the tree is O(Long n) where n= no of nodes. example avl , red black tree
 
 4. Binary Search Tree :
  binary search tree is a special binary tree is that following The properties
@@ -2476,6 +2504,215 @@ Swap the replacement node with the smallest of the children nodes:In this case i
 ![alt text](images/Heap08g.gif)
 
 The replacement node (21) does not have any children node: that means it is convert to heap
+
+### Heap sort ###
+
+### Application Heap ###
+
+1.To quickly find the smallest and largest element from a collection of items or array.
+3. In order to overcome the Worst Case Complexity of Quick Sort algorithm from O(n^2) to O( nlog(n) ) in Heap Sort.
+4. Priority queues can be efficiently implemented using Binary Heap because it supports insert(), delete() and extractmax(), decreaseKey() operations in O(logn) time. Binomoial Heap and Fibonacci Heap are variations of Binary Heap.
+
+Note : priority queues are used in Graph algorithms like Prim’s Algorithm and Dijkstra’s algorithm.and Huffman encoding (data compression)
+
+4. merge k sorted array
+5.sort an almost sorted array
+
+### Hash Table Data structure ###
+
+Suppose we want to design a system for storing employee records keyed using phone numbers. And we want following queries to be performed efficiently:
+
+Insert a phone number and corresponding information.
+Search a phone number and fetch the information.
+Delete a phone number and related information.
+We can think of using the following data structures to maintain information about different phone numbers.
+
+1. Array/Linked of phone numbers and records.
+For arrays and linked lists, we need to search in a linear fashion, which can be costly in practice
+we can't consider it
+3. Balanced binary search tree with phone numbers as keys.
+here we get moderate search, insert and delete times. All of these operations can be guaranteed to be in O(Logn) time.
+4. Direct Access Table.
+Using direct access table where we make a big array and use phone numbers as index in the array
+An entry in array is NIL if phone number is not present, else the array entry stores pointer to records corresponding to phone number. Time complexity wise this solution is the best among all, we can do all operations in O(1) time.but it have some limitation
+1. extra space required is huge.For example if phone number is n digits, we need O(m * 10n) space for table where m is size of a pointer to record
+2.  Another problem is an integer in a programming language may not store n digits.
+
+Due to above limitations Direct Access Table cannot always be used. Hash Table is the solution that can be used in almost all such situations and performs extremely well compared to above data structures like Array, Linked List, Balanced BST in practice. With hashing we get O(1) search time on average (under reasonable assumptions) and O(n) in worst case.
+
+Hash Function: a hash function maps a big number or string to a small integer that can be used as index in hash table.
+A good hash function should have following properties
+1) Efficiently computable.
+2) Should uniformly distribute the keys 
+
+Collision Handling: Since a hash function gets us a small number for a big key, there is possibility that two keys result in same value
+Following are the ways to handle collisions:
+
+1. Chaining:The idea is to make each cell of hash table point to a linked list of records that have same hash function value. Chaining is simple, but requires additional memory outside the table.
+2. Open Addressing: In open addressing, all elements are stored in the hash table itself. Each table entry contains either a record or NIL. When searching for an element, we one by one examine table slots until the desired element is found or it is clear that the element is not in the table.
+3. Linear Probing : In linear probing, search the next empty location in the array by looking into the next cell until we find an empty cell
+
+
+![alt text](images/hashfunction1.png)
+
+As we can see above, 2 index comming duplicaion that means happend hash Collision 
+
+Sovle using Linear Probing technique
+
+![alt text](images/hashfunction3.png)
+
+Consider hash table data struncure of size 20 with the following values
+
+![alt text](images/hashfunction2.png)
+
+Basic Operations
+Following are the basic primary operations of a hash table.
+
+Search − Searches an element in a hash table.
+
+Insert − inserts an element in a hash table.
+
+delete − Deletes an element from a hash table.
+
+
+```C
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define SIZE 20
+
+struct DataItem {
+   int data;   
+   int key;
+};
+
+struct DataItem* hashArray[SIZE]; 
+struct DataItem* dummyItem;
+struct DataItem* item;
+
+int hashCode(int key) {
+   return key % SIZE;
+}
+
+struct DataItem *search(int key) {
+   //get the hash 
+   int hashIndex = hashCode(key);  
+  
+   //move in array until an empty 
+   while(hashArray[hashIndex] != NULL) {
+  
+      if(hashArray[hashIndex]->key == key)
+         return hashArray[hashIndex]; 
+      
+      //go to next cell
+      ++hashIndex;
+    
+      //wrap around the table
+      hashIndex %= SIZE;
+   }        
+  
+   return NULL;        
+}
+
+void insert(int key,int data) {
+
+   struct DataItem *item = (struct DataItem*) malloc(sizeof(struct DataItem));
+   item->data = data;  
+   item->key = key;
+
+   //get the hash 
+   int hashIndex = hashCode(key);
+
+   //move in array until an empty or deleted cell
+   while(hashArray[hashIndex] != NULL && hashArray[hashIndex]->key != -1) {
+      //go to next cell
+      ++hashIndex;
+    
+      //wrap around the table
+      hashIndex %= SIZE;
+   }
+  
+   hashArray[hashIndex] = item;
+}
+
+struct DataItem* delete(struct DataItem* item) {
+   int key = item->key;
+
+   //get the hash 
+   int hashIndex = hashCode(key);
+
+   //move in array until an empty
+   while(hashArray[hashIndex] != NULL) {
+  
+      if(hashArray[hashIndex]->key == key) {
+         struct DataItem* temp = hashArray[hashIndex]; 
+      
+         //assign a dummy item at deleted position
+         hashArray[hashIndex] = dummyItem; 
+         return temp;
+      }
+    
+      //go to next cell
+      ++hashIndex;
+    
+      //wrap around the table
+      hashIndex %= SIZE;
+   }      
+  
+   return NULL;        
+}
+
+void display() {
+   int i = 0;
+  
+   for(i = 0; i<SIZE; i++) {
+  
+      if(hashArray[i] != NULL)
+         printf(" (%d,%d)",hashArray[i]->key,hashArray[i]->data);
+      else
+         printf(" ~~ ");
+   }
+  
+   printf("\n");
+}
+
+int main() {
+   dummyItem = (struct DataItem*) malloc(sizeof(struct DataItem));
+   dummyItem->data = -1;  
+   dummyItem->key = -1; 
+
+   insert(1, 20);
+   insert(2, 70);
+   insert(42, 80);
+   insert(4, 25);
+   insert(12, 44);
+   insert(14, 32);
+   insert(17, 11);
+   insert(13, 78);
+   insert(37, 97);
+
+   display();
+   item = search(37);
+
+   if(item != NULL) {
+      printf("Element found: %d\n", item->data);
+   } else {
+      printf("Element not found\n");
+   }
+
+   delete(item);
+   item = search(37);
+
+   if(item != NULL) {
+      printf("Element found: %d\n", item->data);
+   } else {
+      printf("Element not found\n");
+   }
+}
+```
+
 
 
 ### Linear Searching ###
