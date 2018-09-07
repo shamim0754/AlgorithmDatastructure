@@ -1815,9 +1815,14 @@ One example where a deque can be used is the A-Steal job scheduling algorithm.[5
 [Link](https://en.wikipedia.org/wiki/Priority_queue)
 
 ### Tree Data structure ###
- tree Data structure is a widely used abstract data type (ADT) that simulates a hierarchical tree structure, with a root value and subtrees of children with a parent node
+ We know Array and Linked List, which are linear data structures but  sometimes to store information that naturally forms a hierarchy. For example, the file system on a computer:
 
-Terminology used in trees
+![alt text](images/tree-used.jpg)
+
+In such case array list or array is not possible to store information . For this reason tree data structure is used where each node can be connected to multiple nodes.
+
+Terminology used in trees:
+
 1.Root : The top node in a tree.
 2. Child: A node directly connected to another node when moving away from the root.
 3.Parent:The converse notion of a child.
@@ -1840,6 +1845,20 @@ Terminology used in trees
 3. Every child must have only one parent:
 4. Recursive Data Structure: tree recursively contain another tree that contais data
 5. Number of Edges is N-1 : if a tree have n th node then edge must be n-1
+
+Applications of Trees
+Trees and their variants are an extremely useful data structure with lots of practical applications.
+
+
+1. Heap tree  is used for heifz used in modern routers to store routing information.
+2. Most popular databases use B-Trees, B+ tree and T-Trees  to implement indexing
+3. Compilers use a syntax tree to validate the syntax of every program you write.
+3. BST tree is used quicker search than Linked List
+  note : it will slower than array
+4. BST tree is used quicker insert/delete than array but slower than Unordered Linked Lists
+5. K-D Tree: A space partitioning tree used to organize points in K dimensional space.
+6. Trie : Used to implement dictionaries with prefix lookup.
+7. Suffix Tree : For quick pattern searching in a fixed text.
 
 Linear data structures like arrays, stacks, queues and linked list have only one way to read the data. But a hierarchical data structure like a tree can be traversed in three different ways.
 ![alt text](images/tree-traversal.jpg)
@@ -2251,13 +2270,213 @@ int main(){
 }
 ```
 
-Applications of Trees
-Trees and their variants are an extremely useful data structure with lots of practical applications.
+Red Black tree : 
+red–black tree is a kind of self-balancing binary search tree (similar to AVL tree)
+
+Each node of the binary tree has an extra bit, and that bit is often interpreted as the color (red or black) of the node. These color bits are used to ensure the tree remains approximately balanced during insertions and deletions. as a result it need less rotation during insertion/deletion than avl tree
+So red black tree is more prefer than avl tree
+
+Example : TreeMap or sortedTreeMap in java
+A red black tree must maintain the following colouring rules:
+1. The root node must be black.null nodes are considered to be black.
+2. No red-red parent-child(both parent-child can't be red one has be black)
+3. Every path from root to null pointer must have exactly the same number of balck nodes
+
+![alt text](images/rbtree.png)
+
+1st picure 
+1.root is black condition 1 statisfy
+2. no parent-child both red condition 2 satisfy
+3. Number of black node from B to null path =1
+Number of black node from B->B->null path=2
+Number of black node from B->B->B>null path=3
+
+nof of black nodes are not same so its does not satisfy 3rd condition . so it is not redblack tree <br>
+2nd picure  : redblack tree<br/>
+
+3rd picure  : redblack tree
+
+### Insertion Algorithm ###
+1. if empty tree create root(according to binary search tree insertion rules)
+  1. if parent is black then you don't need to do anything.
+  2. if parent is red then perform following
+    1. if the sibling of the parent is black/missing, a rotation needs to be performed
+
+   If the insertion path from grand parent to parent to node is straight 
+   LL = Right rotation <br>
+   RR = Left rotation <br>
+   If it is angled (LR or RL) we need to do a double.
+   LR = Right rotation + Left rotation<br>
+   RL = Left rotation + Right rotation<br>
+
+    2. if the sibling of the parent is red,  colour swap between parent+sibling and grandparent.
+
+Insert 30
+
+![alt text](images/redblack1.png)
+
+Note : we know null nodes are considered to be black.
+
+If the root is red, make it black:
+
+![alt text](images/redblack2.png)
+
+Insert 50
+
+![alt text](images/redblack3.png)
+
+Since  parent is black so we don't have to change anything
+
+Insert 40
+
+![alt text](images/redblack4.png)
+
+Since parent is red, we must apply fix. Parent's sibling (50's sibling) is black, so we must perform a rotation.
 
 
-Heap is a kind of tree that is used for heifz used in modern routers to store routing information.
-Most popular databases use B-Trees and T-Trees, which are variants of the tree structure we learned above to store their data
-Compilers use a syntax tree to validate the syntax of every program you write. 
+![alt text](images/redblack5.png)
+
+Since insertion path is RL so need Left rotation + Right rotation<br>
+
+Now Left rotation (Rotate first 40 and 50)
+![alt text](images/redblack6.png)
+
+It becomes
+
+![alt text](images/redblack7.png)
+
+Now Right rotation (Rotate  30 and 40)
+
+It becomes
+
+![alt text](images/redblack8.png)
+
+40's colour red and it is red . so just change it  to black
+
+
+Insert 20
+
+![alt text](images/redblack9.png)
+
+If parent is red we must apply a fix. Parent's sibling is red so we need to do a colour swap between parent+sibling and grandparent
+
+![alt text](images/redblack10.png)
+
+40's colour red and it is red . so just change it  to black
+
+Insert 10
+
+![alt text](images/redblack12.png)
+
+If parent is red, we must apply a fix. Parent's sibling is black, so a rotation is needed. This time, the insertion path from grandparent to parent to node is "left" then "left". Thus, we only need to perform a single rotation and colour swap.
+
+![alt text](images/redblack13.png)
+
+Final output
+
+![alt text](images/redblack14.png)
+
+https://www.youtube.com/watch?v=UaLIHuR1t8Q
+
+### Heap ###
+Heap is a special case of binary tree data structure that have following property
+1. it is balanced(complete) tree. This property  makes them suitable to be stored in an array.
+2. it is either Min Heap or Max Heap
+  1. Min Heap : here the value of the root node is less than or equal to either of its children.
+
+  ![alt text](images/min_heap_example.jpg)
+
+  2. Max-Heap : Where the value of the root node is greater than or equal to either of its children.
+
+  ![alt text](images/max_heap_example.jpg)
+
+The traversal method use to achieve Array representation is Level Order
+  ![alt text](images/binaryheap.png)
+
+Max Heap Construction Algorithm
+
+Step 1 − Create a new node at the end of heap.
+Step 2 − Assign new value to the node.
+Step 3 − Compare the value of this child node with its parent.
+Step 4 − If value of parent is less than child, then swap them.
+Step 5 − Repeat step 3 & 4 until Max Heap property holds.
+
+Note : In Min Heap construction algorithm, Step 4 : If value of parent is greater than child, then swap them.
+For Example → 12 7 6 10 8 20 
+
+take 12 and 7
+![alt text](images/minheap1.png)
+
+since 12 > 7 No swap
+
+![alt text](images/minheap2.png)
+
+since 12 > 6 No swap
+
+take 10
+
+![alt text](images/minheap3.png)
+
+since 7 > 10  swap them 
+
+![alt text](images/minheap4.png)
+
+take 8
+
+since 10 > 8 No swap
+
+![alt text](images/minheap5.png)
+
+take 8
+
+![alt text](images/minheap6.png)
+
+since 20 > 6  swap them 
+![alt text](images/minheap7.png)
+
+since 20 > 12 swap them 
+
+![alt text](images/minheap8.png)
+
+### Max Heap Deletion Algorithm ###
+
+
+Step 1 − Remove deleted root node.
+Step 2 − Move the last element of last level to deleted root.
+Step 3 − Compare the value of this child node with its parent.
+Step 4 − If value of parent is less than child, then swap them.
+Step 5 − Repeat step 3 & 4 until Heap property holds.
+
+Note : In Min Heap deletion algorithm, Step 4 : If value of parent is greater than child, then swap them.
+
+![alt text](images/Heap04.gif)
+
+![alt text](images/Heap06.gif)
+
+1.Remove deleted root node.
+
+![alt text](images/Heap07.gif)
+
+Step 2 − Move the last element of last level to root. In this case it is 21
+
+![alt text](images/Heap08a.gif)
+
+Now it is not a heap. we need this to heap again
+
+since 21 > 1 No swap
+
+Compare the values of the replacement node(21)  with all its children nodes in the tree:
+Swap the replacement node with the smallest of the children nodes .In this case it is 9
+
+![alt text](images/Heap08d.gif)
+
+Compare the values of the replacement node (21) with all its children nodes in the tree:
+Swap the replacement node with the smallest of the children nodes:In this case it is 17
+
+![alt text](images/Heap08g.gif)
+
+The replacement node (21) does not have any children node: that means it is convert to heap
+
 
 ### Linear Searching ###
 
