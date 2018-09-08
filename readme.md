@@ -1824,12 +1824,38 @@ One example where a deque can be used is the A-Steal job scheduling algorithm.[5
 ### Priority queue ###
 [Link](https://en.wikipedia.org/wiki/Priority_queue)
 
+### Graph Data structure ###
+We know Array and Linked List, which are linear data structures but always it is not possible to used connected data/sophistcated things e.g map of roads, 
+ google map, airline flights from city to city, how the Internet is connected,   On facebook, everything is a graph(That includes User, Photo, Album, Event, Group, Page, Comment, Story, Video, Link,who knows whom,
+who communicates with whom, who influences whom or other relationships),computer networks,Google map
+,Friendship relation {(Alice, Bob), (Bob, Alice), (Bob, Michel), (Michel, Bob),
+(Josefa, Michel), (Michel, Josefa)}  
+
+For such case we need graph data structure(Non lenear data structure)
+
+Graph is a collection graph vertices(node) and edges
+
+Note : edges is used to connect vertices
+
+
+![alt text](images/graph-vertices-edges.jpg)
+
+In the above graph,
+
+V = {0, 1, 2, 3}
+E = {(0,1), (0,2), (0,3), (1,2)}
+
+### Graph Terminology ###
+1. Adjacency: A vertex is said to be adjacent to another vertex if there is an edge connecting them.
+
+In above picutre <br/>
+v(0,1) is adjacent because there is  edge between them.<br/>
+v(2,3) is adjacent because there is  edge between them.
+
 ### Tree Data structure ###
- We know Array and Linked List, which are linear data structures but  sometimes to store information that naturally forms a hierarchy. For example, the file system on a computer:
+Tree is a special kind of graph that is used to store information that naturally forms a hierarchy(each node can be connected to multiple nodes). For example, the file system on a computer:
 
 ![alt text](images/tree-used.jpg)
-
-In such case array list or array is not possible to store information . For this reason tree data structure is used where each node can be connected to multiple nodes.
 
 Terminology used in trees:
 
