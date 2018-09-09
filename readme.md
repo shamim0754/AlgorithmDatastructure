@@ -2055,6 +2055,12 @@ Dequeue a value from queue(4) add it to the visited list. and start exploring ve
 
 queue is empty traversing done
 
+Example 2 :
+
+![alt text](images/BFS.jpg) 
+
+DFS traversal of a graph, produces a spanning tree as final result.
+
 
 ```C
 #include <stdio.h>
@@ -2200,7 +2206,7 @@ int main() {
 1. Initial Step : Select any one vertex from graph.But for tree it should be root vertix
 
 2. start exploring unvisisted vertex Only one instead all  unvisisted vertex explore(where as BFS explore all vertex) of a vertex. add it to stack(for used remaining unvisited vertex explore) and add to visited list
-3.  If no adjacent vertex is found, pop up a vertex  from the stack until  that have no adjacent vertices for next explore.
+3.  If no adjacent vertex is found,(then use back tracking )pop up a vertex  from the stack until  that have no adjacent vertices for next explore.
 4. Repeat Rule 2 and Rule 3 until the stack  is empty.
 
 
@@ -2228,6 +2234,13 @@ vertex 2 have one unvisited vertex 1 and add it to stack . and add to visited li
 pop 0 . no adjacent unvisited vertex<br>
 pop 4 . no adjacent unvisited vertex<br>
 ![alt text](images/graph-dfs-step-1_04.jpg) 
+
+
+Example 2 :
+
+![alt text](images/DFS.jpg) 
+
+DFS traversal of a graph, produces a spanning tree as final result.
 
 
 ```C
