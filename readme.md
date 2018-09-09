@@ -1846,12 +1846,529 @@ V = {0, 1, 2, 3}
 E = {(0,1), (0,2), (0,3), (1,2)}
 
 ### Graph Terminology ###
-1. Adjacency: A vertex is said to be adjacent to another vertex if there is an edge connecting them.
+1. Adjacency(Neighbur): A vertex is said to be adjacent to another vertex if there is an edge connecting them.
 
 In above picutre <br/>
 v(0,1) is adjacent because there is  edge between them.<br/>
 v(2,3) is adjacent because there is  edge between them.
 
+
+2. Path : Path represents a sequence of edges between the two vertices
+In above picutre <br/>
+vertex 0 to vertex 2.<br/>
+Path squence is two one is :  0-1, 1-2 and  other is 0-2
+ `cycle` - a path where the starting and ending node is the same
+3. Edge :
+Edges are three types.
+
+![alt text](images/Directedgraph.jpg)
+
+1. Undirected Edge - An undirected egde is a bidirectional edge. If there is a undirected edge between vertices A and B then edge (A , B) is equal to edge (B , A). when a graph have undirected edge it is called Undirected Graph
+
+2. Directed Edge - A directed egde is a unidirectional edge. If there is a directed edge between vertices A and B then edge (A , B) is not equal to edge (B , A).
+
+when a graph have Directed edge it is called Directed Graph
+
+3. Weighted Edge - A weighted egde is an edge with cost on it.
+
+weighted(cost) can be mean anything e.g it can be distance between two city, how many time need to travel into the edge
+
+![alt text](weighted-graph.jpg)
+
+when a graph have Weighted edge it is called Weighted Graph
+
+4. Degree : Total number of edges connected to a vertex is said to be degree of that vertex 
+![alt text](degree1.jpg)
+
+here a= 3  since it connected with 3 edge
+
+But in directed graph degreee type two
+1. InDegree 2. Outdegree
+
+![alt text](Untitled-Diagram.jpg)
+
+here vertice A have inDegre = 1, outDegree=2
+
+### Graph Representation In computer ###
+
+There are two ways to store Graph into the computer's memory
+
+1. Using  adjacency matrix ( heere matrix means 2D Array)
+
+An adjacency matrix is a 2D array of dimension n x n  where graph having n vertices. Each row and column represent a vertex.
+
+In undireted graph : 
+If the value of any element a[i][j] is 1, it represents that there is an edge connecting vertex i and vertex j. other wise it' s value will be 0
+
+![alt text](graph-adjacency-matrix.jpg)
+
+Example : Suppose we have 3 vertics and 3 edge(1-2 cost 5, 2-3 cost 8 , 1-3 cost 3) in undirected graph.Prepare adjacent Mattrix ?
+
+
+![alt text](adjacentmattrix.png)
+```C
+int N;
+int matrix[100][100]; 
+
+
+scanf("%d",&N);
+for(int i=1;i<=N;i++)
+for(int j=1;j<=N;j++)
+scanf("%d" ,&matrix[i][j]);
+```
+
+
+In directed graph, an element a[i][j] will be 1 only when there is an edge directed from i to j.
+
+![alt text](sequential-representation2.png)
+
+ In weighted  graph, Instead of filling the entry by 1, an element a[i][j] will be fill by the weight of respective edges.
+
+ ![alt text](sequential-representation3.png)
+
+C
+
+```C
+int Node,Edge;
+int matrix[100][100];
+scanf("%d%d",&Node,&Edge);
+for(i=0;i<Edge;i++)
+{
+int n1,n2,cost;
+scanf("%d%d%d",&n1,&n2,&cost);
+matrix[n1][n2]=cost;
+matrix[n2][n1]=cost;
+}
+```
+Input of above program
+3 3  //3 node ,3 edge
+1 2 5 //node1-node2-cost
+2 3 8
+1 3 3
+
+ Edge lookup(checking if an edge exists between vertex A and vertex B or how many cost of a edge by matrix[i][j] is 1  ) is extremely fast in adjacency matrix representation but we have to reserve space for every possible link between all vertices(V x V), so it requires more space althogh it have less edge.
+
+ if need to go from one node to other node. we need to travers all node. it have time complexixty
+
+ For this reason we used 2nd strategy
+
+ 2. Using Adjacency linked  List: 
+    1. each node present in the graph which stores the node value
+    2. a pointer to the next adjacent node to the respective node.
+In undireted graph :
+![alt text](graph-representation-linked-representation.png)
+
+In directed graph
+
+![alt text](graph-representation-linked-representation2.png)
+
+In weighted  graph : each node contains an extra field that is called the weight of the nod
+
+![alt text](graph-representation-linked-representation3.png)
+
+An adjacency list is efficient in terms of storage because we only need to store the values for the edges. For a graph with millions of vertices, this can mean a lot of saved space.
+
+C++ 
+
+```C
+#include<cstdio>
+#include<vector>
+using namespace std;
+#define MAX 100000 //maximum node
+vector<int>edges[MAX];
+vector<int>cost[MAX]; //parallel vector to store costs;
+int main()
+{
+int N,E,i;
+
+scanf("%d%d",&N,&E);
+for(i=1;i<=E;i++)
+{
+int x,y;
+scanf("%d%d",&x,&y);
+edges[x].push_back(y);
+edges[y].push_back(x);
+cost[x].push_back(1);
+cost[y].push_back(1);
+}
+return 0;
+```
+Input of above program
+
+6 8 //node-edge
+1 2 //node1-node2
+1 4
+2 4
+2 5
+4 5
+5 3
+3 6
+6 6
+
+Disadvantge of Adjacent list
+Edge lookup(checking if an edge exists between vertex A and vertex B or how many cost of a edge) we need to loop to check
+
+### Graph Operations ###
+1. Check if element is present in graph
+2. Graph Traversal : Traversing the graph means examining all the nodes and vertices of the graph.There are two standard methods for graph traversing
+    1. Breadth First Search
+    2. Depth First Search
+3. Add elements(vertex, edges) to graph
+4. Finding path from one vertex to anothe
+
+### Breadth First Search ##
+
+1. Initial Step : Select any one vertex from graph.But for tree it should be root vertix. add it to queue 
+2. Dequeue(remove also) a value from queue and add it to the visited list. and start exploring vertex(Visit the adjacent  vertex) except visited vertex. add it to queue 
+2. If no adjacent vertex is found (Explore complete of that take queue vertex)
+3. Repeat Rule 1 and Rule 2 until the queue is empty.
+
+
+![alt text](images/graph-bfs-step-0.jpg)
+
+1. Initial Step : We start from vertex 0.add it to queue
+
+![alt text](images/graph-bfs-step-1.jpg)
+
+2.Dequeue a value from queue(0) add it to the visited list. and start exploring vertex except visited vertex then add it to queue and  any sequence you can take
+You can 1,2,3 or 3,2,1 or 2,3,1 etc
+![alt text](images/graph-bfs-step-1_01.jpg)
+
+Dequeue a value from queue(3) add it to the visited list. and start exploring vertex except visited vertex then add it to queue and 
+
+3 and go to its adjacent nodes. Since 0 has already been visited, it explore complete
+![alt text](images/graph-bfs-step-1_02.jpg)
+
+Dequeue a value from queue(2) add it to the visited list. and start exploring vertex except visited vertex then add it to queue and 
+
+Vertex 2 has an Only one unvisiste adjacent vertex in 4, so we add to the queue
+![alt text](images/graph-bfs-step-1_03.jpg)
+
+Dequeue a value from queue(1) add it to the visited list. and start exploring vertex except visited vertex then add it to queue 
+
+Vertex 1 has no unvisiste adjacent vertex it explore complete
+
+![alt text](images/graph-bfs-step-1_04.jpg)
+
+Dequeue a value from queue(4) add it to the visited list. and start exploring vertex except visited vertex then add it to queue 
+![alt text](images/graph-bfs-step-1_05.jpg)
+
+queue is empty traversing done
+
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX 5
+
+struct Vertex {
+   char label;
+   bool visited;
+};
+
+//queue variables
+
+int queue[MAX];
+int rear = -1;
+int front = 0;
+int queueItemCount = 0;
+
+//graph variables
+
+//array of vertices
+struct Vertex* lstVertices[MAX];
+
+//adjacency matrix
+int adjMatrix[MAX][MAX];
+
+//vertex count
+int vertexCount = 0;
+
+//queue functions
+
+void insert(int data) {
+   queue[++rear] = data;
+   queueItemCount++;
+}
+
+int removeData() {
+   queueItemCount--;
+   return queue[front++]; 
+}
+
+bool isQueueEmpty() {
+   return queueItemCount == 0;
+}
+
+//graph functions
+
+//add vertex to the vertex list
+void addVertex(char label) {
+   struct Vertex* vertex = (struct Vertex*) malloc(sizeof(struct Vertex));
+   vertex->label = label;  
+   vertex->visited = false;     
+   lstVertices[vertexCount++] = vertex;
+}
+
+//add edge to edge array
+void addEdge(int start,int end) {
+   adjMatrix[start][end] = 1;
+   adjMatrix[end][start] = 1;
+}
+
+//display the vertex
+void displayVertex(int vertexIndex) {
+   printf("%c ",lstVertices[vertexIndex]->label);
+}       
+
+//get the adjacent unvisited vertex
+int getAdjUnvisitedVertex(int vertexIndex) {
+   int i;
+  
+   for(i = 0; i<vertexCount; i++) {
+      if(adjMatrix[vertexIndex][i] == 1 && lstVertices[i]->visited == false)
+         return i;
+   }
+  
+   return -1;
+}
+
+void breadthFirstSearch() {
+   int i;
+
+   //mark first node as visited
+   lstVertices[0]->visited = true;
+
+   //display the vertex
+   displayVertex(0);   
+
+   //insert vertex index in queue
+   insert(0);
+   int unvisitedVertex;
+
+   while(!isQueueEmpty()) {
+      //get the unvisited vertex of vertex which is at front of the queue
+      int tempVertex = removeData();   
+
+      //no adjacent vertex found
+      while((unvisitedVertex = getAdjUnvisitedVertex(tempVertex)) != -1) {    
+         lstVertices[unvisitedVertex]->visited = true;
+         displayVertex(unvisitedVertex);
+         insert(unvisitedVertex);               
+      }
+    
+   }   
+
+   //queue is empty, search is complete, reset the visited flag        
+   for(i = 0;i<vertexCount;i++) {
+      lstVertices[i]->visited = false;
+   }    
+}
+
+int main() {
+   int i, j;
+
+   for(i = 0; i<MAX; i++) // set adjacency {
+      for(j = 0; j<MAX; j++) // matrix to 0
+         adjMatrix[i][j] = 0;
+   }
+
+   addVertex('S');   // 0
+   addVertex('A');   // 1
+   addVertex('B');   // 2
+   addVertex('C');   // 3
+   addVertex('D');   // 4
+ 
+   addEdge(0, 1);    // S - A
+   addEdge(0, 2);    // S - B
+   addEdge(0, 3);    // S - C
+   addEdge(1, 4);    // A - D
+   addEdge(2, 4);    // B - D
+   addEdge(3, 4);    // C - D
+  
+   printf("\nBreadth First Search: ");
+   
+   breadthFirstSearch();
+
+   return 0;
+}
+```
+
+### Depth First Traversal ###
+1. Initial Step : Select any one vertex from graph.But for tree it should be root vertix
+
+2. start exploring unvisisted vertex Only one instead all  unvisisted vertex explore(where as BFS explore all vertex) of a vertex. add it to stack(for used remaining unvisited vertex explore) and add to visited list
+3.  If no adjacent vertex is found, pop up a vertex  from the stack until  that have no adjacent vertices for next explore.
+4. Repeat Rule 2 and Rule 3 until the stack  is empty.
+
+
+
+Initial Step : We start from vertex 
+
+
+
+start exploring vertex(3) and add it to stack . and add to visited list
+![alt text](images/graph-dfs-step-1.jpg)
+
+start exploring vertex 3 have one vertex 0 add to stack . and add to visited list
+
+![alt text](images/graph-dfs-step-1_01.jpg)
+<br>
+vertex 0 have two unvisited vertex 1,vertex2. You can anyone among them . i choose vertex 2 and add 2 to stack and add to visited list
+
+![alt text](images/graph-dfs-step-1_02.jpg)
+
+start exploring vertex2 have one unvisited vertex 4 and add 4 have no  unvisited vertex.pop from stack(2).<br>
+vertex 2 have one unvisited vertex 1 and add it to stack . and add to visited list
+
+![alt text](images/graph-dfs-step-1_03.jpg)
+
+pop 0 . no adjacent unvisited vertex<br>
+pop 4 . no adjacent unvisited vertex<br>
+![alt text](images/graph-dfs-step-1_04.jpg) 
+
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX 5
+
+struct Vertex {
+   char label;
+   bool visited;
+};
+
+//stack variables
+
+int stack[MAX]; 
+int top = -1; 
+
+//graph variables
+
+//array of vertices
+struct Vertex* lstVertices[MAX];
+
+//adjacency matrix
+int adjMatrix[MAX][MAX];
+
+//vertex count
+int vertexCount = 0;
+
+//stack functions
+
+void push(int item) { 
+   stack[++top] = item; 
+} 
+
+int pop() { 
+   return stack[top--]; 
+} 
+
+int peek() {
+   return stack[top];
+}
+
+bool isStackEmpty() {
+   return top == -1;
+}
+
+//graph functions
+
+//add vertex to the vertex list
+void addVertex(char label) {
+   struct Vertex* vertex = (struct Vertex*) malloc(sizeof(struct Vertex));
+   vertex->label = label;  
+   vertex->visited = false;     
+   lstVertices[vertexCount++] = vertex;
+}
+
+//add edge to edge array
+void addEdge(int start,int end) {
+   adjMatrix[start][end] = 1;
+   adjMatrix[end][start] = 1;
+}
+
+//display the vertex
+void displayVertex(int vertexIndex) {
+   printf("%c ",lstVertices[vertexIndex]->label);
+}       
+
+//get the adjacent unvisited vertex
+int getAdjUnvisitedVertex(int vertexIndex) {
+   int i;
+
+   for(i = 0; i < vertexCount; i++) {
+      if(adjMatrix[vertexIndex][i] == 1 && lstVertices[i]->visited == false) {
+         return i;
+      }
+   }
+
+   return -1;
+}
+
+void depthFirstSearch() {
+   int i;
+
+   //mark first node as visited
+   lstVertices[0]->visited = true;
+
+   //display the vertex
+   displayVertex(0);   
+
+   //push vertex index in stack
+   push(0);
+
+   while(!isStackEmpty()) {
+      //get the unvisited vertex of vertex which is at top of the stack
+      int unvisitedVertex = getAdjUnvisitedVertex(peek());
+
+      //no adjacent vertex found
+      if(unvisitedVertex == -1) {
+         pop();
+      } else {
+         lstVertices[unvisitedVertex]->visited = true;
+         displayVertex(unvisitedVertex);
+         push(unvisitedVertex);
+      }
+   }
+
+   //stack is empty, search is complete, reset the visited flag        
+   for(i = 0;i < vertexCount;i++) {
+      lstVertices[i]->visited = false;
+   }        
+}
+
+int main() {
+   int i, j;
+
+   for(i = 0; i < MAX; i++)    // set adjacency {
+      for(j = 0; j < MAX; j++) // matrix to 0
+         adjMatrix[i][j] = 0;
+   }
+
+   addVertex('S');   // 0
+   addVertex('A');   // 1
+   addVertex('B');   // 2
+   addVertex('C');   // 3
+   addVertex('D');   // 4
+
+   addEdge(0, 1);    // S - A
+   addEdge(0, 2);    // S - B
+   addEdge(0, 3);    // S - C
+   addEdge(1, 4);    // A - D
+   addEdge(2, 4);    // B - D
+   addEdge(3, 4);    // C - D
+
+   printf("Depth First Search: ")
+   depthFirstSearch(); 
+
+   return 0;   
+}
+```
 ### Tree Data structure ###
 Tree is a special kind of graph that is used to store information that naturally forms a hierarchy(each node can be connected to multiple nodes). For example, the file system on a computer:
 
@@ -1920,7 +2437,7 @@ Since the node "5" doesn't have any subtrees, pop from stack
 
 5 -> 12 -> 6 -> 1 -> 9
 
-2.Preorder traversal
+2.Preorder traversal(DFS)
 Until all nodes are traversed 
 Visit root node
 Visit all the nodes in the left subtree
@@ -1945,6 +2462,7 @@ Pre-order :A → B → D → E → C → F → G
 
 Post-order : D → E → B → F → G → C → A
 
+4.Postorder traversal: BFS
 
 see implemnetation on binary search tree
 
