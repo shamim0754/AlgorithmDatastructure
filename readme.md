@@ -76,7 +76,7 @@ Space complexity of an algorithm represents the amount of memory space required 
 Time complexity of an algorithm represents the amount of time required by the algorithm to run to completion
 For example, addition of two n-bit integers takes n instuction. Consequently, the total computational time is T(n) = c ∗ n, where c is the time taken for the addition of two bits.
 
-<b>Asymptotic(Asymptotic means approaching a value or curve arbitrarily closely) analysis</b> of an algorithm refers to defining the mathematical boundation/framing of its run-time performance in terms of input size.The time required by an algorithm falls under three types −
+<b>Asymptotic(Asymptotic means approaching/assume a value or curve arbitrarily closely) analysis</b> of an algorithm refers to defining the mathematical boundation/framing of its run-time performance in terms of input size instead of taking exact amount of space/time complexitity .The time required by an algorithm falls under three types −
 
 1. Best Case − Minimum time required for program execution. it express by nota
 tion called Ω Notation
@@ -424,8 +424,36 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
   5. Shortest path by Dijkstra
   6. Project scheduling
 
+4. Backtracking: It is a general algorithmic technique that considers searching every possible combination in order to solve an optimization problem
+
+Backtracking Methodology
+1. View picking a solution as a sequence of choices
+2. For each choice, consider every option recursively
+3. Return the best solution found
+
+Suppose you are standing in front of three tunnels, one of which is having a bag of gold at its end, but you don't know which one. So you'll try all three. First go in tunnel , if that is not the one, then come out of it, and go into tunnel , and again if that is not the one, come out of it and go into tunnel . So basically in backtracking we attempt solving a subproblem, and if we don't reach the desired solution, then undo whatever we did for solving that subproblem, and try solving another subproblem.
+
+Example 2
+
+suppose the problem statement is to find three numbers whose sum of is 10 among these given numbers ( 3,2,7,5,6,8). we started with 3+2+7=12 which is greater than 10. So we backtrack (means we move one step back), now added 3+2+5 = 10. there we go and in this way found the required solution.
+
+
+So backtracking means tracking (or moving) back in order to find other path to get the required solution.
+
+Standard Problem :
+1. N-Queens Problem
+2. The Knight’s tour problem
+2. Rat in a Maze
+4. Subset Sum
+5. (Sudoku
+6. Hamiltonian Cycle
+
 ### Data Structure ###
-Data Structure is a way to organized data in such a way that it can be used efficiently.Almost every enterprise application uses various types of data structures e.g array,linked list
+Whenever we want to work with large amount of data, then organizing that data is very important. If that data is not organized effectively, it is very difficult to perform any task on that data. If it is organized effectively then any operation can be performed easily on that data.<br>
+
+Data structure is a method of organizing large amount of data more efficiently so that any operation on that data becomes easy
+
+Almost every enterprise application uses various types of data structures e.g array,linked list
 
 ### Data Structure Type ###
 ![alt text](images/introduction-to-data-structures.gif)
@@ -1889,6 +1917,11 @@ But in directed graph degreee type two
 
 here vertice A have inDegre = 1, outDegree=2
 
+5. Complete graph
+ if a vertex is connected to all other vertices in a graph, then it is called a complete graph.
+
+ ![alt text](complete_graph.jpg)
+
 ### Graph Representation In computer ###
 
 There are two ways to store Graph into the computer's memory
@@ -2382,6 +2415,59 @@ int main() {
    return 0;   
 }
 ```
+
+### Spanning Tree ###
+A spanning tree is a subset of connected Graph Graph G, which has all the vertices with following properties
+1. It has n-1 edges, where n is the number of vertex . as a result spanning tree does not have any cycle (loops).
+
+![alt text](images/spanning_trees.jpg)
+
+above graph has n vertex,  spanning tree have 3-1 = 2 edge
+
+Tatoal number of spaning tree ecv-1 = 3c2 = 3
+![alt text](images/spanning.png)
+
+### Computing a Spanning Tree ###
+There are many algorithms to compute a spanning tree for a connected
+graph. The first is an example of a vertex-centric algorithm.
+1. Pick an arbitrary node and mark it as being in the tree.
+2. Repeat until all nodes are marked as in the tree:
+(a) Pick an arbitrary node u in the tree with an edge e to a node w
+not in the tree. Add e to the spanning tree and mark w as in the
+tree.
+
+We iterate n−1 times in Step 2, because there are n−1 vertices that have to
+be added to the tree
+
+The second algorithm is edge-centric.
+1. Start with the collection of singleton trees, each with exactly one node.
+2. As long as we have more than one tree, connect two trees together
+with an edge in the graph.
+
+
+###  Application of Spanning Tree ###
+Common application of spanning trees are −
+
+1. Civil Network Planning
+
+2. Computer Network Routing Protocol
+
+3. Cluster Analysis
+
+### Minimum Spanning Tree (MST) ###
+In a weighted graph, a minimum spanning tree is a spanning tree that has minimum weight than all other spanning trees of the same graph. 
+In real-world situations, this weight can be measured as distance, congestion, traffic load or any arbitrary value denoted to the edges.
+
+![alt text](images/spaning1.png)
+
+We have 6c3 = 6!/3!*(6-3)! = 6×5×4×3×2×1/(3×2×1)×(3×2×1) = 20(Show only 3 above picure). 
+
+How to find minnumber weighted spanning tree among them . Three are two greedy  algorithm to find minimum weight
+
+1. Prim's Algorithm
+3. Kruskal's Algorithm
+
+
 ### Tree Data structure ###
 Tree is a special kind of graph that is used to store information that naturally forms a hierarchy(each node can be connected to multiple nodes). For example, the file system on a computer:
 
@@ -3075,7 +3161,127 @@ Note : priority queues are used in Graph algorithms like Prim’s Algorithm and 
 4. merge k sorted array
 5.sort an almost sorted array
 
-### Hash Table Data structure ###
+
+
+
+
+### Linear Searching ###
+
+Linear search is a very simple search algorithm.Every items is checked and if a match founds then that particular item.it is slow since every element need to check.
+
+```C
+#include <stdio.h>
+#include <conio.h>
+
+int linear_search(int arr[],int size,int searchitem);
+
+void main() {
+
+    int arr[20], n, i,item;
+    printf("Enter the size of the array\n");
+    scanf("%d", &n);
+
+    printf("Enter %d the elements\n",n);
+    for(i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+    
+    //display data
+    printf("Data : [ ");
+    for(i = 0; i < n; i++){
+      printf("%d ",arr[i]);
+    }
+    printf("]\n");
+
+    //input search item
+    printf("enter search number:\n");
+    scanf("%d", &item);
+    if(linear_search(arr,n,item) == 1)
+      printf("found");
+    else
+      printf("Not found");
+
+    getch();
+
+}
+
+int linear_search(int arr[],int size,int searchitem){
+    int i;
+    for(i = 0; i < size; i++) //number of iternation need for linear
+         if(arr[i] == searchitem)
+             return 1;
+  
+  return 0;  
+}
+
+```
+### Binary Searching ###
+
+Binary search is a fast search algorithm.
+ [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/binary_search_algorithm.htm).
+
+ ```C
+#include <stdio.h>
+#include <conio.h>
+
+int binary_search(int arr[],int size,int searchitem);
+
+void main() {
+
+    int arr[20], n, i,item;
+    printf("Enter the size of the array\n");
+    scanf("%d", &n);
+
+    printf("Enter %d the elements\n",n);
+    for(i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+    
+    //display data
+    printf("Data : [ ");
+    for(i = 0; i < n; i++){
+      printf("%d ",arr[i]);
+    }
+    printf("]\n");
+
+    //input search item
+    printf("enter search number:\n");
+    scanf("%d", &item);
+    if(binary_search(arr,n,item) == 1)
+      printf("found");
+    else
+      printf("Not found");
+
+    getch();
+
+}
+
+int binary_search(int arr[],int size,int searchitem){
+    /*
+    low,mid,high = store array index
+    isFound = flag for search found or not
+    */
+    int low,mid,high,isFound = 0;
+    
+    //high is less then 1 than size 
+    high = size - 1;
+
+    //otherwise search done
+    while(low <= high){
+        mid = (low + high) / 2;
+        //if midlle index found
+        if(arr[mid] == searchitem){
+            isFound = 1;
+            break;
+         }else if(searchitem < arr[mid])
+            high = mid - 1;
+        else
+            low = mid + 1;
+    }
+  return isFound;  
+}
+
+ ```
+
+### Hashing ###
 
 Suppose we want to design a system for storing employee records keyed using phone numbers. And we want following queries to be performed efficiently:
 
@@ -3096,6 +3302,12 @@ An entry in array is NIL if phone number is not present, else the array entry st
 2.  Another problem is an integer in a programming language may not store n digits.
 
 Due to above limitations Direct Access Table cannot always be used. Hash Table is the solution that can be used in almost all such situations and performs extremely well compared to above data structures like Array, Linked List, Balanced BST in practice. With hashing we get O(1) search time on average (under reasonable assumptions) and O(n) in worst case.
+
+```
+In all search techniques like linear search, binary search and search trees, the time required to search an element is depends on the total number of element in that data structure. In all these search techniquies, as the number of element are increased the time required to search an element also increased linearly.
+
+Hashing is another approach in which time required to search an element doesn't depend on the number of element. Using hashing data structure, an element is searched with constant time complexity. Hashing is an effective way to reduce the number of comparisions to seach an element in a data structure.
+```
 
 Hash Function: a hash function maps a big number or string to a small integer that can be used as index in hash table.
 A good hash function should have following properties
@@ -3269,124 +3481,6 @@ int main() {
    }
 }
 ```
-
-
-
-### Linear Searching ###
-
-Linear search is a very simple search algorithm.Every items is checked and if a match founds then that particular item.it is slow since every element need to check.
-
-```C
-#include <stdio.h>
-#include <conio.h>
-
-int linear_search(int arr[],int size,int searchitem);
-
-void main() {
-
-    int arr[20], n, i,item;
-    printf("Enter the size of the array\n");
-    scanf("%d", &n);
-
-    printf("Enter %d the elements\n",n);
-    for(i = 0; i < n; i++)
-        scanf("%d", &arr[i]);
-    
-    //display data
-    printf("Data : [ ");
-    for(i = 0; i < n; i++){
-      printf("%d ",arr[i]);
-    }
-    printf("]\n");
-
-    //input search item
-    printf("enter search number:\n");
-    scanf("%d", &item);
-    if(linear_search(arr,n,item) == 1)
-      printf("found");
-    else
-      printf("Not found");
-
-    getch();
-
-}
-
-int linear_search(int arr[],int size,int searchitem){
-    int i;
-    for(i = 0; i < size; i++) //number of iternation need for linear
-         if(arr[i] == searchitem)
-             return 1;
-  
-  return 0;  
-}
-
-```
-### Binary Searching ###
-
-Binary search is a fast search algorithm.
- [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/binary_search_algorithm.htm).
-
- ```C
-#include <stdio.h>
-#include <conio.h>
-
-int binary_search(int arr[],int size,int searchitem);
-
-void main() {
-
-    int arr[20], n, i,item;
-    printf("Enter the size of the array\n");
-    scanf("%d", &n);
-
-    printf("Enter %d the elements\n",n);
-    for(i = 0; i < n; i++)
-        scanf("%d", &arr[i]);
-    
-    //display data
-    printf("Data : [ ");
-    for(i = 0; i < n; i++){
-      printf("%d ",arr[i]);
-    }
-    printf("]\n");
-
-    //input search item
-    printf("enter search number:\n");
-    scanf("%d", &item);
-    if(binary_search(arr,n,item) == 1)
-      printf("found");
-    else
-      printf("Not found");
-
-    getch();
-
-}
-
-int binary_search(int arr[],int size,int searchitem){
-    /*
-    low,mid,high = store array index
-    isFound = flag for search found or not
-    */
-    int low,mid,high,isFound = 0;
-    
-    //high is less then 1 than size 
-    high = size - 1;
-
-    //otherwise search done
-    while(low <= high){
-        mid = (low + high) / 2;
-        //if midlle index found
-        if(arr[mid] == searchitem){
-            isFound = 1;
-            break;
-         }else if(searchitem < arr[mid])
-            high = mid - 1;
-        else
-            low = mid + 1;
-    }
-  return isFound;  
-}
-
- ```
 
 ### Sorting ###
 
@@ -3594,4 +3688,5 @@ void mergeSort(int arr[],int low,int mid,int high){
 
 Referece
 
-[git](https://introcs.cs.princeton.edu/java/43stack/)
+[1](https://introcs.cs.princeton.edu/java/43stack/)
+[2](http://btechsmartclass.com/DS/U2_T6.html)
