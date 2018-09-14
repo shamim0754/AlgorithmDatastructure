@@ -2458,6 +2458,8 @@ Common application of spanning trees are −
 In a weighted graph, a minimum spanning tree is a spanning tree that has minimum weight than all other spanning trees of the same graph. 
 In real-world situations, this weight can be measured as distance, congestion, traffic load or any arbitrary value denoted to the edges.
 
+ maximum spanning tree is a spanning tree with weight greater than or equal to the weight of every other spanning tree. 
+
 ![alt text](images/spaning1.png)
 
 We have 6c3 = 6!/3!*(6-3)! = 6×5×4×3×2×1/(3×2×1)×(3×2×1) = 20(Show only 3 above picure). 
