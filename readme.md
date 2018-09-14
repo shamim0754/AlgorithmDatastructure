@@ -2469,11 +2469,373 @@ How to find minnumber weighted spanning tree among them . Three are two greedy  
 1. Prim's Algorithm
 3. Kruskal's Algorithm
 
+### Prims algorithm ###
+Prim's algorithm are as follows:
+
+Intial step: Remove all loops and parallel edges(keep the one which has the least cost associated and remove all others.)
+1. Initialize the minimum spanning tree with a root vertex (chosen at random.)
+2. Find all the edges that connect the tree to new vertices, find the minimum and add it to the tree
+3. Keep repeating step 2 until we get a minimum spanning tree
+
+![alt text](images/mst_graph.jpg)
+
+![alt text](images/mst_without_loops.jpg)
+
+1. Choose s as root vertex 
+
+SA and SC are two edges with weight 7 and 8, respectively. We choose the edge S,A as it is lesser than the other.
+![alt text](images/mst_graph_step_1.jpg)
+
+Now, the tree S-7-A
+
+we check for all edges going out from it which is AC and SC with weight 3 and 8, respectively. So we choose AC
+![alt text](images/mst_graph_step_2.jpg)
+Now tree is  S-7-A-3-C tree
+
+check again minimum cost,which C-3-D is the new edge, which is less than other edges' cost 8, 6, 4, etc.
+
+![alt text](images/mst_graph_step_3.jpg)
+
+After adding node D to the spanning tree, we now have two edges going out of it having the same cost, i.e. D-2-T and D-2-B. Thus, we can add either one. But the next step will again yield edge 2 as the least cost. Hence, we are showing a spanning tree with both edges included.
+
+![alt text](images/mst_prims_algorithm.jpg)
+
+So total cost 7+3+3+2+2 = 17
+
+Example 2 : 
+![alt text](images/img425.gif)
+
+```C
+#include <iostream>
+#include <cstring>
+using namespace std;
+ 
+#define INF 9999999
+ 
+// number of vertices in grapj
+#define V 5
+ 
+// create a 2d array of size 5x5
+//for adjacency matrix to represent graph
+ 
+int G[V][V] = {
+  {0, 9, 75, 0, 0},
+  {9, 0, 95, 19, 42},
+  {75, 95, 0, 51, 66},
+  {0, 19, 51, 0, 31},
+  {0, 42, 66, 31, 0}
+};
+ 
+int main () {
+ 
+  int no_edge;            // number of edge
+ 
+  // create a array to track selected vertex
+  // selected will become true otherwise false
+  int selected[V];
+  
+ // set selected false initially
+  memset (selected, false, sizeof (selected));
+ 
+ // set number of edge to 0
+  no_edge = 0;
+ 
+  // the number of egde in minimum spanning tree will be
+  // always less than (V -1), where V is number of vertices in
+  //graph
+ 
+  // choose 0th vertex and make it true
+  selected[0] = true;
+ 
+  int x;            //  row number
+  int y;            //  col number
+ 
+  // print for edge and weight
+  cout << "Edge" << " : " << "Weight";
+  cout << endl;
+  while (no_edge < V - 1) {
+ 
+  //For every vertex in the set S, find the all adjacent vertices
+  // , calculate the distance from the vertex selected at step 1.
+  // if the vertex is already in the set S, discard it otherwise
+  //choose another vertex nearest to selected vertex  at step 1.
+ 
+      int min = INF;
+      x = 0;
+      y = 0;
+ 
+      for (int i = 0; i < V; i++) {
+        if (selected[i]) {
+            for (int j = 0; j < V; j++) {
+              if (!selected[j] && G[i][j]) { // not in selected and there is an edge
+                  if (min > G[i][j]) {
+                      min = G[i][j];
+                      x = i;
+                      y = j;
+                  }
+     
+              }
+          }
+        }
+      }
+      cout << x <<  " - " << y << " :  " << G[x][y];
+      cout << endl;
+      selected[y] = true;
+      no_edge++;
+    }
+ 
+  return 0;
+}
+```
+
+### Kruskal's algorithm ###
+
+Intial step: Remove all loops and parallel edges(keep the one which has the least cost associated and remove all others.)
+
+1.  Instead of starting from an vertex, Kruskal's algorithm get the edges from all the edges from low weight to high and keeps adding the lowest edges
+2. ignoring those edges that create a cycle(does not violate MST properties.)
+
+![alt text](images/mst_graph.jpg)
+
+![alt text](images/mst_without_loops.jpg)
+
+The least cost is 2 and edges involved are B,D and D,T. We add them. Adding them does not violate spanning tree properties, so we continue to our next edge selection.
+
+so tree is following black line
+
+![alt text](images/mst_graph_step_one.jpg)
+
+Next cost is 3, and associated edges are A,C and C,D. We add them again −
+
+so tree is now
+
+![alt text](images/mst_graph_step_two.jpg)
+
+Next cost in the table is 4, and we observe that adding it will create a circuit in the graph. −We ignore it
+
+so tree is now
+
+![alt text](images/mst_graph_step_four.jpg)
+
+edges with cost 5 and 6 also create circuits. We ignore them and move on.
+
+so tree is now
+
+![alt text](images/mst_graph_step_five.jpg)
+
+Between the two least cost edges available 7 and 8, we shall add the edge with cost 7
+
+![alt text](images/mst_kruskals_algorithm.jpg)
+
+So total cost 7+3+3+2+2 = 17
+
+```C
+
+// C++ program for Kruskal's algorithm to find Minimum Spanning Tree
+// of a given connected, undirected and weighted graph
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+ 
+// a structure to represent a weighted edge in graph
+struct Edge
+{
+    int src, dest, weight;
+};
+ 
+// a structure to represent a connected, undirected
+// and weighted graph
+struct Graph
+{
+    // V-> Number of vertices, E-> Number of edges
+    int V, E;
+ 
+    // graph is represented as an array of edges. 
+    // Since the graph is undirected, the edge
+    // from src to dest is also edge from dest
+    // to src. Both are counted as 1 edge here.
+    struct Edge* edge;
+};
+ 
+// Creates a graph with V vertices and E edges
+struct Graph* createGraph(int V, int E)
+{
+    struct Graph* graph = new Graph;
+    graph->V = V;
+    graph->E = E;
+ 
+    graph->edge = new Edge[E];
+ 
+    return graph;
+}
+ 
+// A structure to represent a subset for union-find
+struct subset
+{
+    int parent;
+    int rank;
+};
+ 
+// A utility function to find set of an element i
+// (uses path compression technique)
+int find(struct subset subsets[], int i)
+{
+    // find root and make root as parent of i 
+    // (path compression)
+    if (subsets[i].parent != i)
+        subsets[i].parent = find(subsets, subsets[i].parent);
+ 
+    return subsets[i].parent;
+}
+ 
+// A function that does union of two sets of x and y
+// (uses union by rank)
+void Union(struct subset subsets[], int x, int y)
+{
+    int xroot = find(subsets, x);
+    int yroot = find(subsets, y);
+ 
+    // Attach smaller rank tree under root of high 
+    // rank tree (Union by Rank)
+    if (subsets[xroot].rank < subsets[yroot].rank)
+        subsets[xroot].parent = yroot;
+    else if (subsets[xroot].rank > subsets[yroot].rank)
+        subsets[yroot].parent = xroot;
+ 
+    // If ranks are same, then make one as root and 
+    // increment its rank by one
+    else
+    {
+        subsets[yroot].parent = xroot;
+        subsets[xroot].rank++;
+    }
+}
+ 
+// Compare two edges according to their weights.
+// Used in qsort() for sorting an array of edges
+int myComp(const void* a, const void* b)
+{
+    struct Edge* a1 = (struct Edge*)a;
+    struct Edge* b1 = (struct Edge*)b;
+    return a1->weight > b1->weight;
+}
+ 
+// The main function to construct MST using Kruskal's algorithm
+void KruskalMST(struct Graph* graph)
+{
+    int V = graph->V;
+    struct Edge result[V];  // Tnis will store the resultant MST
+    int e = 0;  // An index variable, used for result[]
+    int i = 0;  // An index variable, used for sorted edges
+ 
+    // Step 1:  Sort all the edges in non-decreasing 
+    // order of their weight. If we are not allowed to 
+    // change the given graph, we can create a copy of
+    // array of edges
+    qsort(graph->edge, graph->E, sizeof(graph->edge[0]), myComp);
+ 
+    // Allocate memory for creating V ssubsets
+    struct subset *subsets =
+        (struct subset*) malloc( V * sizeof(struct subset) );
+ 
+    // Create V subsets with single elements
+    for (int v = 0; v < V; ++v)
+    {
+        subsets[v].parent = v;
+        subsets[v].rank = 0;
+    }
+ 
+    // Number of edges to be taken is equal to V-1
+    while (e < V - 1)
+    {
+        // Step 2: Pick the smallest edge. And increment 
+        // the index for next iteration
+        struct Edge next_edge = graph->edge[i++];
+ 
+        int x = find(subsets, next_edge.src);
+        int y = find(subsets, next_edge.dest);
+ 
+        // If including this edge does't cause cycle,
+        // include it in result and increment the index 
+        // of result for next edge
+        if (x != y)
+        {
+            result[e++] = next_edge;
+            Union(subsets, x, y);
+        }
+        // Else discard the next_edge
+    }
+ 
+    // print the contents of result[] to display the
+    // built MST
+    printf("Following are the edges in the constructed MST\n");
+    for (i = 0; i < e; ++i)
+        printf("%d -- %d == %d\n", result[i].src, result[i].dest,
+                                                 result[i].weight);
+    return;
+}
+ 
+// Driver program to test above functions
+int main()
+{
+    /* Let us create following weighted graph
+             10
+        0--------1
+        |  \     |
+       6|   5\   |15
+        |      \ |
+        2--------3
+            4       */
+    int V = 4;  // Number of vertices in graph
+    int E = 5;  // Number of edges in graph
+    struct Graph* graph = createGraph(V, E);
+ 
+ 
+    // add edge 0-1
+    graph->edge[0].src = 0;
+    graph->edge[0].dest = 1;
+    graph->edge[0].weight = 10;
+ 
+    // add edge 0-2
+    graph->edge[1].src = 0;
+    graph->edge[1].dest = 2;
+    graph->edge[1].weight = 6;
+ 
+    // add edge 0-3
+    graph->edge[2].src = 0;
+    graph->edge[2].dest = 3;
+    graph->edge[2].weight = 5;
+ 
+    // add edge 1-3
+    graph->edge[3].src = 1;
+    graph->edge[3].dest = 3;
+    graph->edge[3].weight = 15;
+ 
+    // add edge 2-3
+    graph->edge[4].src = 2;
+    graph->edge[4].dest = 3;
+    graph->edge[4].weight = 4;
+ 
+    KruskalMST(graph);
+ 
+    return 0;
+}
+
+```
+
+### Application Minimum Spanning Tree (MST) ###
+
+1. Network design. : telephone, electrical, hydraulic, TV cable, computer, road network
+
+You have a business with several offices; you want to lease phone lines to connect them up with each other; and the phone company charges different amounts of money to connect different pairs of cities. You want a set of lines that connects all your offices with a minimum total cost. It should be a spanning tree, since if a network isn’t a tree you can always remove some edges and save money.
+
+2. Approximately sovle following  problems.
+– traveling salesperson problem, Steiner tree
 
 ### Tree Data structure ###
 Tree is a special kind of graph that is used to store information that naturally forms a hierarchy(each node can be connected to multiple nodes). For example, the file system on a computer:
 
-![alt text](images/tree-used.jpg)
+![alt text](images/tree-used.png)
 
 Terminology used in trees:
 
@@ -3167,9 +3529,9 @@ Note : priority queues are used in Graph algorithms like Prim’s Algorithm and 
 
 
 
-### Linear Searching ###
+### Searching Technique###
 
-Linear search is a very simple search algorithm.Every items is checked and if a match founds then that particular item.it is slow since every element need to check.
+Linear Searching  : Linear search is a very simple search algorithm.Every items is checked and if a match founds then that particular item.it is slow since every element need to check.
 
 ```C
 #include <stdio.h>
@@ -3218,8 +3580,14 @@ int linear_search(int arr[],int size,int searchitem){
 ```
 ### Binary Searching ###
 
-Binary search is a fast search algorithm.
- [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/binary_search_algorithm.htm).
+Binary search has a huge advantage of time complexity over linear search. Linear search has worst-case complexity of Ο(n) whereas binary search has Ο(log n). it is mandatory for the target array to be sorted
+
+1. looks for a search item by comparing the middle most item of the array 
+2. If the middle item is greater than the item, then the item is searched in the sub-array to the left of the middle item. Otherwise, the item is searched for in the sub-array to the right of the middle item
+3. Repeat step 1 and 2 until the value is found or the interval is empty.
+
+Example
+![alt text](images/binary-search1.png)
 
  ```C
 #include <stdio.h>
@@ -3283,6 +3651,7 @@ int binary_search(int arr[],int size,int searchitem){
 
  ```
 
+Disadvantage : 1. array inially convert to sorted array
 ### Hashing ###
 
 Suppose we want to design a system for storing employee records keyed using phone numbers. And we want following queries to be performed efficiently:
