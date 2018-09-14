@@ -3324,17 +3324,17 @@ Following are the ways to handle collisions:
 3. Linear Probing : In linear probing, search the next empty location in the array by looking into the next cell until we find an empty cell
 
 
-![alt text](images/hashfunction1.png)
+![alt text](images/hasfunction1.png)
 
 As we can see above, 2 index comming duplicaion that means happend hash Collision 
 
 Sovle using Linear Probing technique
 
-![alt text](images/hashfunction3.png)
+![alt text](images/hasfunction3.png)
 
 Consider hash table data struncure of size 20 with the following values
 
-![alt text](images/hashfunction2.png)
+![alt text](images/hasfunction2.png)
 
 Basic Operations
 Following are the basic primary operations of a hash table.
