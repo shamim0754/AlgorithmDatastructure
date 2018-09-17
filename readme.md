@@ -310,7 +310,11 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 
 2. `Divide and Conquer` :
 
-  In divide and conquer approach, the problem in hand, is divided into smaller sub-problems and then each problem is solved independently. When we keep on dividing the subproblems into even smaller sub-problems, we may eventually reach a stage where no more division is possible. Those "atomic" smallest possible sub-problem (fractions) are solved. The solution of all sub-problems is finally merged in order to obtain the solution of an original problem.
+  The concept of Divide and Conquer involves three steps:
+
+  1. Divide: the problem into multiple small problems.
+  2. Conquer; the subproblems by solving them. The idea is to break down the problem into atomic subproblems, where they are actually solved.
+  3. Combine/merge:The solution of all sub-problems is finally merged in order to obtain the solution of an original problem.
 
   Example : Convert following small alphabet to capital alphabet
 
@@ -318,7 +322,7 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
 
   The following computer algorithms are based on divide-and-conquer programming approach −
 
-  1. Merge Sort
+  1. Merge Sort 
   2. Quick Sort
   3. Binary Search
   4. Strassen's Matrix Multiplication
@@ -3853,60 +3857,238 @@ int main() {
 }
 ```
 
-### Sorting ###
+### Sort Algorithm ###
 
 Sorting refers to arranging data in a particular format in accending or decending.Importance of sorting lies in the fact that data searching can be optimized to a very high level if data is stored in a sorted manner.
 
 ### Bubble Sort ###
+
+1. Starting with the first element(index = 0), compare the current element with the next element of the array.
+2. If the current element is greater than the next element of the array, swap them.
+3. If the current element is less than the next element, move to the next element. Repeat Step 1 until finally a elemenet is bubble up. 
+4. Repeat step 1,2,3 
+
+This algorithm is not suitable for large data sets as its average and worst case complexity are of Ο(n2) where n is the number of items.
+
+
+![alt text](images/basic-bubble-sort.png)
+
+ after the first iteration, 6 is placed at the last index(bubble up)
+
+Similarly after the second iteration, 5 will be at the second last index, and so on.
+
 
 ```C
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
 
+void printArray(int arr[], int n){
+
+    for(int i = 0; i < n; i++){
+      printf("%d ",arr[i]);
+    }
+    printf("\n");
+}
 void main(){
-	int n,a[20],i,j,temp;
+  int n,a[20],i,j,temp;
 
     printf("Enter total numbers of elements: ");
     scanf("%d",&n);
 
-    printf("Enter %d elements: ",n);
-    // take value from user
     for(i = 0; i < n; i++){
+      printf("Enter %d th element: \n",i+1);
       scanf("%d",&a[i]);
     }
-    printf("Before sort : [ ");
+
+    printf("before sort \n");
+    printArray(a, n);
+
     // input array value
-    for(i = 0; i < n; i++){
-      printf("%d ",a[i]);
+    for(i = 0; i < n; i++){ //number of iteration need for bubble up
+       for(j = 0; j < n-i; j++){ //n-i for performance you can use n
+        if(a[j] > a[j+1]){
+          temp = a[j];  // for swaping purpose
+          a[j] = a[j+1]; // bubble up
+          a[j+1] = temp; // swap
+        }
+       }
     }
-    printf("]");
+
+    printf("after sort \n");
+    printArray(a, n);
+}
+
+```
+
+![alt text](images/bubble.png)
+
+### Optimized Bubble Sort ###
+
+In the above case, we need n(no of element) iteration, it could be sorted after,2nd... first iteration
+
+So we a flag to monitor whether elements are getting swapped(means it is not sorted) or not (means it is already sorted)
+
+```C
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+
+void printArray(int arr[], int n){
+
+    for(int i = 0; i < n; i++){
+      printf("%d ",arr[i]);
+    }
+    printf("\n");
+}
+void main(){
+  int n,a[20],i,j,temp;
+
+    printf("Enter total numbers of elements: ");
+    scanf("%d",&n);
+
+    for(i = 0; i < n; i++){
+      printf("Enter %d th element: \n",i+1);
+      scanf("%d",&a[i]);
+    }
+
+    printf("before sort \n");
+    printArray(a, n);
+
     // input array value
-    for(i = 0; i < n; i++){ //number of iternation need for bubble up
-    	 for(j = 0; j < n-i; j++){ //n-i for performance you can use n
-    	 	/*
-    	 	for decending order : pickup greater value for bubble up
-    	 	for accending order : pickup smaller value for bubble up then use <
-    	 	*/
-    	 	if(a[j] > a[j+1]){
-    	 		temp = a[j]; // for swaping purpose
-    	 		a[j] = a[j+1]; // bubble up
-    	 		a[j+1] = temp; // swap
-    	 	}
-    	 }
+    for(i = 0; i < n; i++){ //number of iteration need for bubble up
+         int flag = 0;
+       for(j = 0; j < n-i; j++){ //n-i for performance you can use n
+        if(a[j] > a[j+1]){
+          temp = a[j];  // for swaping purpose
+          a[j] = a[j+1]; // bubble up
+          a[j+1] = temp; // swap
+                flag = 1;
+        }
+       }
+       if(!flag)
+            break;
+
     }
-    printf("After sort : [ ");
-    for(i = 0; i < n; i++){
-      printf("%d ",a[i]);
+
+    printf("after sort \n");
+    printArray(a, n);
+}
+
+```
+
+Worst Case Time Complexity : O(n2)
+Best Case Time Complexity : O(n)
+Average Time Complexity : O(n2)
+Space Complexity: O(1)
+
+
+
+
+### Merge Sort ###
+we know Merge Sort is a kind of Divide and Conquer algorithm.According to Divide and Conquer we have three step
+
+1. Divide : divide the array into sub array by finding middle of the array using the formula (p + r)/2  where p= start index of array, r = end index of an array until a single element of sub array
+
+2. Conquer : sovle two sub array into sorted list
+
+3. Combine : combine the result
+
+![alt text](images/merge-sort-example_0.jpg )
+
+ [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/merge_sort_algorithm.htm).
+ 
+```C
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+#define MAX 10
+
+void mergeSort(int arr[],int low,int mid,int high);
+void partition(int arr[],int low,int high);
+
+void main(){
+
+    int arr[MAX] = { 14, 33, 27, 35, 10 }, n, i;
+
+    partition(arr, 0, n-1);
+    
+    printf("sorted : ");
+    for(i = 0; i < n; i++)
+      printf("%d ", arr[i]);
+}
+void partition(int arr[],int low,int high){
+
+    int mid;
+
+    if(low<high){
+         mid=(low+high)/2;
+
+         partition(arr,low,mid);
+         partition(arr,mid+1,high);
+
+         mergeSort(arr,low,mid,high);
     }
-    printf("]");
+}
+void mergeSort(int arr[],int low,int mid,int high){
+    int i,m,k,l,temp[MAX];
+    l=low;
+    i=low;
+    m=mid+1;
+    while((l<=mid)&&(m<=high)){
+      if(arr[l]<=arr[m]){
+             temp[i]=arr[l];
+             l++;
+         }
+         else{
+             temp[i]=arr[m];
+             m++;
+         }
+         i++;
+    }
+    if(l>mid){
+         for(k=m;k<=high;k++){
+             temp[i]=arr[k];
+             i++;
+         }
+    }
+    else{
+         for(k=l;k<=mid;k++){
+             temp[i]=arr[k];
+             i++;
+         }
+    }
+   
+    for(k=low;k<=high;k++){
+         arr[k]=temp[k];
+    }
+
 }
 ```
 
+Worst Case Time Complexity: O(n*log n)
+Best Case Time Complexity: O(n*log n)
+Average Time Complexity: O(n*log n)
+Space Complexity: O(n)
 
 
-### Quick Sort ###
- [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/quick_sort_algorithm.htm).
+2. Quick sort :
+
+6 3 5 4 2 1 9 <br>
+4 6 7 10 16 12 13 14 <br>
+
+if accending order above collection 9 and 10 is sorted since all element of left side is less than of that element. This sorted element is called pivot. Based on this idea quick sort works
+
+
+### Algorith Quick sort ###
+1. − Choose the any value as pivot
+Note : to avoid worst case complexity
+  1. Select a meidan as pivot
+  2. random picking as pivot
+
+2.partition the array using pivot value
+3. − quicksort left partition recursively
+4. − quicksort right partition recursively
 
  ```C
 #include <stdio.h>
@@ -3976,86 +4158,11 @@ quicksort(int *arr, int low, int high){
 }
 ```
 
-### Merge Sort ###
- [Alogrithm](http://www.tutorialspoint.com/data_structures_algorithms/merge_sort_algorithm.htm).
- 
-```C
-#include <stdio.h>
-#include <conio.h>
-#include <math.h>
-#define MAX 50
+Worst Case Time Complexity: O(n2)
+Best Case Time Complexity: O(n*log n)
+Average Time Complexity: O(n*log n)
+Space Complexity: O(n*log n)
 
-void mergeSort(int arr[],int low,int mid,int high);
-void partition(int arr[],int low,int high);
-
-void main(){
-  /*
-  arr = store elements that needs to sort using quick
-  n = store no of elements
-  i = store index value
-  */
-  int arr[MAX], n, i;
-    printf("Enter the size of the array\n");
-    scanf("%d", &n);
-
-    printf("Enter the elements to be sorted\n");
-    for(i = 0; i < n; i++)
-      scanf("%d", &arr[i]);
-
-    partition(arr, 0, n-1);
-    
-    printf("sorted : ");
-    for(i = 0; i < n; i++)
-      printf("%d ", arr[i]);
-}
-void partition(int arr[],int low,int high){
-
-    int mid;
-
-    if(low<high){
-         mid=(low+high)/2;
-
-         partition(arr,low,mid);
-         partition(arr,mid+1,high);
-
-         mergeSort(arr,low,mid,high);
-    }
-}
-void mergeSort(int arr[],int low,int mid,int high){
-    int i,m,k,l,temp[MAX];
-    l=low;
-    i=low;
-    m=mid+1;
-    while((l<=mid)&&(m<=high)){
-      if(arr[l]<=arr[m]){
-             temp[i]=arr[l];
-             l++;
-         }
-         else{
-             temp[i]=arr[m];
-             m++;
-         }
-         i++;
-    }
-    if(l>mid){
-         for(k=m;k<=high;k++){
-             temp[i]=arr[k];
-             i++;
-         }
-    }
-    else{
-         for(k=l;k<=mid;k++){
-             temp[i]=arr[k];
-             i++;
-         }
-    }
-   
-    for(k=low;k<=high;k++){
-         arr[k]=temp[k];
-    }
-
-}
-```
 
 Referece
 
