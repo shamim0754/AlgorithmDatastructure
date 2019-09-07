@@ -273,7 +273,8 @@ Most networking algorithms use the greedy approach. Here is a list of few of the
           slot[i] = false;
       // Iterate through all given jobs
       for (int i=0; i<n; i++){
-              //min(n, arr[i].deadline)-1; slot before or after based on deadline
+              // Find a free slot for this job (Note that we start 
+       // from the last possible slot) 
           for (int j=min(n, arr[i].deadline)-1; j>=0; j--){
             // Free slot found
             if (slot[j]==false)
